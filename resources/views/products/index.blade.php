@@ -3,12 +3,17 @@
 @section('content')
     <form method="GET" action="{{ route('products.index') }}">
     
-        <select name="category">
+        @if (request('category') == 'smartproduct')
+            <select name="type">
             <option value="">Összes kategória</option>
-            <option value="smartproducts">Okos eszközök</option>
+            <option value="smartproduct">Okos eszközök</option>
             <option value="household">Háztartási</option>
             <option value="gaming">Gaming</option>
         </select>
+        @else
+            
+        @endif
+        
 
         <input type="number" name="min_price" placeholder="Min ár">
         <input type="number" name="max_price" placeholder="Max ár">

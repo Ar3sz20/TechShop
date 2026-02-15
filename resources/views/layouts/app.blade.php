@@ -15,19 +15,19 @@
         <div class="nav-right">
             <a href="{{ route('products.index') }}">Termékek</a>
 
-            <a href="{{ route('products.index', ['category' => 'smart']) }}+"
-                class="{{ request('category') == 'smartproducts' ? 'active' : '' }}">Okos eszközök
+            <a href="{{ route('products.index', ['category' => 'smart']) }}"+
+                class="{{ request('category') == 'smartproduct' ? 'active' : '' }}">Okos eszközök
             </a>
 
-            <a href="{{ route('products.index', ['category' => 'household']) }}+"
+            <a href="{{ route('products.index', ['category' => 'household']) }}"+
                 class="{{ request('category') == 'household' ? 'active' : '' }}">Háztartás
             </a>
 
-            <a href="{{ route('products.index', ['category' => 'gaming']) }}+"
+            <a href="{{ route('products.index', ['category' => 'gaming']) }}"+
                 class="{{ request('category') == 'gaming' ? 'active' : '' }}">Gaming
             </a>
             
-            <a href="{{ route('login') }}">Bejelentkezés</a>
+            <a href="{{ route('loginshow') }}">Bejelentkezés</a>
             {{-- <a href="{{route('auth')}}" class="nav-btn">👤</a>
             <a href="{{route('cart')}}" class="nav-btn">🛒</a> --}}
         </div>

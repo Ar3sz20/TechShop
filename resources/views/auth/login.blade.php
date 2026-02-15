@@ -5,7 +5,7 @@
 
     <div id="loginbox" class="reg-log-box">
         <h2>Bejelentkezés</h2>
-        <form id="loginForm" class="log-form" action="{{ route('login') }}" method="POST">
+        <form id="loginForm" class="log-form" action="{{ url('/login') }}" method="POST">
             @csrf
             <div class="input-group">
                 <input type="email" name="email" id="email" required>
@@ -25,7 +25,7 @@
         </form>
 
         <div class="register-option">
-            <p>Még nincs fiókod? <a href="{{ route('register') }}" id="showRegister">Regisztráció</a></p>
+            <p>Még nincs fiókod? <a href="{{ route('registershow') }}" id="showRegister">Regisztráció</a></p>
         </div>
     </div>
 
