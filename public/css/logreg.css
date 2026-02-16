@@ -1,0 +1,111 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
+}
+
+.log-container {
+    background: rgba(20, 20, 50, 0.8);
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(120, 0, 255, 0.5);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+.log-container h2 {
+    margin-bottom: 30px;
+    font-size: 2rem;
+    text-shadow: 0 0 10px #7b68ee;
+}
+
+.log-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1rem;
+}
+
+.input-group label {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    color: #d9d9ff;
+    pointer-events: none;
+}
+
+.input-group.active label,
+.input-group input:focus + label {
+    top: -10px;
+    left: 10px;
+    font-size: 0.8rem;
+    color: #8a2be2;
+    background: rgba(20,20,50,0.8);
+    padding: 0 5px;
+    border-radius: 5px;
+}
+
+.loginbutton {
+    padding: 12px 25px;
+    background: linear-gradient(90deg, #6a5acd, #8a2be2);
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    border: none;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.loginbutton:hover {
+    box-shadow: 0 0 25px rgba(140, 0, 255, 0.8);
+}
+
+.forgot-container {
+    text-align: right;
+}
+
+.forgot-password {
+    background: none;
+    border: none;
+    color: #bfa7ff;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    transition: 0.2s;
+}
+
+.forgot-password:hover {
+    color: #fff;
+}
+
+.register-option {
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.register-option a {
+    color: #8a2be2;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-option a:hover {
+    text-decoration: underline;
+}

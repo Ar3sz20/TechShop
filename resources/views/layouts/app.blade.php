@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webshop</title>
+    <link rel="stylesheet" href="{{asset('css/apps.css')}}">
+    <link rel="stylesheet" href="{{asset('css/footer.css')}}">
+    <link rel="stylesheet" href="{{asset('css/navbar.css')}}">
+    <link rel="stylesheet" href="{{asset('css/logreg.css')}}">
+    <link rel="stylesheet" href="{{asset('css/cart.css')}}">
+    <link rel="stylesheet" href="{{asset('css/product.css')}}">
 </head>
 <body>
     {{--Navbar--}}
@@ -43,13 +49,14 @@
         <div class="footer-content">
             <p>© 2026 TechShop - Minden jog fenntartva</p>
             <p>
-                <a href="#" class="footer-link">Impresszum</a> |
-                <a href="#" class="footer-link">Adatvédelem</a> |
+                <a href="#" class="footer-link">Impresszum</a>
+                <a href="#" class="footer-link">Adatvédelem</a>
                 <a href="#" class="footer-link">Kapcsolat</a>
             </p>
         </div>
     </footer>
     {{--Footer End--}}
 
+    <script src="{{ asset('js/loginform.js') }}"></script>
 </body>
 </html>
