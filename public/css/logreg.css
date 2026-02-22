@@ -1,9 +1,9 @@
-body {
+.auth-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     color: white;
+    padding: 30px 20px;
 }
 
 .log-container {
@@ -57,7 +57,7 @@ body {
     left: 10px;
     font-size: 0.8rem;
     color: #8a2be2;
-    background: rgba(20,20,50,0.8);
+    background: rgba(20, 20, 50, 0.8);
     padding: 0 5px;
     border-radius: 5px;
 }
