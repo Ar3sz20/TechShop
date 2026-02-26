@@ -30,7 +30,7 @@
                     <li class="active">
                         <a href="{{ route('products.index') }}">Összes termék</a>
                     </li>
-                    <li><a href="{{ route('products.index', ['category' => 'smart']) }}" +
+                    <li><a href="{{ route('products.index', ['category' => 'smartproduct']) }}" +
                             class="{{ request('category') == 'smartproduct' ? 'active' : '' }}">Okos eszközök
                         </a></li>
                     <li> <a href="{{ route('products.index', ['category' => 'household']) }}" +
