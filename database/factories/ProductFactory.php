@@ -16,12 +16,15 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $filteredCategories = ['smartproduct', 'household', 'gaming'];
+        $filteredTypes = ['smartproduct', 'household', 'gaming'];
+
         return [
             "name" => fake()->words(3, true),
-            "type" => fake()->word(),
+            "type" => fake()->randomElement($filteredTypes),
             "price" => fake()->randomFloat(2,10,10000),
-            "category" => fake()->word(),
-            "description" => fake()->paragraph(),
+            "category" => fake()->randomElement($filteredCategories),
+            "description" => fake()->sentence(),
             "image" => "placeholder.png",
             "quantity" => fake()->numberBetween(1,1000),
         ];

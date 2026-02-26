@@ -15,8 +15,8 @@
         @endif
 
 
-        <input type="number" name="min_price" placeholder="Min ár">
-        <input type="number" name="max_price" placeholder="Max ár">
+        <input type="number" name="min_price" placeholder="Min ár" value="{{ request('min_price') }}">
+        <input type="number" name="max_price" placeholder="Max ár" value="{{ request('max_price') }}">
 
         <button type="submit">Szűrés</button>
     </form>

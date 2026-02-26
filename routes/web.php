@@ -16,7 +16,7 @@ Route::post("/products/{product}/restore", [ProductController::class,"restore"])
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 //termékek
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 //auth
 Route::get('/login', [AuthController::class, 'showLogin'])->name('loginshow');
 Route::post('/login', [AuthController::class, 'login']);
