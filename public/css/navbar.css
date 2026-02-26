@@ -50,9 +50,8 @@
 }
 
 .dropdown{
-    min-width: 15em;
+    min-width: 7em;
     position: relative;
-    margin: 2em;
 }
 .dropdown *{
     box-sizing: border-box;
