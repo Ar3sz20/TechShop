@@ -44,6 +44,8 @@
 
             <a href="{{ route('loginshow') }}">Bejelentkezés</a>
 
+            {{-- <a href="{{route('auth')}}" class="nav-btn">👤</a>--}}
+            <a href="{{route('cart')}}" class="nav-btn">🛒</a> 
         </div>
     </nav>
     {{--Navbar End--}}

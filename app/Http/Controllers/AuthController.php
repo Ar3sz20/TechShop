@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+use Hash;
 
 class AuthController extends Controller
 {
@@ -26,20 +26,21 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed'
+            'name' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'role' => 0,
+            'password' => Hash::make($request->password),
         ]);
 
         Auth::login($user);
 
-        return redirect('./');
+        return redirect('/');
     }
 
     // ---------- LOGIN ----------
@@ -50,11 +51,13 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('./');
+
+            return redirect('/');
         }
 
         return back()->withErrors([
-            'email' => 'Hibás adatok'
+            'email' => 'Hibás adatok',
+            'password' => 'Hibás adatok'
         ]);
     }
 
