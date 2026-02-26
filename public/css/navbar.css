@@ -1,22 +1,31 @@
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
+.navbar{
+    position: sticky;
+    top: 20px;
+    width: 75%;
+    left: 12.5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 50px;
     background: linear-gradient(90deg, #2e2aff, #8a2be2);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    padding: 17px 20px;
+    border-radius: 2rem;
 }
 
-.nav-left,
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.logo{
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: black;
+}
+
+.nav-right a{
+    text-decoration: none;
+    color: inherit;
+    font-size: 1rem;
+}
+.nav-right a:hover{
+    transition: 0.2s;
+    font-size: 1.15rem;
 }
 
 .logo {
@@ -24,6 +33,7 @@
     font-weight: 700;
     text-decoration: none;
     color: #fff;
+    
 }
 
 .kereso {
@@ -33,19 +43,84 @@
     outline: none;
     width: 200px;
 }
-
-.nav-btn {
-    color: #fff;
-    font-size: 1.3rem;
-    text-decoration: none;
-    transition: transform 0.2s;
+.nav-left, .nav-right{
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.nav-btn:hover {
-    transform: scale(1.2);
+.dropdown{
+    min-width: 15em;
+    position: relative;
+    margin: 2em;
+}
+.dropdown *{
+    box-sizing: border-box;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+.select{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.select-clicked{
+    border: 2px #26489a solid;
+    box-shadow: blue;
+}
+
+.select:hover{
+    background: #323741;
+}
+
+.nyilacska{
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #fff;
+    transition: 0.3s;
+}
+
+.nyilacska-rotate{
+    transform: rotate(180deg);
+}
+
+.menu{
+    list-style: none;
+    padding: 0.2em 0.5em;
+    background-color: blue;
+    border: 1px #363a45 solid;
+    border-radius: 0.5em;
+    position: absolute;
+    top: 3em;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    opacity: 0;
+    display: none;
+    transition: 0.2s;
+}
+
+.menu li{
+    padding: 0.7em 0.5em;
+    margin: 0.3em 0;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.menu li:hover{
+    background: #2a2d35;
+}
+
+.active{
+    background: #23242a;
+}
+
+.menu-open{
+    display: block;
+    opacity: 1;
 }

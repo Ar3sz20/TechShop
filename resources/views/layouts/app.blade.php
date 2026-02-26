@@ -21,20 +21,29 @@
             <input type="text" class="kereso" placeholder="Kereső...">
         </div>
         <div class="nav-right">
-            <a href="{{ route('products.index') }}">Termékek</a>
-
-            <a href="{{ route('products.index', ['category' => 'smart']) }}" + class="{{ request('category') == 'smartproduct' ? 'active' : '' }}">Okos eszközök
-            </a>
-
-            <a href="{{ route('products.index', ['category' => 'household']) }}" + class="{{ request('category') == 'household' ? 'active' : '' }}">Háztartás
-            </a>
-
-            <a href="{{ route('products.index', ['category' => 'gaming']) }}" + class="{{ request('category') == 'gaming' ? 'active' : '' }}">Gaming
-            </a>
+            <div class="dropdown">
+                <div class="select">
+                    <p>Termékek</p>
+                    <div class="nyilacska"></div>
+                </div>
+                <ul class="menu">
+                    <li class="active">
+                        <a href="{{ route('products.index') }}">Összes termék</a>
+                    </li>
+                    <li><a href="{{ route('products.index', ['category' => 'smart']) }}" +
+                            class="{{ request('category') == 'smartproduct' ? 'active' : '' }}">Okos eszközök
+                        </a></li>
+                    <li> <a href="{{ route('products.index', ['category' => 'household']) }}" +
+                            class="{{ request('category') == 'household' ? 'active' : '' }}">Háztartás
+                        </a></li>
+                    <li><a href="{{ route('products.index', ['category' => 'gaming']) }}" +
+                            class="{{ request('category') == 'gaming' ? 'active' : '' }}">Gaming
+                        </a></li>
+                </ul>
+            </div>
 
             <a href="{{ route('loginshow') }}">Bejelentkezés</a>
-            {{-- <a href="{{route('auth')}}" class="nav-btn">👤</a>
-            <a href="{{route('cart')}}" class="nav-btn">🛒</a> --}}
+
         </div>
     </nav>
     {{--Navbar End--}}
@@ -58,6 +67,7 @@
     {{--Footer End--}}
 
     <script src="{{ asset('js/loginform.js') }}"></script>
+    <script src="{{ asset('js/navbardropdownmenu.js') }}"></script>
 </body>
 
 </html>
