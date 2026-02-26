@@ -21,7 +21,7 @@
         <div class="nav-right">
             <a href="{{ route('products.index') }}">Termékek</a>
 
-            <a href="{{ route('products.index', ['category' => 'smart']) }}"+
+            <a href="{{ route('products.index', ['category' => 'smartproduct']) }}"+
                 class="{{ request('category') == 'smartproduct' ? 'active' : '' }}">Okos eszközök
             </a>
 
@@ -32,10 +32,10 @@
             <a href="{{ route('products.index', ['category' => 'gaming']) }}"+
                 class="{{ request('category') == 'gaming' ? 'active' : '' }}">Gaming
             </a>
-            
+                
             <a href="{{ route('loginshow') }}">Bejelentkezés</a>
-            {{-- <a href="{{route('auth')}}" class="nav-btn">👤</a>
-            <a href="{{route('cart')}}" class="nav-btn">🛒</a> --}}
+            {{-- <a href="{{route('auth')}}" class="nav-btn">👤</a>--}}
+            <a href="{{route('cart')}}" class="nav-btn">🛒</a> 
         </div>
     </nav>
     {{--Navbar End--}}

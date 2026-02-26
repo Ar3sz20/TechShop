@@ -22,6 +22,11 @@ class ProductController extends Controller
             $query->where('category', $request->category);
         }
 
+        //típus szerinti szűrés
+        if ($request->filled('type')) {
+            $query->whereIn('type', (array) $request->type);
+        }
+
         // ár szerinti szűrés példa
         if ($request->filled('min_price')) {
             $query->where('price', '>=', $request->min_price);
@@ -33,7 +38,7 @@ class ProductController extends Controller
 
         $products = $query->get();
 
-        return view('products.index', compact('products'));
+        return view('products.index', ['products' => $products]);
     }
 
     /**
@@ -41,7 +46,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
+
     }
 
     /**
@@ -49,7 +55,8 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        Product::create($request->all());
+        return redirect()->route('products.index');
     }
 
     /**
@@ -57,7 +64,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view("products.index", ["products" => $product]);
     }
 
     /**
@@ -65,7 +72,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view("products.create", ["product" => $product]);
     }
 
     /**
@@ -73,7 +80,8 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $product->update($request->all());
+        return redirect()->route("products.index");
     }
 
     /**
@@ -81,6 +89,18 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route("products.index");
+    }
+    public function ShowTrashed()
+    {
+        $trashedProduct = Product::onlyTrashed()->get();
+        return view("products.index", ["products" => $trashedProduct]);
+    }
+
+    public function restore(Product $product)
+    {
+        $product->restore();
+        return redirect()->route("products.index")->with("msg", "Samurai restored successfully");
     }
 }
