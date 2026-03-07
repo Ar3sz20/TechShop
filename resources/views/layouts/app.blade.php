@@ -19,6 +19,7 @@
         <div class="nav-left">
             <a href="/" class="logo">Techshop</a>
             <input type="text" class="kereso" placeholder="Kereső...">
+            <div class="mobilscroll"></div>
         </div>
         <div class="nav-right">
             <div class="dropdown">

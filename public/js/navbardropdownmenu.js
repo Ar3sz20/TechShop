@@ -28,3 +28,11 @@ dropdowns.forEach(dropdown => {
         });
     });
 });
+
+const mobilscroll = document.querySelector('.mobilscroll');
+const navRight = document.querySelector('.nav-right');
+
+mobilscroll.addEventListener('click', () => {
+    mobilscroll.classList.toggle('active');
+    navRight.classList.toggle('active');
+});

@@ -122,3 +122,70 @@
     display: block;
     opacity: 1;
 }
+
+
+@media (max-width: 960px) {
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 90%;
+        left: 5%;
+        padding: 12px 15px;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .nav-left, .nav-right {
+        gap: 10px;
+        flex-basis: 100%;
+    }
+
+    .nav-right {
+        display: none;
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    .nav-right.active {
+        display: flex;
+    }
+
+    .kereso {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .mobilscroll {
+        display: block;
+        cursor: pointer;
+        width: 30px;
+        height: 3px;
+        background-color: #fff;
+        position: relative;
+        transition: 0.3s;
+        margin-left: auto;
+    }
+    .mobilscroll::before,
+    .mobilscroll::after {
+        content: '';
+        position: absolute;
+        width: 30px;
+        height: 3px;
+        background-color: #fff;
+        transition: 0.3s;
+    }
+    .mobilscroll::before { top: -10px; }
+    .mobilscroll::after { top: 10px; }
+
+    .mobilscroll.active {
+        background: transparent;
+    }
+    .mobilscroll.active::before {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .mobilscroll.active::after {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+}
