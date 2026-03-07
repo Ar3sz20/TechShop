@@ -11,3 +11,13 @@ if(model && modelCloseBtn && modelCloseOverlay){
     modelCloseOverlay.addEventListener('click', modelCloseFunc);
     modelCloseBtn.addEventListener('click', modelCloseFunc);
 }
+
+
+//Ha nem kell tényleges feliratkozás!
+const newsletterForm = document.querySelector(".newsletter form");
+
+newsletterForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    document.querySelector(".model").classList.add("closed");
+    document.querySelector(".overlay").classList.remove("active");
+});
