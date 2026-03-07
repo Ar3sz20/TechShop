@@ -4,7 +4,8 @@
     <div class="main-main">
         <div class="banner">
             <div class="container-banner">
-                <div class="slider-container">
+                <button class="slider-btn prev">&#10094;</button>
+                <div class="slider-track">
                     <div class="slider-item">
                         <img src="{{ asset('images/banner.png') }}" alt="Üdvözlünk a TechShopunkban" class="banner-img">
 
@@ -40,6 +41,7 @@
                         </div>
                     </div>
                 </div>
+                <button class="slider-btn next">&#10095;</button>
             </div>
         </div>
 

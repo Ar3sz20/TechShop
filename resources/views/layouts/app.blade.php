@@ -103,6 +103,7 @@
     <script src="{{ asset('js/loginform.js') }}"></script>
     <script src="{{ asset('js/navbardropdownmenu.js') }}"></script>
     <script src="{{ asset('js/newsletter.js') }}"></script>
+    <script src="{{ asset('js/slider.js') }}"></script>
 </body>
 
 </html>
