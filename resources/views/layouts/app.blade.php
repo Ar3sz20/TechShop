@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="{{asset('css/logreg.css')}}">
     <link rel="stylesheet" href="{{asset('css/cart.css')}}">
     <link rel="stylesheet" href="{{asset('css/product.css')}}">
+    <link rel="stylesheet" href="{{asset('css/newsletter.css')}}">
 </head>
 
 <body>
+
     {{--Navbar--}}
     <nav class="navbar">
         <div class="nav-left">
@@ -45,7 +47,7 @@
 
             <a href="{{ route('loginshow') }}">Bejelentkezés👤</a>
 
-            <a href="{{route('cart')}}" class="nav-btn">Kosár🛒</a> 
+            <a href="{{route('cart')}}" class="nav-btn">Kosár🛒</a>
         </div>
     </nav>
     {{--Navbar End--}}
@@ -68,8 +70,38 @@
     </footer>
     {{--Footer End--}}
 
+
+    <div class="overlay"></div>
+
+    <div class="model">
+        <div class="model-close-overlay"></div>
+        <div class="model-content">
+            <button class="model-close-btn">
+                ❌
+            </button>
+            <div class="newsletter-img">
+                <img src="{{ asset('images/newsletter.png') }}" alt="subscribe newsletter" width="400" height="400">
+            </div>
+
+            <div class="newsletter">
+                <form action="#">
+                    <div class="newsletter-header">
+                        <h3 class="newsletter-title">Iratkozz fel hírlevelünkre!</h3>
+                        <p class="newsletter-desc">
+                            Ha szeretnél kedvezményeket, limitált termékekről információkat kapni iratkozz fel
+                            hírlevünkre
+                        </p>
+                    </div>
+                    <input type="email" name="email" class="email-field" placeholder="Email cím" required>
+                    <button type="submit" class="btn-newsletter">Felíratkozás</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="{{ asset('js/loginform.js') }}"></script>
     <script src="{{ asset('js/navbardropdownmenu.js') }}"></script>
+    <script src="{{ asset('js/newsletter.js') }}"></script>
 </body>
 
 </html>

@@ -1,0 +1,153 @@
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: hsla(0, 0%, 0%, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 15;
+    transition: 0.5s ease;
+}
+
+.overlay.active{
+    opacity: 1;
+    pointer-events: all;
+}
+
+.model{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: hsla(0, 0%, 0%, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 10;
+    animation: popup 1s ease-in-out 5s forwards;
+}
+
+@keyframes popup{
+    0%{
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+    100%{
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+    }
+}
+
+
+.model.closed{
+    display: none;
+}
+
+.model-close-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.newsletter-img {
+    display: block;
+    text-align: center;
+}
+
+.newsletter-img img {
+    max-width: 100%;
+    height: auto;
+}
+
+.model-content{
+    position: relative;
+    max-width: 350px;
+    margin: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 2;
+    animation: scaleup 0.5s ease-in-out 5s forwards;
+}
+
+@keyframes scaleup{
+    0%{
+        transform: scale(0.9);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+
+.model-close-btn{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: pink;
+    color: white;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.model-close-btn:hover{
+    opacity: 0.9;
+}
+
+.newsletter{
+    padding: 50px 30px;
+    text-align: center;
+}
+
+.newsletter-header{
+    margin-bottom: 20px;
+}
+
+.newsletter-title{
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.newsletter-desc{
+    color: gray;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.email-field{
+    font-size: 15px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: 1px solid rgb(51, 51, 51);
+    margin: 16px;
+}
+
+.btn-newsletter{
+    background: black;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: auto;
+    transition: 0.3s;
+}
+
+.btn-newsletter:hover{
+    background: pink;
+}
