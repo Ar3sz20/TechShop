@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset('css/product.css')}}">
     <link rel="stylesheet" href="{{asset('css/newsletter.css')}}">
     <link rel="stylesheet" href="{{asset('css/banner.css')}}">
+    <link rel="stylesheet" href="{{asset('css/profile.css')}}">
 </head>
 
 <body>
@@ -45,8 +46,27 @@
                         </a></li>
                 </ul>
             </div>
+            @guest
+                <a href="{{ route('loginshow') }}">Bejelentkezés👤</a>
+            @endguest
 
-            <a href="{{ route('loginshow') }}">Bejelentkezés👤</a>
+            @auth
+                <div class="dropdown">
+                    <div class="select">
+                        <p>{{ auth()->user()->name }}</p>
+                        <div class="nyilacska"></div>
+                    </div>
+                    <ul class="menu">
+                        <li><a href={{ route('profile.show') }}>Profil</a></li>
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="logout-btn">Kijelentkezés</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            @endauth
 
             <a href="{{route('cart')}}" class="nav-btn">Kosár🛒</a>
         </div>
@@ -104,6 +124,7 @@
     <script src="{{ asset('js/navbardropdownmenu.js') }}"></script>
     <script src="{{ asset('js/newsletter.js') }}"></script>
     <script src="{{ asset('js/slider.js') }}"></script>
+    <script src="{{ asset('js/profile.js') }}"></script>
 </body>
 
 </html>

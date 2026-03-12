@@ -29,4 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     //kosárhoz adás
     Route::get('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
+      
+    Route::get('/profile', function() {
+        return view('profile', ['user' => auth()->user()]);
+    })->name('profile.show');
+
 });

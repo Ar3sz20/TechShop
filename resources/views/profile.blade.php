@@ -1,0 +1,98 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="profile-container">
+
+    <div class="profile">
+        <div class="profile-header">
+            <img src="{{ $user->avatar ?? asset('images/default-profile.png') }}" alt="profile img" class="profile-img">
+            <div class="profile-text-container">
+                <h1 class="profile-title">{{ $user->name }}</h1>
+                <p class="profile-email">{{ $user->email }}</p>
+            </div>
+        </div>
+
+        <div class="profile-menu">
+            <button class="profile-menu-link active" data-section="account">Fiók</button>
+            <button class="profile-menu-link" data-section="address">Szállítási adatok</button>
+            <button class="profile-menu-link" data-section="orders">Előző rendelések</button>
+            <button class="profile-menu-link" data-section="notifications">Értesítések</button>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="profile-menu-link">Kijelentkezés</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="account">
+        <div id="account" class="account-section">
+            <h2>Fiók beállítások</h2>
+            <form action="#" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="account-edit">
+                    <div class="account-input-container">
+                        <label>Profil név:</label>
+                        <input type="text" name="name" value="{{ $user->name }}">
+                    </div>
+                    <div class="account-input-container">
+                        <label>Email cím:</label>
+                        <input type="email" name="email" value="{{ $user->email }}">
+                    </div>
+                </div>
+                <div class="account-edit">
+                    <div class="account-input-container">
+                        <label>Telefonszám:</label>
+                        <input type="text" name="phone" value="{{ $user->phone ?? '' }}">
+                    </div>
+                </div>
+                <button type="submit" class="account-btn-save">Mentés</button>
+            </form>
+        </div>
+
+        <div id="address" class="account-section" style="display:none;">
+            <h2>Szállítási adatok</h2>
+            <form action="#" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="account-edit">
+                    <div class="account-input-container">
+                        <label>Szállítási név:</label>
+                        <input type="text" name="shipping_name" value="{{ $user->name }}">
+                    </div>
+                    <div class="account-input-container">
+                        <label>Cím:</label>
+                        <input type="text" name="address" value="{{ $user->address ?? '' }}">
+                    </div>
+                    <div class="account-input-container">
+                        <label>Telefonszám:</label>
+                        <input type="text" name="shipping_phone" value="{{ $user->phone ?? '' }}">
+                    </div>
+                </div>
+                <button type="submit" class="account-btn-save">Mentés</button>
+            </form>
+        </div>
+
+        <div id="orders" class="account-section" style="display:none;">
+            <h2>Előző rendelések</h2>
+            <p>Még nincs rendelésed.</p>
+        </div>
+
+        <div id="notifications" class="account-section" style="display:none;">
+            <h2>Értesítések</h2>
+            <form action="#" method="POST">
+                @csrf
+                @method('PUT')
+                <label>
+                    <input type="checkbox" name="newsletter" {{ $user->newsletter ?? false ? 'checked' : '' }}>
+                    Feliratkozás hírlevélre
+                </label>
+                <div style="margin-top:15px;">
+                    <button type="submit" class="account-btn-save">Mentés</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+@endsection
