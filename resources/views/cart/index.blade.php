@@ -56,7 +56,10 @@
 
             <div class="cart-summary">
                 <p>Összesen: <strong>{{ number_format($total, 0, ",", " ") }} $</strong></p>
-                <button class="checkout-btn">Megrendelés</button>
+            <form action="{{ route('orders.store') }}" method="POST">
+                @csrf
+                <button type="submit">Rendelés</button>
+            </form>
             </div>
 
         @else

@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
     
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::post('/order', [OrderController::class, 'store'])->name('orders.store');
 
     Route::get('/profile', function() {
         return view('profile', ['user' => auth()->user()]);
