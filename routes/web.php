@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
      $products = Product::where('quantity', '>', 0)
@@ -38,7 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     //kosárhoz adás
     Route::get('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
-      
+    
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
     Route::get('/profile', function() {
         return view('profile', ['user' => auth()->user()]);
     })->name('profile.show');
