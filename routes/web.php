@@ -1,12 +1,18 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
-    return view('welcome');
+     $products = Product::where('quantity', '>', 0)
+        ->inRandomOrder()
+        ->take(6)
+        ->get();
+
+    return view('welcome', compact('products'));
 });
 
 //softdelethez való részek
@@ -14,6 +20,9 @@ Route::get("/products/trashed", [ProductController::class, "trashed"]) -> name("
 Route::post("/products/{product}/restore", [ProductController::class,"restore"])->name("products.restore");
 //kosár
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+Route::get('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
+// **Törlés a kosárból**
+Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 //termékek
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');

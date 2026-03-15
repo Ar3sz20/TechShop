@@ -4,6 +4,7 @@
 <div class="cart-container">
     <h1>🛒 Kosár</h1>
 
+    @if(count($cart) > 0)
     <table class="cart-table">
         <thead>
             <tr>
@@ -15,26 +16,38 @@
             </tr>
         </thead>
         <tbody>
+            @php $total = 0; @endphp
+            @foreach($cart as $id => $item)
+                @php $subtotal = $item['price'] * $item['quantity']; $total += $subtotal; @endphp
             <tr>
-                <td>Ultra Laptop</td>
-                <td>1</td>
-                <td>300 000 Ft</td>
-                <td>300 000 Ft</td>
-                <td><button class="remove-btn">Törlés</button></td>
+                <td data-label="Termék">
+                    <div class="cart-product-info">
+                        <img src="{{ $item['image'] ? asset('kepek/'.$item['image']) : asset('kepek/placeholder.png') }}" 
+                             alt="{{ $item['name'] }}" class="cart-product-img">
+                        <span>{{ $item['name'] }}</span>
+                    </div>
+                </td>
+                <td data-label="Darab">{{ $item['quantity'] }}</td>
+                <td data-label="Ár">{{ number_format($item['price'],0,","," ") }} Ft</td>
+                <td data-label="Összesen">{{ number_format($subtotal,0,","," ") }} Ft</td>
+                <td data-label="Művelet">
+                    <form action="{{ route('cart.remove',$id) }}" method="POST">
+                        @csrf
+                        <button class="remove-btn">Törlés</button>
+                    </form>
+                </td>
             </tr>
-            <tr>
-                <td>Okostelefon Pro</td>
-                <td>2</td>
-                <td>150 000 Ft</td>
-                <td>300 000 Ft</td>
-                <td><button class="remove-btn">Törlés</button></td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 
     <div class="cart-summary">
-        <p>Összesen: <strong>600 000 Ft</strong></p>
+        <p>Összesen: <strong>{{ number_format($total,0,","," ") }} Ft</strong></p>
         <button class="checkout-btn">Megrendelés</button>
     </div>
+
+    @else
+        <p style="text-align:center; font-size:1.2rem; margin-top:20px;">A kosarad üres!</p>
+    @endif
 </div>
 @endsection

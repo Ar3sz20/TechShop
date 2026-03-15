@@ -45,41 +45,33 @@
             </div>
         </div>
 
-        <div class="products-section">
-            <h2>Népszerű termékek</h2>
-            <div class="products-grid">
-                <div class="product-card">
-                    <img src="{{ asset('kepek/placeholder.png') }}" alt="Laptop">
-                    <h3>Ultra Laptop</h3>
-                    <p>Akár 20% kedvezmény!</p>
-                    <button>Megnézem</button>
-                </div>
-                <div class="product-card">
-                    <img src="{{ asset('kepek/placeholder.png') }}" alt="Telefon">
-                    <h3>Okostelefon Pro</h3>
-                    <p>Most akciós ár!</p>
-                    <button>Megnézem</button>
-                </div>
-                <div class="product-card">
-                    <img src="{{ asset('kepek/placeholder.png') }}" alt="Gaming">
-                    <h3>Gamer felszerelés</h3>
-                    <p>Limitált kiadás!</p>
-                    <button>Megnézem</button>
-                </div>
-            </div>
-        </div>
+       <div class="products-section">
+    <h2 class="section-title">Ajánlott termékek</h2>
 
-        <div class="offers-section">
-            <h2>Különleges akciók</h2>
-            <div class="offers-grid">
-                <div class="offer-card">
-                    <h3>Black Friday akció!</h3>
-                    <p>Akár 50% kedvezmény a laptopokra</p>
-                </div>
-                <div class="offer-card">
-                    <h3>Új termékek</h3>
-                    <p>Próbáld ki az új gamer perifériákat</p>
+    <div class="products-grid">
+
+        @foreach($products as $product)
+        <div class="product-card">
+
+            <div class="product-image">
+                <img src="{{ $product->image ? asset('kepek/'.$product->image) : asset('kepek/placeholder.png') }}" 
+                     alt="{{ $product->name }}">
+            </div>
+
+            <div class="product-info">
+                <h3>{{ $product->name }}</h3>
+                <span class="price">{{ number_format($product->price,0,","," ") }} Ft</span>
+
+                <div class="product-actions">
+                    <a href="{{ route('products.show',$product->id) }}" class="view-btn">Megnézem</a>
+                    <a href="{{ route('cart.add',$product->id) }}" class="cart-btn">Kosárba 🛒</a>
                 </div>
             </div>
+
         </div>
+        @endforeach
+
+    </div>
+</div>
+</div>
 @endsection
