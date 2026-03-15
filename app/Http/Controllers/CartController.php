@@ -15,17 +15,14 @@ class CartController extends Controller
         return view('cart.index', compact('cart'));
     }
     public function addToCart($id)
-    { 
+    {
         $product = Product::find($id);
 
         $cart = session()->get("cart", []);
         //ha már van olyan terméka sessionben nővelje az mennyiségét ha nincs akkor adja hozzá
-        if (isset($cart[$id])) 
-        {
+        if (isset($cart[$id])) {
             $cart[$id]["quantity"]++;
-        }
-        else
-        {
+        } else {
             $cart[$id] = [
                 "name" => $product->name,
                 "price" => $product->price,
@@ -45,13 +42,36 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
 
         //ha a sessionben van az adot termék szedje ki
-        if (isset($cart[$id])) 
-        {
+        if (isset($cart[$id])) {
             unset($cart[$id]);
             session()->put('cart', $cart);
         }
 
         return redirect()->back()->with('success', 'Termék eltávolítva.');
     }
+    // + gomb
+    public function increase($id)
+    {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+            session()->put('cart', $cart);
+        }
+        return redirect()->back();
+    }
 
+    // - gomb
+    public function decrease($id)
+    {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            if ($cart[$id]['quantity'] > 1) {
+                $cart[$id]['quantity']--;
+            } else {
+                unset($cart[$id]);
+            }
+            session()->put('cart', $cart);
+        }
+        return redirect()->back();
+    }
 }

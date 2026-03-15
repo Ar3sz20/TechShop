@@ -98,6 +98,37 @@
     box-shadow:0 5px 15px rgba(138,43,226,0.5);
 }
 
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qty-number {
+    min-width: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.qty-btn {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #8a2be2;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.qty-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 10px rgba(138,43,226,0.5);
+}
+
+.quantity-btn-form {
+    display: inline-block;
+}
+
 @media(max-width:768px){
     .cart-table thead { display:none; }
     .cart-table tbody td{

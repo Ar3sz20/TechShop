@@ -323,6 +323,23 @@ body {
     box-shadow:0 5px 15px rgba(138,43,226,0.5);
 }
 
+.all-products-btn {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.all-products-btn .btn {
+    padding: 12px 25px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.all-products-btn .btn:hover {
+    background-color: #0056b3;
+}
+
 
 @media(max-width:767px){
     .product-actions{

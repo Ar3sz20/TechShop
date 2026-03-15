@@ -21,6 +21,8 @@ Route::post("/products/{product}/restore", [ProductController::class,"restore"])
 //kosár
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::get('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/increase/{id}', [CartController::class, 'increase'])->name('cart.increase');
+Route::post('/cart/decrease/{id}', [CartController::class, 'decrease'])->name('cart.decrease');
 // **Törlés a kosárból**
 Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 //termékek

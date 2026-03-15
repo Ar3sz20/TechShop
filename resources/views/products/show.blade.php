@@ -6,29 +6,34 @@
 
     <div class="product-detail-card">
 
-
-<div class="product-detail-container">
-
-    <div class="product-detail-card">
-
         <div class="product-image">
-            <img src="{{ asset('kepek/laptop.png') }}" alt="Ultra Laptop">
+            <img src="{{ asset('kepek/laptop.png') }}" alt="{{ $product->name ?? 'Termék' }}">
         </div>
 
         <div class="product-info">
-            <h1>Ultra Laptop</h1>
-            <p class="product-price"><strong>300 000 Ft</strong></p>
+            <h1>{{ $product->name ?? 'Ultra Laptop' }}</h1>
+            <p class="product-price"><strong>{{ $product->price ?? '300 000 Ft' }}</strong></p>
+            
+            <p class="product-stock {{ $product->stock > 0 ? 'in-stock' : 'out-of-stock' }}">
+                {{ $product->stock > 0 ? 'Raktáron: '.$product->stock.' db' : 'Nincs készleten' }}
+            </p>
+
             <p class="product-description">
-                Ez az Ultra Laptop egy csúcskategóriás készülék, amely tökéletes a munkára és a játékra is.
-                16 GB RAM, 1 TB SSD és legújabb processzor található benne. Ideális választás mindenkinek, aki a teljesítményt szereti.
+                {{ $product->description ?? 'Ez az Ultra Laptop egy csúcskategóriás készülék, amely tökéletes a munkára és a játékra is.' }}
             </p>
 
             <div class="product-actions">
-                <button class="add-to-cart-btn">Kosárba</button>
+                @if($product->stock > 0)
+                    <button class="add-to-cart-btn">Kosárba</button>
+                @else
+                    <button class="add-to-cart-btn disabled" disabled>Nem elérhető</button>
+                @endif
+                <a href="{{ url()->previous() }}" class="back-btn">Vissza</a>
             </div>
         </div>
 
     </div>
 
 </div>
+
 @endsection
