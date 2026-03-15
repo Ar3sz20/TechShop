@@ -14,8 +14,8 @@
             <h1>{{ $product->name ?? 'Ultra Laptop' }}</h1>
             <p class="product-price"><strong>{{ $product->price ?? '300 000 Ft' }}</strong></p>
             
-            <p class="product-stock {{ $product->stock > 0 ? 'in-stock' : 'out-of-stock' }}">
-                {{ $product->stock > 0 ? 'Raktáron: '.$product->stock.' db' : 'Nincs készleten' }}
+            <p class="product-stock {{ $product->quantity > 0 ? 'in-stock' : 'out-of-stock' }}">
+                {{ $product->quantity > 0 ? 'Raktáron: '.$product->quantity.' db' : 'Nincs készleten' }}
             </p>
 
             <p class="product-description">
