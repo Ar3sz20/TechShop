@@ -45,33 +45,33 @@
             </div>
         </div>
 
-       <div class="products-section">
-    <h2 class="section-title">Ajánlott termékek</h2>
+        <div class="products-section">
+            <h2 class="section-title">Ajánlott termékek</h2>
 
-    <div class="products-grid">
+            <div class="products-grid">
+                @foreach($products as $product)
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="{{ $product->image ? asset('kepek/' . $product->image) : asset('kepek/placeholder.png') }}"
+                                alt="{{ $product->name }}">
+                        </div>
 
-        @foreach($products as $product)
-        <div class="product-card">
+                        <div class="product-info">
+                            <h3>{{ $product->name }}</h3>
+                            <span class="price">{{ number_format($product->price, 0, ",", " ") }} $</span>
 
-            <div class="product-image">
-                <img src="{{ $product->image ? asset('kepek/'.$product->image) : asset('kepek/placeholder.png') }}" 
-                     alt="{{ $product->name }}">
+                            <div class="product-actions">
+                                <a href="{{ route('products.show', $product->id) }}" class="view-btn">Megnézem</a>
+                                <a href="{{ route('cart.add', $product->id) }}" class="cart-btn">Kosárba 🛒</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
 
-            <div class="product-info">
-                <h3>{{ $product->name }}</h3>
-                <span class="price">{{ number_format($product->price,0,","," ") }} Ft</span>
-
-                <div class="product-actions">
-                    <a href="{{ route('products.show',$product->id) }}" class="view-btn">Megnézem</a>
-                    <a href="{{ route('cart.add',$product->id) }}" class="cart-btn">Kosárba 🛒</a>
-                </div>
+            <div class="all-products-btn">
+                <a href="{{ route('products.index') }}" class="btn btn-primary">Összes termék</a>
             </div>
-
         </div>
-        @endforeach
-
     </div>
-</div>
-</div>
 @endsection
