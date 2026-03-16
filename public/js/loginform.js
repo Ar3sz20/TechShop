@@ -13,21 +13,3 @@ mentettlabelcsoport.forEach(g => {
         }
     });
 });
-
-/*const login = document.getElementById('loginbox');
-const register = document.getElementById('registerbox');
-
-const showRegister = document.getElementById('showRegister');
-const showLogin = document.getElementById('showLogin');
-
-showRegister.addEventListener('click', (e) => {
-    e.preventDefault(); 
-    login.style.display = 'none';
-    register.style.display = 'block';
-});
-
-showLogin.addEventListener('click', (e) => {
-    e.preventDefault();
-    register.style.display = 'none';
-    login.style.display = 'block';
-});*/

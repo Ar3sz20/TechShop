@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\OrderController;
+use App\Models\NewsLetter;
 
 Route::get('/', function () {
      $products = Product::where('quantity', '>', 0)
@@ -36,6 +38,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegister'])->name('registershow');
 Route::post('/register', [AuthController::class, 'register']);
 
+//newsletter
+Route::post('newsletter', [NewsLetterController::class,'store'])->name('newsletter.store');
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -43,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
     
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::post('/order', [OrderController::class, 'store'])->name('orders.store');
 
     Route::get('/profile', function() {
         return view('profile', ['user' => auth()->user()]);

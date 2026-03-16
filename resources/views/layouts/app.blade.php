@@ -105,7 +105,8 @@
             </div>
 
             <div class="newsletter">
-                <form action="#">
+                <form action="/newsletter" method="POST">
+                    @csrf
                     <div class="newsletter-header">
                         <h3 class="newsletter-title">Iratkozz fel hírlevelünkre!</h3>
                         <p class="newsletter-desc">

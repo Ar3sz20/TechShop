@@ -11,7 +11,6 @@ if (model && modelCloseBtn && modelCloseOverlay) {
     const modelCloseFunc = () => {
         model.classList.add('closed');
         localStorage.setItem("modalClosed", "true");
-
     };
 
     modelCloseOverlay.addEventListener('click', modelCloseFunc);
@@ -19,15 +18,46 @@ if (model && modelCloseBtn && modelCloseOverlay) {
 }
 
 
-//Ha nem kell tényleges feliratkozás!
+// Newsletter feliratkozás
 const newsletterForm = document.querySelector(".newsletter form");
 
 if (newsletterForm) {
-    newsletterForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        document.querySelector(".model").classList.add("closed");
-        localStorage.setItem("modalClosed", "true");
-        document.querySelector(".overlay").classList.remove("active");
 
-    })
-};
+    newsletterForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const emailInput = newsletterForm.querySelector("input[name='email']");
+        const email = emailInput.value;
+
+        const csrf = document.querySelector('meta[name="csrf-token"]').content;
+
+        try {
+
+            const response = await fetch("/newsletter", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrf,
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email
+                })
+            });
+
+            if (response.ok) {
+
+                document.querySelector(".model").classList.add("closed");
+                localStorage.setItem("modalClosed", "true");
+                document.querySelector(".overlay").classList.remove("active");
+
+                emailInput.value = "";
+            }
+
+        } catch (error) {
+            console.error("Hiba történt:", error);
+        }
+
+    });
+
+}
