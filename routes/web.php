@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -52,5 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', function() {
         return view('profile', ['user' => auth()->user()]);
     })->name('profile.show');
+
+    Route::put('/profile/notifications', [ProfileController::class, 'updateNewsletter'])->name('profile.updateNewsletter');
 
 });

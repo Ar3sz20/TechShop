@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+@if(session('success'))
+    <div class="alert-success" style="padding:10px; margin-bottom:15px; background-color:#d4edda; color:#155724; border-radius:5px;">
+        {{ session('success') }}
+    </div>
+@endif
 <div class="profile-container">
 
     <div class="profile">
@@ -80,11 +85,11 @@
 
         <div id="notifications" class="account-section" style="display:none;">
             <h2>Értesítések</h2>
-            <form action="#" method="POST">
+            <form action="{{ route('profile.updateNewsletter') }}" method="POST">
                 @csrf
                 @method('PUT')
                 <label>
-                    <input type="checkbox" name="newsletter" {{ $user->newsletter ?? false ? 'checked' : '' }}>
+                    <input type="checkbox" name="newsletter" value="1" {{ $user->newsletter ?? false ? 'checked' : '' }}>
                     Feliratkozás hírlevélre
                 </label>
                 <div style="margin-top:15px;">

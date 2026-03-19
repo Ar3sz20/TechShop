@@ -22,42 +22,31 @@ if (model && modelCloseBtn && modelCloseOverlay) {
 const newsletterForm = document.querySelector(".newsletter form");
 
 if (newsletterForm) {
-
     newsletterForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const emailInput = newsletterForm.querySelector("input[name='email']");
-        const email = emailInput.value;
-
         const csrf = document.querySelector('meta[name="csrf-token"]').content;
+        const formData = new FormData(newsletterForm);
 
         try {
-
             const response = await fetch("/newsletter", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": csrf,
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({
-                    email: email
-                })
+                headers: { "X-CSRF-TOKEN": csrf },
+                body: formData
             });
 
             if (response.ok) {
-
                 document.querySelector(".model").classList.add("closed");
                 localStorage.setItem("modalClosed", "true");
                 document.querySelector(".overlay").classList.remove("active");
-
-                emailInput.value = "";
+                newsletterForm.reset();
+            } else {
+                const text = await response.text();
+                console.error("Server hiba:", text);
             }
 
         } catch (error) {
-            console.error("Hiba történt:", error);
+            console.error("Fetch hiba:", error);
         }
-
     });
-
 }
