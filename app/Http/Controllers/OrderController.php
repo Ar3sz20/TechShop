@@ -10,9 +10,10 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        return view('welcome', compact('products'));
+        $orders = Auth::user()->orders()->latest()->get();
+        return view('orders.index', compact('orders'));
     }
+
     public function store()
     {
         $cart = session()->get('cart', []);
@@ -23,17 +24,27 @@ class OrderController extends Controller
 
         $total = 0;
 
-        foreach($cart as $item){
+        foreach($cart as $id => $item){
+            $product = Product::find($id);
+            if (!$product || $product->quantity < $item['quantity']) {
+                return redirect()->back()->with('error', 'A(z) "' . $item['name'] . '" termékből nincs elég raktáron!');
+            }
             $total += $item['price'] * $item['quantity'];
         }
 
-        Order::create([
+        $order = Order::create([
             'user_id' => Auth::id(),
             'total_price' => $total
         ]);
 
+        // Decrement stock
+        foreach($cart as $id => $item){
+            $product = Product::find($id);
+            $product->decrement('quantity', $item['quantity']);
+        }
+
         session()->forget('cart');
 
-        return redirect()->route('orders.index')->with('success','Sikeres rendelés!');
+        return redirect()->route('orders.index')->with('success', 'Sikeres rendelés!');
     }
 }

@@ -7,7 +7,7 @@
         <div class="product-detail-card">
 
             <div class="product-image">
-                <img src="{{ asset('kepek/laptop.png') }}" alt="{{ $product->name ?? 'Termék' }}">
+                <img src="{{ $product->image ? asset('kepek/' . $product->image) : asset('kepek/placeholder.png') }}" alt="{{ $product->name ?? 'Termék' }}">
             </div>
 
             <div class="product-info">
@@ -24,7 +24,10 @@
 
                 <div class="product-actions">
                     @if($product->quantity > 0)
-                        <a href="{{ route('cart.add', $product->id) }}" class="add-to-cart-btn">Kosárba 🛒</a>
+                        <form action="{{ route('cart.add', $product->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            <button type="submit" class="add-to-cart-btn">Kosárba 🛒</button>
+                        </form>
                     @else
                         <button class="add-to-cart-btn disabled" disabled>Nem elérhető</button>
                     @endif

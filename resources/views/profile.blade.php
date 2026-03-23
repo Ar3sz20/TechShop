@@ -80,7 +80,28 @@
 
         <div id="orders" class="account-section" style="display:none;">
             <h2>Előző rendelések</h2>
-            <p>Még nincs rendelésed.</p>
+            @if($user->orders->count() > 0)
+                <table style="width:100%; border-collapse:collapse; margin-top:10px;">
+                    <thead>
+                        <tr>
+                            <th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Rendelés #</th>
+                            <th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Dátum</th>
+                            <th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Összeg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($user->orders()->latest()->get() as $order)
+                            <tr>
+                                <td style="padding:8px; border-bottom:1px solid #eee;">{{ $order->id }}</td>
+                                <td style="padding:8px; border-bottom:1px solid #eee;">{{ $order->created_at->format('Y.m.d H:i') }}</td>
+                                <td style="padding:8px; border-bottom:1px solid #eee;">{{ number_format($order->total_price, 0, ",", " ") }} $</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <p>Még nincs rendelésed.</p>
+            @endif
         </div>
 
         <div id="notifications" class="account-section" style="display:none;">

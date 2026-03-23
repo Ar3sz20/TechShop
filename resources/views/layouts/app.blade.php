@@ -36,13 +36,13 @@
                     <li class="active">
                         <a href="{{ route('products.index') }}">Összes termék</a>
                     </li>
-                    <li><a href="{{ route('products.index', ['category' => 'smartproduct']) }}" +
+                    <li><a href="{{ route('products.index', ['category' => 'smartproduct']) }}"
                             class="{{ request('category') == 'smartproduct' ? 'active' : '' }}">Okos eszközök
                         </a></li>
-                    <li> <a href="{{ route('products.index', ['category' => 'household']) }}" +
+                    <li> <a href="{{ route('products.index', ['category' => 'household']) }}"
                             class="{{ request('category') == 'household' ? 'active' : '' }}">Háztartás
                         </a></li>
-                    <li><a href="{{ route('products.index', ['category' => 'gaming']) }}" +
+                    <li><a href="{{ route('products.index', ['category' => 'gaming']) }}"
                             class="{{ request('category') == 'gaming' ? 'active' : '' }}">Gaming
                         </a></li>
                 </ul>
@@ -58,7 +58,7 @@
                         <div class="nyilacska"></div>
                     </div>
                     <ul class="menu">
-                        <li><a href={{ route('profile.show') }}>Profil</a></li>
+                        <li><a href="{{ route('profile.show') }}">Profil</a></li>
                         <li>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
