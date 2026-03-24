@@ -40,7 +40,9 @@ class OrderController extends Controller
 
         Order::create([
             'user_id' => Auth::id(),
-            'total_price' => $total
+            'total_price' => $total,
+            'address' => $request->address,
+            'items' => json_encode($cart)
         ]);
 
         // Raktárkészlet csökkentése a megrendelt mennyiséggel
