@@ -52,6 +52,37 @@
     border-radius:8px;
 }
 
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qty-number {
+    min-width: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.qty-btn {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #8a2be2;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.qty-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 10px rgba(138,43,226,0.5);
+}
+
+.quantity-btn-form {
+    display: inline-block;
+}
+
 .remove-btn{
     padding:8px 12px;
     border:none;
@@ -82,22 +113,31 @@
     font-weight:bold;
 }
 
-.checkout-btn{
-    padding:12px 25px;
-    border:none;
-    border-radius:10px;
-    background-color:#8a2be2;
-    color:white;
-    font-size:1.2rem;
-    cursor:pointer;
-    transition:transform 0.2s, box-shadow 0.2s;
-    text-decoration:none;
-    display:inline-block;
+.cart-summary form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.checkout-btn:hover{
-    transform:scale(1.05);
-    box-shadow:0 5px 15px rgba(138,43,226,0.5);
+.cart-summary input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+.cart-summary button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #8a2be2;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cart-summary button:hover {
+    background-color: #6a1bbf;
 }
 
 /* Üres kosár üzenet */
@@ -105,37 +145,6 @@
     text-align: center;
     font-size: 1.2rem;
     margin-top: 20px;
-}
-
-.quantity-control {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.qty-number {
-    min-width: 30px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.qty-btn {
-    padding: 6px 10px;
-    border: none;
-    border-radius: 6px;
-    background-color: #8a2be2;
-    color: #fff;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.qty-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 10px rgba(138,43,226,0.5);
-}
-
-.quantity-btn-form {
-    display: inline-block;
 }
 
 @media (max-width: 768px){
@@ -208,8 +217,7 @@
         text-align:center;
     }
 
-    .checkout-btn{
+    .cart-summary button{
         width:100%;
     }
-
 }

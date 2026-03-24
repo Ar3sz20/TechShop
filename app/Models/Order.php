@@ -8,7 +8,13 @@ class Order extends Model
 {
     protected $fillable = [
         'user_id',
-        'total_price'
+        'address',
+        'total_price',
+        'items',
+    ];
+
+    protected $casts = [
+        'items' => 'array',
     ];
 
     public function user()

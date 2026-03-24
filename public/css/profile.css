@@ -135,38 +135,37 @@
     background-color: #4053e0;
 }
 
-@media (max-width: 900px) {
-    .profile-container {
-        flex-direction: column;
-    }
-    .account, .profile {
-        width: 100%;
-    }
-}
-
-/* Rendelési előzmények táblázat a profil oldalon */
-.profile-orders-table {
+.account-section table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
-.profile-orders-table th {
+.account-section table th,
+.account-section table td {
+    border: 1px solid #cbd5e1;
+    padding: 10px;
     text-align: left;
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-    color: #64748b;
+    font-size: 14px;
+}
+
+.account-section table th {
+    background-color: #f1f5f9;
+    color: #1e293b;
     font-weight: 600;
 }
 
-.profile-orders-table td {
-    padding: 8px;
-    border-bottom: 1px solid #eee;
-    color: #1e293b;
+.account-section table tr:nth-child(even) {
+    background-color: #f9fafb;
 }
 
-.profile-orders-table tr:hover {
-    background-color: #f8fafc;
+.account-section table td ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.account-section table td ul li {
+    list-style-type: disc;
 }
 
 /* Értesítések checkbox */
@@ -178,4 +177,18 @@
     color: #1e293b;
     cursor: pointer;
     margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+    .profile-container {
+        flex-direction: column;
+    }
+    .account, .profile {
+        width: 100%;
+    }
+    .account-section table th, 
+    .account-section table td {
+        font-size: 12px;
+        padding: 8px;
+    }
 }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function updateNewsletter(Request $request)
+       public function updateNewsletter(Request $request)
     {
         $request->validate([
             'newsletter' => 'sometimes|boolean',
@@ -17,5 +18,4 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'Értesítési beállítások frissítve.');
-    }
-}
+    }}

@@ -52,9 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::post('/order', [OrderController::class, 'store'])->name('orders.store');
 
-    Route::get('/profile', function() {
-        return view('profile', ['user' => auth()->user()]);
-    })->name('profile.show');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::put('/profile/notifications', [ProfileController::class, 'updateNewsletter'])->name('profile.updateNewsletter');
 

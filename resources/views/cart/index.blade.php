@@ -64,11 +64,13 @@
                 @auth
                     <form action="{{ route('orders.store') }}" method="POST">
                         @csrf
-                        <button type="submit" class="checkout-btn">Rendelés</button>
+                        <label for="address">Szállítási cím:</label>
+                        <input type="text" name="address" id="address" value="{{ old('address', auth()->user()->address ?? '') }}" required>
+                        <button type="submit">Rendelés leadása</button>
                     </form>
                 @endauth
                 @guest
-                    <a href="{{ route('loginshow') }}" class="checkout-btn">
+                    <a href="{{ route('loginshow') }}" style="text-decoration:none; padding:12px 20px; background:#8a2be2; color:#fff; border-radius:10px; display:inline-block;">
                         Jelentkezz be a rendeléshez
                     </a>
                 @endguest

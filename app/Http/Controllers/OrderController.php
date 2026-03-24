@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\Product;
@@ -14,13 +15,17 @@ class OrderController extends Controller
         return view('orders.index', compact('orders'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $cart = session()->get('cart', []);
 
-        if(empty($cart)) {
+        if (empty($cart)) {
             return redirect()->back()->with('error', 'A kosár üres!');
         }
+
+        $request->validate([
+            'address' => 'required|string|max:255',
+        ]);
 
         $total = 0;
 
@@ -33,7 +38,7 @@ class OrderController extends Controller
             $total += $item['price'] * $item['quantity'];
         }
 
-        $order = Order::create([
+        Order::create([
             'user_id' => Auth::id(),
             'total_price' => $total
         ]);
