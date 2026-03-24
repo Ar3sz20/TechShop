@@ -5,7 +5,7 @@ dropdowns.forEach(dropdown => {
     const nyilacska = dropdown.querySelector('.nyilacska');
     const menu = dropdown.querySelector('.menu');
     const options = dropdown.querySelectorAll('.menu li');
-    const selected = dropdown.querySelector('.selected');
+    const selected = dropdown.querySelector('.select p');
 
 
     select.addEventListener('click', () => {
@@ -16,8 +16,8 @@ dropdowns.forEach(dropdown => {
 
     options.forEach(option =>{
         option.addEventListener('click', ()=>{
-            selected.innerText = option.innerText;
-            select.classList.remove('select-cliked');
+            if (selected) selected.innerText = option.innerText;
+            select.classList.remove('select-clicked');
             nyilacska.classList.remove('nyilacska-rotate');
             menu.classList.remove('menu-open');
 

@@ -20,11 +20,11 @@ Route::get('/', function () {
 });
 
 //softdelethez való részek
-Route::get("/products/trashed", [ProductController::class, "trashed"]) -> name("products.trashed");
-Route::post("/products/{product}/restore", [ProductController::class,"restore"])->name("products.restore");
+Route::get("/products/trashed", [ProductController::class, "ShowTrashed"]) -> name("products.trashed");
+Route::post("/products/{product}/restore", [ProductController::class,"restore"])->withTrashed()->name("products.restore");
 //kosár
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
-Route::get('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/increase/{id}', [CartController::class, 'increase'])->name('cart.increase');
 Route::post('/cart/decrease/{id}', [CartController::class, 'decrease'])->name('cart.decrease');
 // **Törlés a kosárból**
@@ -33,19 +33,19 @@ Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->nam
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 //auth
-Route::get('/login', [AuthController::class, 'showLogin'])->name('loginshow');
-Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('loginshow');
+    Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/register', [AuthController::class, 'showRegister'])->name('registershow');
-Route::post('/register', [AuthController::class, 'register']);
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('registershow');
+    Route::post('/register', [AuthController::class, 'register']);
+});
 
 //newsletter
 Route::post('newsletter', [NewsLetterController::class,'store'])->name('newsletter.store');
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    //kosárhoz adás
-    Route::get('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
     
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::post('/order', [OrderController::class, 'store'])->name('orders.store');

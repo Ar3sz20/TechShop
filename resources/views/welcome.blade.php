@@ -62,7 +62,10 @@
 
                             <div class="product-actions">
                                 <a href="{{ route('products.show', $product->id) }}" class="view-btn">Megnézem</a>
-                                <a href="{{ route('cart.add', $product->id) }}" class="cart-btn">Kosárba 🛒</a>
+                                <form action="{{ route('cart.add', $product->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="cart-btn">Kosárba 🛒</button>
+                                </form>
                             </div>
                         </div>
                     </div>

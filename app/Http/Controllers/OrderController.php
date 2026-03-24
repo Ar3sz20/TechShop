@@ -11,13 +11,12 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        return view('welcome', compact('products'));
+        $orders = Auth::user()->orders()->latest()->get();
+        return view('orders.index', compact('orders'));
     }
- public function store(Request $request)
-{
-    $user = Auth::user();
-    $cart = session()->get('cart', []);
+    public function store()
+    {
+        $cart = session()->get('cart', []);
 
     if (empty($cart)) {
         return redirect()->back()->with('error', 'A kosár üres!');
@@ -27,24 +26,19 @@ class OrderController extends Controller
         'address' => 'required|string|max:255',
     ]);
 
-    $total = 0;
-    foreach ($cart as $item) {
-        $total += $item['price'] * $item['quantity'];
-    }
+        $total = 0;
 
-    Order::create([
-        'user_id' => $user->id,
-        'address' => $request->address,
-        'total_price' => $total,
-        'items' => json_encode($cart),
-    ]);
+        foreach($cart as $item){
+            $total += $item['price'] * $item['quantity'];
+        }
 
-    if ($user->address !== $request->address) {
-        $user->update(['address' => $request->address]);
-    }
+        Order::create([
+            'user_id' => Auth::id(),
+            'total_price' => $total
+        ]);
 
     session()->forget('cart');
 
-    return redirect()->route('orders.index')->with('success', 'Sikeres rendelés!');
-}
+        return redirect()->route('orders.index')->with('success','Sikeres rendelés!');
+    }
 }

@@ -60,44 +60,9 @@
         </div>
 
         <div id="orders" class="account-section" style="display:none;">
-    <h2>Előző rendelések</h2>
-
-    @if($orders->isEmpty())
-        <p>Nincsenek előző rendeléseid.</p>
-    @else
-        <table border="1" cellpadding="10" cellspacing="0" style="width:100%; border-collapse:collapse;">
-            <thead>
-                <tr>
-                    <th>Rendelés ID</th>
-                    <th>Dátum</th>
-                    <th>Összeg</th>
-                    <th>Cím</th>
-                    <th>Termékek</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($orders as $order)
-                    <tr>
-                        <td>{{ $order->id }}</td>
-                        <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
-                        <td>{{ number_format($order->total_price, 0, ',', ' ') }} Ft</td>
-                        <td>{{ $order->address }}</td>
-                        <td>
-                            @php
-                                $items = is_array($order->items) ? $order->items : json_decode($order->items, true) ?? [];
-                            @endphp
-                            <ul>
-                                @foreach($items as $item)
-                                    <li>{{ $item['name'] ?? 'Név hiányzik' }} - {{ $item['quantity'] ?? 1 }} db</li>
-                                @endforeach
-                            </ul>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @endif
-</div>
+            <h2>Előző rendelések</h2>
+            <p>Még nincs rendelésed.</p>
+        </div>
 
         <div id="notifications" class="account-section" style="display:none;">
             <h2>Értesítések</h2>
