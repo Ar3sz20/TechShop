@@ -14,21 +14,27 @@ class OrderController extends Controller
         $orders = Auth::user()->orders()->latest()->get();
         return view('orders.index', compact('orders'));
     }
-    public function store()
+
+    public function store(Request $request)
     {
         $cart = session()->get('cart', []);
 
-    if (empty($cart)) {
-        return redirect()->back()->with('error', 'A kosár üres!');
-    }
+        if (empty($cart)) {
+            return redirect()->back()->with('error', 'A kosár üres!');
+        }
 
-    $request->validate([
-        'address' => 'required|string|max:255',
-    ]);
+        $request->validate([
+            'address' => 'required|string|max:255',
+        ]);
 
         $total = 0;
 
-        foreach($cart as $item){
+        // Ellenőrizzük, hogy minden termékből van-e elég raktáron
+        foreach($cart as $id => $item){
+            $product = Product::find($id);
+            if (!$product || $product->quantity < $item['quantity']) {
+                return redirect()->back()->with('error', 'A(z) "' . $item['name'] . '" termékből nincs elég raktáron!');
+            }
             $total += $item['price'] * $item['quantity'];
         }
 
@@ -37,8 +43,14 @@ class OrderController extends Controller
             'total_price' => $total
         ]);
 
-    session()->forget('cart');
+        // Raktárkészlet csökkentése a megrendelt mennyiséggel
+        foreach($cart as $id => $item){
+            $product = Product::find($id);
+            $product->decrement('quantity', $item['quantity']);
+        }
 
-        return redirect()->route('orders.index')->with('success','Sikeres rendelés!');
+        session()->forget('cart');
+
+        return redirect()->route('orders.index')->with('success', 'Sikeres rendelés!');
     }
 }

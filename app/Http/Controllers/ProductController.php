@@ -55,7 +55,8 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        Product::create($request->all());
+        // validated() csak az ellenőrzött mezőket adja vissza (biztonságosabb mint all())
+        Product::create($request->validated());
         return redirect()->route('products.index');
     }
 
@@ -80,6 +81,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
+        // validated() csak az ellenőrzött mezőket adja vissza (biztonságosabb mint all())
         $product->update($request->validated());
         return redirect()->route("products.index");
     }

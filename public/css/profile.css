@@ -168,6 +168,17 @@
     list-style-type: disc;
 }
 
+/* Értesítések checkbox */
+.profile-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #1e293b;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
 @media (max-width: 900px) {
     .profile-container {
         flex-direction: column;

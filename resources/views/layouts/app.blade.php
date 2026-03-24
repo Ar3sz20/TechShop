@@ -6,15 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webshop</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- Globális stílusok (minden oldalon kellenek) --}}
     <link rel="stylesheet" href="{{asset('css/apps.css')}}">
-    <link rel="stylesheet" href="{{asset('css/footer.css')}}">
     <link rel="stylesheet" href="{{asset('css/navbar.css')}}">
-    <link rel="stylesheet" href="{{asset('css/logreg.css')}}">
-    <link rel="stylesheet" href="{{asset('css/cart.css')}}">
-    <link rel="stylesheet" href="{{asset('css/product.css')}}">
+    <link rel="stylesheet" href="{{asset('css/footer.css')}}">
     <link rel="stylesheet" href="{{asset('css/newsletter.css')}}">
-    <link rel="stylesheet" href="{{asset('css/banner.css')}}">
-    <link rel="stylesheet" href="{{asset('css/profile.css')}}">
+    {{-- Oldal-specifikus stílusok --}}
+    @stack('styles')
 </head>
 
 <body>
@@ -122,11 +120,11 @@
         </div>
     </div>
 
-    <script src="{{ asset('js/loginform.js') }}"></script>
+    {{-- Globális scriptek --}}
     <script src="{{ asset('js/navbardropdownmenu.js') }}"></script>
     <script src="{{ asset('js/newsletter.js') }}"></script>
-    <script src="{{ asset('js/slider.js') }}"></script>
-    <script src="{{ asset('js/profile.js') }}"></script>
+    {{-- Oldal-specifikus scriptek --}}
+    @stack('scripts')
 </body>
 
 </html>

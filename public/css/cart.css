@@ -140,6 +140,13 @@
     background-color: #6a1bbf;
 }
 
+/* Üres kosár üzenet */
+.cart-empty {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
 @media (max-width: 768px){
 
     .cart-container{

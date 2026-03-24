@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@push('styles')
+    <link rel="stylesheet" href="{{asset('css/profile.css')}}">
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('js/profile.js') }}"></script>
+@endpush
+
 @section('content')
 @if(session('success'))
     <div class="alert-success" style="padding:10px; margin-bottom:15px; background-color:#d4edda; color:#155724; border-radius:5px;">
@@ -31,7 +39,7 @@
     <div class="account">
         <div id="account" class="account-section">
             <h2>Fiók beállítások</h2>
-            <form action="#" method="POST">
+            <form action="{{ route('profile.update') }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="account-edit">
@@ -49,7 +57,6 @@
                         <label>Telefonszám:</label>
                         <input type="text" name="phone" value="{{ $user->phone ?? '' }}">
                     </div>
-                    
                     <div class="account-input-container">
                         <label>Cím:</label>
                         <input type="text" name="address" value="{{ $user->address ?? '' }}">
@@ -61,7 +68,29 @@
 
         <div id="orders" class="account-section" style="display:none;">
             <h2>Előző rendelések</h2>
-            <p>Még nincs rendelésed.</p>
+            @if($user->orders->count() > 0)
+                {{-- Rendelési előzmények táblázat --}}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rendelés #</th>
+                            <th>Dátum</th>
+                            <th>Összeg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($user->orders()->latest()->get() as $order)
+                            <tr>
+                                <td>{{ $order->id }}</td>
+                                <td>{{ $order->created_at->format('Y.m.d H:i') }}</td>
+                                <td>{{ number_format($order->total_price, 0, ",", " ") }} $</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <p>Még nincs rendelésed.</p>
+            @endif
         </div>
 
         <div id="notifications" class="account-section" style="display:none;">
@@ -69,7 +98,7 @@
             <form action="{{ route('profile.updateNewsletter') }}" method="POST">
                 @csrf
                 @method('PUT')
-                <label>
+                <label class="profile-checkbox-label">
                     <input type="checkbox" name="newsletter" value="1" {{ $user->newsletter ?? false ? 'checked' : '' }}>
                     Feliratkozás hírlevélre
                 </label>

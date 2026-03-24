@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('styles')
+    <link rel="stylesheet" href="{{asset('css/cart.css')}}">
+@endpush
+
 @section('content')
     <div class="cart-container">
         <h1>🛒 Kosár</h1>
@@ -56,16 +60,24 @@
 
             <div class="cart-summary">
                 <p>Összesen: <strong>{{ number_format($total, 0, ",", " ") }} $</strong></p>
-            <form action="{{ route('orders.store') }}" method="POST">
-                @csrf
-                <label for="address">Szállítási cím:</label>
-                <input type="text" name="address" id="address" value="{{ old('address', auth()->user()->address ?? '') }}" required>
-                <button type="submit">Rendelés leadása</button>
-            </form>
+                {{-- Csak bejelentkezett felhasználó rendelhet, vendég a bejelentkezés oldalra kerül --}}
+                @auth
+                    <form action="{{ route('orders.store') }}" method="POST">
+                        @csrf
+                        <label for="address">Szállítási cím:</label>
+                        <input type="text" name="address" id="address" value="{{ old('address', auth()->user()->address ?? '') }}" required>
+                        <button type="submit">Rendelés leadása</button>
+                    </form>
+                @endauth
+                @guest
+                    <a href="{{ route('loginshow') }}" style="text-decoration:none; padding:12px 20px; background:#8a2be2; color:#fff; border-radius:10px; display:inline-block;">
+                        Jelentkezz be a rendeléshez
+                    </a>
+                @endguest
             </div>
 
         @else
-            <p style="text-align:center; font-size:1.2rem; margin-top:20px;">A kosarad üres!</p>
+            <p class="cart-empty">A kosarad üres!</p>
         @endif
     </div>
 @endsection

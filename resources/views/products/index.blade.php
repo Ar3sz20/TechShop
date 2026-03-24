@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('styles')
+    <link rel="stylesheet" href="{{asset('css/product.css')}}">
+@endpush
+
 @section('content')
 <div class="main-main">
 

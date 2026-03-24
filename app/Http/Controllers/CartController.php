@@ -18,10 +18,12 @@ class CartController extends Controller
     {
         $product = Product::find($id);
 
+        // Ellenőrizzük, hogy a termék létezik és van-e raktáron
         if (!$product || $product->quantity <= 0) {
             return redirect()->back()->with("error", "A termék nem elérhető!");
         }
 
+        // Nem engedjük, hogy többet tegyen a kosárba, mint amennyi raktáron van
         $cart = session()->get("cart", []);
         $currentQty = isset($cart[$id]) ? $cart[$id]["quantity"] : 0;
 

@@ -1,5 +1,15 @@
 @extends("layouts.app")
 
+{{-- Főoldal: banner + termék stílusok --}}
+@push('styles')
+    <link rel="stylesheet" href="{{asset('css/banner.css')}}">
+    <link rel="stylesheet" href="{{asset('css/product.css')}}">
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('js/slider.js') }}"></script>
+@endpush
+
 @section('content')
     <div class="main-main">
         <div class="banner">
