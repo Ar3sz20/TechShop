@@ -135,11 +135,49 @@
     background-color: #4053e0;
 }
 
+.account-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.account-section table th,
+.account-section table td {
+    border: 1px solid #cbd5e1;
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.account-section table th {
+    background-color: #f1f5f9;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.account-section table tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+.account-section table td ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.account-section table td ul li {
+    list-style-type: disc;
+}
+
 @media (max-width: 900px) {
     .profile-container {
         flex-direction: column;
     }
     .account, .profile {
         width: 100%;
+    }
+    .account-section table th, 
+    .account-section table td {
+        font-size: 12px;
+        padding: 8px;
     }
 }

@@ -58,7 +58,9 @@
                 <p>Összesen: <strong>{{ number_format($total, 0, ",", " ") }} $</strong></p>
             <form action="{{ route('orders.store') }}" method="POST">
                 @csrf
-                <button type="submit">Rendelés</button>
+                <label for="address">Szállítási cím:</label>
+                <input type="text" name="address" id="address" value="{{ old('address', auth()->user()->address ?? '') }}" required>
+                <button type="submit">Rendelés leadása</button>
             </form>
             </div>
 
