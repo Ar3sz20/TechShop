@@ -7,7 +7,29 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-       public function updateNewsletter(Request $request)
+    // Profil oldal megjelenítése
+    public function show()
+    {
+        return view('profile', ['user' => auth()->user()]);
+    }
+
+    // Profil adatok mentése
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:50',
+            'email' => 'required|email',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+        ]);
+
+        $user = $request->user();
+        $user->update($request->only('name', 'email', 'phone', 'address'));
+
+        return redirect()->back()->with('success', 'Profil frissítve.');
+    }
+
+    public function updateNewsletter(Request $request)
     {
         $request->validate([
             'newsletter' => 'sometimes|boolean',
@@ -18,4 +40,5 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'Értesítési beállítások frissítve.');
-    }}
+    }
+}
