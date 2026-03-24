@@ -24,6 +24,7 @@ class OrderController extends Controller
 
         $total = 0;
 
+        // Ellenőrizzük, hogy minden termékből van-e elég raktáron
         foreach($cart as $id => $item){
             $product = Product::find($id);
             if (!$product || $product->quantity < $item['quantity']) {
@@ -37,7 +38,7 @@ class OrderController extends Controller
             'total_price' => $total
         ]);
 
-        // Decrement stock
+        // Raktárkészlet csökkentése a megrendelt mennyiséggel
         foreach($cart as $id => $item){
             $product = Product::find($id);
             $product->decrement('quantity', $item['quantity']);

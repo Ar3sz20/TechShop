@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@push('styles')
+    <link rel="stylesheet" href="{{asset('css/logreg.css')}}">
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('js/loginform.js') }}"></script>
+@endpush
+
 @section('content')
 <div class="auth-page">
     <div class="log-container">

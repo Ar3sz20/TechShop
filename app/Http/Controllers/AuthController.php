@@ -31,12 +31,12 @@ class AuthController extends Controller
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'confirmed', Password::min(8)->letters()->numbers()->symbols()]
         ]);
-
+        // Redundáns a Hash::make() mert a User modellben a password hashed cast van beállítva, de okozhat GUI bugot egyes SQL kezelő programokban ritka esetekben.
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'role' => 0,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
         ]);
 
         Auth::login($user);

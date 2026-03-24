@@ -21,9 +21,11 @@ Route::get('/', function () {
 
 //softdelethez való részek
 Route::get("/products/trashed", [ProductController::class, "ShowTrashed"]) -> name("products.trashed");
+// withTrashed() kell, mert a törölt terméket nem találná meg alapból
 Route::post("/products/{product}/restore", [ProductController::class,"restore"])->withTrashed()->name("products.restore");
 //kosár
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+// POST a CSRF védelem miatt (GET-tel bárki hozzáadhatna a kosárhoz linkkel)
 Route::post('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/increase/{id}', [CartController::class, 'increase'])->name('cart.increase');
 Route::post('/cart/decrease/{id}', [CartController::class, 'decrease'])->name('cart.decrease');
@@ -32,7 +34,7 @@ Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->nam
 //termékek
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
-//auth
+// guest middleware: bejelentkezett user ne látogathassa a login/regisztrációs oldalt
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('loginshow');
     Route::post('/login', [AuthController::class, 'login']);

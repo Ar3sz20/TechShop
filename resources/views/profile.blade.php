@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@push('styles')
+    <link rel="stylesheet" href="{{asset('css/profile.css')}}">
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('js/profile.js') }}"></script>
+@endpush
+
 @section('content')
 @if(session('success'))
     <div class="alert-success" style="padding:10px; margin-bottom:15px; background-color:#d4edda; color:#155724; border-radius:5px;">
@@ -81,20 +89,21 @@
         <div id="orders" class="account-section" style="display:none;">
             <h2>Előző rendelések</h2>
             @if($user->orders->count() > 0)
-                <table style="width:100%; border-collapse:collapse; margin-top:10px;">
+                {{-- Rendelési előzmények táblázat --}}
+                <table class="profile-orders-table">
                     <thead>
                         <tr>
-                            <th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Rendelés #</th>
-                            <th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Dátum</th>
-                            <th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Összeg</th>
+                            <th>Rendelés #</th>
+                            <th>Dátum</th>
+                            <th>Összeg</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($user->orders()->latest()->get() as $order)
                             <tr>
-                                <td style="padding:8px; border-bottom:1px solid #eee;">{{ $order->id }}</td>
-                                <td style="padding:8px; border-bottom:1px solid #eee;">{{ $order->created_at->format('Y.m.d H:i') }}</td>
-                                <td style="padding:8px; border-bottom:1px solid #eee;">{{ number_format($order->total_price, 0, ",", " ") }} $</td>
+                                <td>{{ $order->id }}</td>
+                                <td>{{ $order->created_at->format('Y.m.d H:i') }}</td>
+                                <td>{{ number_format($order->total_price, 0, ",", " ") }} $</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -109,7 +118,7 @@
             <form action="{{ route('profile.updateNewsletter') }}" method="POST">
                 @csrf
                 @method('PUT')
-                <label>
+                <label class="profile-checkbox-label">
                     <input type="checkbox" name="newsletter" value="1" {{ $user->newsletter ?? false ? 'checked' : '' }}>
                     Feliratkozás hírlevélre
                 </label>

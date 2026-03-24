@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+{{-- Rendelések oldal: a kosár stílusokat használja a táblázathoz --}}
+@push('styles')
+    <link rel="stylesheet" href="{{asset('css/cart.css')}}">
+@endpush
+
 @section('content')
 <div class="cart-container">
     <h1>📦 Rendeléseim</h1>

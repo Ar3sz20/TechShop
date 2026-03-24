@@ -143,3 +143,39 @@
         width: 100%;
     }
 }
+
+/* Rendelési előzmények táblázat a profil oldalon */
+.profile-orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.profile-orders-table th {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.profile-orders-table td {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    color: #1e293b;
+}
+
+.profile-orders-table tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Értesítések checkbox */
+.profile-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #1e293b;
+    cursor: pointer;
+    margin-top: 10px;
+}
