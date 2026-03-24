@@ -28,10 +28,7 @@
 
                 <div class="product-actions">
                     @if($product->quantity > 0)
-                        <form action="{{ route('cart.add', $product->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="add-to-cart-btn">Kosárba 🛒</button>
-                        </form>
+                        <a href="{{ route('cart.add', $product->id) }}" class="add-to-cart-btn">Kosárba 🛒</a>
                     @else
                         <button class="add-to-cart-btn disabled" disabled>Nem elérhető</button>
                     @endif

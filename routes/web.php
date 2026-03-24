@@ -39,15 +39,16 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('loginshow');
     Route::post('/login', [AuthController::class, 'login']);
 
-    Route::get('/register', [AuthController::class, 'showRegister'])->name('registershow');
-    Route::post('/register', [AuthController::class, 'register']);
-});
+Route::get('/register', [AuthController::class, 'showRegister'])->name('registershow');
+Route::post('/register', [AuthController::class, 'register']);
 
 //newsletter
 Route::post('newsletter', [NewsLetterController::class,'store'])->name('newsletter.store');
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    //kosárhoz adás
+    Route::get('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
     
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::post('/order', [OrderController::class, 'store'])->name('orders.store');
