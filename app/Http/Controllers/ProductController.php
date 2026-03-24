@@ -7,7 +7,6 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
 
-
 class ProductController extends Controller
 {
     /**
@@ -17,17 +16,17 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
-        // kategória szűrés
+        // Kategória szűrés
         if ($request->filled('category')) {
             $query->where('category', $request->category);
         }
 
-        //típus szerinti szűrés
+        // Típus szerinti szűrés
         if ($request->filled('type')) {
             $query->whereIn('type', (array) $request->type);
         }
 
-        // ár szerinti szűrés példa
+        // Ár szerinti szűrés
         if ($request->filled('min_price')) {
             $query->where('price', '>=', $request->min_price);
         }
@@ -47,7 +46,6 @@ class ProductController extends Controller
     public function create()
     {
         return view('products.create');
-
     }
 
     /**
@@ -55,9 +53,10 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        // validated() csak az ellenőrzött mezőket adja vissza (biztonságosabb mint all())
+        // FIX: Használjuk a validated() metódust az all() helyett a biztonság érdekében
         Product::create($request->validated());
-        return redirect()->route('products.index');
+        
+        return redirect()->route('products.index')->with('success', 'Termék sikeresen hozzáadva!');
     }
 
     /**
@@ -73,6 +72,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        // Megjegyzés: Ha ugyanazt a nézetet használod create-hez és edit-hez, 
+        // győződj meg róla, hogy a form kezeli a $product meglétét/hiányát.
         return view("products.create", ["product" => $product]);
     }
 
@@ -81,9 +82,10 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        // validated() csak az ellenőrzött mezőket adja vissza (biztonságosabb mint all())
+        // A validated() csak az ellenőrzött mezőket adja vissza
         $product->update($request->validated());
-        return redirect()->route("products.index");
+        
+        return redirect()->route("products.index")->with('success', 'Termék sikeresen frissítve!');
     }
 
     /**
@@ -92,17 +94,27 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route("products.index");
-    }
-    public function ShowTrashed()
-    {
-        $trashedProduct = Product::onlyTrashed()->get();
-        return view("products.index", ["products" => $trashedProduct]);
+        return redirect()->route("products.index")->with('success', 'Termék lomtárba került.');
     }
 
+    /**
+     * Törölt termékek megjelenítése.
+     */
+    public function showTrashed() // FIX: camelCase névkonvenció (ShowTrashed helyett)
+    {
+        $trashedProducts = Product::onlyTrashed()->get();
+        return view("products.index", ["products" => $trashedProducts]);
+    }
+
+    /**
+     * Termék visszaállítása.
+     */
     public function restore(Product $product)
     {
+        // Mivel a route-nál használtad a ->withTrashed() kiegészítést, 
+        // a Laravel automatikusan beinjektálja a törölt modellt is.
         $product->restore();
-        return redirect()->route("products.index")->with("msg", "Samurai restored successfully");
+        
+        return redirect()->route("products.index")->with("success", "Termék sikeresen visszaállítva!");
     }
 }
