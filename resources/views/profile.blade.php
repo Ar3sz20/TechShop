@@ -83,7 +83,7 @@
                             <tr>
                                 <td>{{ $order->id }}</td>
                                 <td>{{ $order->created_at->format('Y.m.d H:i') }}</td>
-                                <td>{{ number_format($order->total_price, 0, ",", " ") }} $</td>
+                                <td>{{ number_format($order->total_price,2,",") }} $</td>
                             </tr>
                         @endforeach
                     </tbody>

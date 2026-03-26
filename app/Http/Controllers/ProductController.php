@@ -16,17 +16,22 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
-        // Kategória szűrés
+        // Kategória
         if ($request->filled('category')) {
             $query->where('category', $request->category);
         }
 
-        // Típus szerinti szűrés
-        if ($request->filled('type')) {
-            $query->whereIn('type', (array) $request->type);
+        // Típus (csak ha valid)
+        if ($request->filled('type') && $request->filled('category')) {
+
+            $validTypes = Product::where('category', $request->category)->pluck('type')->toArray();
+            
+            if (in_array($request->type, $validTypes)) {
+                $query->where('type', $request->type);
+            }
         }
 
-        // Ár szerinti szűrés
+        // Ár
         if ($request->filled('min_price')) {
             $query->where('price', '>=', $request->min_price);
         }
@@ -37,7 +42,7 @@ class ProductController extends Controller
 
         $products = $query->get();
 
-        return view('products.index', ['products' => $products]);
+        return view('products.index', compact('products'));
     }
 
     /**

@@ -1,9 +1,6 @@
 <?php
 
 namespace Database\Factories;
-
-use App\Models\Brand;
-use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,92 +17,92 @@ class ProductFactory extends Factory
     {
         $products = [
             // Phones
-            ["iPhone 15 Pro", "Apple", "phone", 499999],
-            ["iPhone 14", "Apple", "phone", 399999],
-            ["Samsung Galaxy S24", "Samsung", "phone", 349999],
-            ["Samsung Galaxy S23", "Samsung", "phone", 299999],
-            ["Xiaomi 13", "Xiaomi", "phone", 249999],
-            ["Xiaomi 12", "Xiaomi", "phone", 199999],
-            ["Google Pixel 8", "Google", "phone", 349999],
-            ["Google Pixel 9a", "Google", "phone", 279999],
-            ["OnePlus 12", "OnePlus", "phone", 279999],
-            ["OnePlus 11", "OnePlus", "phone", 199999],
+            ["iPhone 15 Pro", "Apple", "Smartproduct", "Phone", 499.99],
+            ["iPhone 14", "Apple", "Smartproduct", "Phone", 399.99],
+            ["Samsung Galaxy S24", "Samsung", "Smartproduct", "Phone", 3499.99],
+            ["Samsung Galaxy S23", "Samsung", "Smartproduct", "Phone", 2999.99],
+            ["Xiaomi 13", "Xiaomi", "Smartproduct", "Phone", 2499.99],
+            ["Xiaomi 12", "Xiaomi", "Smartproduct", "Phone", 1999.99],
+            ["Google Pixel 8", "Google", "Smartproduct", "Phone", 3499.99],
+            ["Google Pixel 9a", "Google", "Smartproduct", "Phone", 2799.99],
+            ["OnePlus 12", "OnePlus", "Smartproduct", "Phone", 2799.99],
+            ["OnePlus 11", "OnePlus", "Smartproduct", "Phone", 1999.99],
 
             // Laptops
-            ["MacBook Air M2", "Apple", "laptop", 599999],
-            ["MacBook Pro M2", "Apple", "laptop", 899999],
-            ["Lenovo Legion 5", "Lenovo", "laptop", 429999],
-            ["ASUS ZenBook 14", "ASUS", "laptop", 379999],
-            ["Dell XPS 13", "Dell", "laptop", 649999],
-            ["HP Spectre x360", "HP", "laptop", 599999],
-            ["ASUS ROG Strix G15", "ASUS", "laptop", 519999],
-            ["Lenovo ThinkPad X1", "Lenovo", "laptop", 649999],
-            ["HP Pavilion 15", "HP", "laptop", 399999],
-            ["Dell Inspiron 16", "Dell", "laptop", 449999],
+            ["MacBook Air M2", "Apple", "Smartproduct", "Laptop", 5999.99],
+            ["MacBook Pro M2", "Apple", "Smartproduct", "Laptop", 8999.99],
+            ["Lenovo Legion 5", "Lenovo", "Smartproduct", "Laptop", 4299.99],
+            ["ASUS ZenBook 14", "ASUS", "Smartproduct", "Laptop", 3799.99],
+            ["Dell XPS 13", "Dell", "Smartproduct", "Laptop", 6499.99],
+            ["HP Spectre x360", "HP", "Smartproduct", "Laptop", 5999.99],
+            ["ASUS ROG Strix G15", "ASUS", "Smartproduct", "Laptop", 5199.99],
+            ["Lenovo ThinkPad X1", "Lenovo", "Smartproduct", "Laptop", 6499.99],
+            ["HP Pavilion 15", "HP", "Smartproduct", "Laptop", 3999.99],
+            ["Dell Inspiron 16", "Dell", "Smartproduct", "Laptop", 4499.99],
 
             // Gaming
-            ["PlayStation 5", "Sony", "gaming", 219999],
-            ["PlayStation 4 Pro", "Sony", "gaming", 129999],
-            ["Xbox Series X", "Microsoft", "gaming", 199999],
-            ["Xbox One X", "Microsoft", "gaming", 119999],
-            ["Nintendo Switch OLED", "Nintendo", "gaming", 159999],
-            ["Nintendo Switch Lite", "Nintendo", "gaming", 99999],
-            ["Steam Deck", "Valve", "gaming", 179999],
-            ["PlayStation VR2", "Sony", "gaming", 89999],
-            ["Xbox Wireless Controller", "Microsoft", "gaming", 24999],
-            ["Nintendo Pro Controller", "Nintendo", "gaming", 29999],
+            ["PlayStation 5", "Sony", "Gaming", "Console", 2199.99],
+            ["PlayStation 4 Pro", "Sony", "Gaming", "Console", 1299.99],
+            ["Xbox Series X", "Microsoft", "Gaming", "Console", 1999.99],
+            ["Xbox One X", "Microsoft", "Gaming", "Console", 1199.99],
+            ["Nintendo Switch OLED", "Nintendo", "Gaming", "HandholdConsole", 1599.99],
+            ["Nintendo Switch Lite", "Nintendo", "Gaming", "HandholdConsole", 999.99],
+            ["Steam Deck", "Valve", "Gaming", "HandholdConsole", 1799.99],
+            ["PlayStation VR2", "Sony", "Gaming", "VR", 899.99],
+            ["Xbox Wireless Controller", "Microsoft", "Gaming", "Controller", 249.99],
+            ["Nintendo Pro Controller", "Nintendo", "Gaming", "Controller", 299.99],
 
             // PC Components
-            ["RTX 4070", "NVIDIA", "pc_components", 299999],
-            ["RTX 5060", "NVIDIA", "pc_components", 499999],
-            ["RTX 4090", "NVIDIA", "pc_components", 899999],
-            ["Ryzen 7 5800X", "AMD", "pc_components", 149999],
-            ["Ryzen 9 5900X", "AMD", "pc_components", 249999],
-            ["Intel i7-13700K", "Intel", "pc_components", 189999],
-            ["Intel i9-13900K", "Intel", "pc_components", 279999],
-            ["Samsung 1TB SSD", "Samsung", "pc_components", 44999],
-            ["Corsair 16GB RAM", "Corsair", "pc_components", 39999],
-            ["Kingston 32GB RAM", "Kingston", "pc_components", 79999],
+            ["RTX 4070", "NVIDIA", "Components", "GPU", 2999.99],
+            ["RTX 5060", "NVIDIA", "Components", "GPU", 4999.99],
+            ["RTX 4090", "NVIDIA", "Components", "GPU", 8999.99],
+            ["Ryzen 7 5800X", "AMD", "Components", "CPU", 1499.99],
+            ["Ryzen 9 5900X", "AMD", "Components",  "CPU",2499.99],
+            ["Intel i7-13700K", "Intel", "Components", "CPU", 1899.99],
+            ["Intel i9-13900K", "Intel", "Components", "CPU", 2799.99],
+            ["Samsung 1TB SSD", "Samsung", "Components", "Storage", 449.99],
+            ["Corsair 16GB RAM", "Corsair", "Components", "RAM", 399.99],
+            ["Kingston 32GB RAM", "Kingston", "Components", "RAM", 799.99],
 
             // Accessories
-            ["Logitech G Pro X Mouse", "Logitech", "accessories", 29999],
-            ["Razer BlackWidow V3", "Razer", "accessories", 49999],
-            ["SteelSeries Arctis 7", "SteelSeries", "accessories", 69999],
-            ["Apple Magic Keyboard", "Apple", "accessories", 49999],
-            ["Samsung Wireless Charger", "Samsung", "accessories", 14999],
-            ["Sony Extra Bass Headphones", "Sony", "accessories", 34999],
-            ["Corsair K95 Keyboard", "Corsair", "accessories", 59999],
-            ["Razer DeathAdder V3", "Razer", "accessories", 39999],
-            ["Logitech C920 Webcam", "Logitech", "accessories", 24999],
-            ["SteelSeries QcK Mousepad", "SteelSeries", "accessories", 9999],
+            ["Logitech G Pro X Mouse", "Logitech", "Accessories", "Mouse", 299.99],
+            ["Razer BlackWidow V3", "Razer", "Accessories", "Keyboard", 499.99],
+            ["Apple Magic Keyboard", "Apple", "Accessories", "Keyboard", 499.99],
+            ["Samsung Wireless Charger", "Samsung", "Accessories", "Charger", 149.99],
+            ["Corsair K95 Keyboard", "Corsair", "Accessories", "Keyboard", 599.99],
+            ["Razer DeathAdder V3", "Razer", "Accessories", "Mouse", 399.99],
+            ["Logitech C920 Webcam", "Logitech", "Accessories", "Webcam", 249.99],
+            ["SteelSeries QcK Mousepad", "SteelSeries", "Accessories", "Mousepad", 99.99],
 
             // TVs
-            ["Samsung 55\" 4K Smart TV", "Samsung", "tv", 249999],
-            ["Samsung 65\" QLED TV", "Samsung", "tv", 399999],
-            ["LG OLED C2 65\"", "LG", "tv", 699999],
-            ["LG 55\" UHD TV", "LG", "tv", 319999],
-            ["Sony 75\" Bravia", "Sony", "tv", 899999],
-            ["Sony 55\" X90K", "Sony", "tv", 449999],
-            ["Panasonic 65\" 4K TV", "Panasonic", "tv", 399999],
-            ["Philips 55\" OLED TV", "Philips", "tv", 449999],
-            ["Samsung 50\" LED TV", "Samsung", "tv", 199999],
-            ["LG 65\" NanoCell", "LG", "tv", 549999],
+            ["Samsung 55\" 4K Smart TV", "Samsung", "Household", "Television", 2499.99],
+            ["LG OLED C2 65\"", "LG", "Household", "Television", 6999.99],
+            ["Bosch Serie 6 Mosógép", "Bosch", "Household", "WashingMachine", 1899.99],
+            ["Whirlpool Mosogatógép", "Whirlpool", "Household", "Dishwasher", 1599.99],
+            ["Electrolux Hűtőszekrény", "Electrolux", "Household", "Refrigerator", 2799.99],
+            ["Samsung Side-by-Side Hűtő", "Samsung", "Household", "Refrigerator", 3499.99],
+            ["Bosch Beépíthető Sütő", "Bosch", "Household", "Oven", 1299.99],
+            ["Whirlpool Elektromos Sütő", "Whirlpool", "Household", "Oven", 1099.99],
+            ["Rowenta Porszívó", "Rowenta", "Household", "VacuumCleaner", 699.99],
+            ["Dyson V11 porszívó", "Dyson", "Household", "VacuumCleaner", 2499.99],
 
             // Audio
-            ["Sony WH-1000XM5", "Sony", "audio", 149999],
-            ["AirPods Pro 2", "Apple", "audio", 99999],
-            ["Bose QuietComfort 45", "Bose", "audio", 129999],
-            ["JBL Charge 5", "JBL", "audio", 14999],
-            ["Logitech Z623", "Logitech", "audio", 69999],
-            ["Sony SRS-XB43", "Sony", "audio", 44999],
-            ["Bose SoundLink Revolve", "Bose", "audio", 69999],
-            ["JBL Flip 6", "JBL", "audio", 39999],
-            ["Apple HomePod Mini", "Apple", "audio", 59999],
-            ["Sony HT-G700 Soundbar", "Sony", "audio", 129999],
+            ["Sony WH-1000XM5", "Sony", "Audio", "Headphone", 1499.99],
+            ["AirPods Pro 2", "Apple", "Audio", "Earphone", 999.99],
+            ["Sony Extra Bass Headphones", "Sony", "Audio", "Headphone", 349.99],
+            ["SteelSeries Arctis 7", "SteelSeries", "Audio", "Headphone", 699.99],
+            ["Bose QuietComfort 45", "Bose", "Audio", "Headphone", 1299.99],
+            ["JBL Charge 5", "JBL", "Audio", "Speaker", 149.99],
+            ["Logitech Z623", "Logitech", "Audio", "Speaker", 699.99],
+            ["Sony SRS-XB43", "Sony", "Audio", "Speaker", 449.99],
+            ["Bose SoundLink Revolve", "Bose", "Audio", "Speaker", 699.99],
+            ["JBL Flip 6", "JBL", "Audio", "Speaker", 399.99],
+            ["Apple HomePod Mini", "Apple", "Audio", "Speaker", 599.99],
+            ["Sony HT-G700 Soundbar", "Sony", "Audio", "Speaker", 1299.99],
         ];
 
         $product = $this->faker->randomElement($products);
-        [$name, $brandName, $categoryName, $price] = $product;
+        [$name, $brandName, $category, $type, $price] = $product;
         
         $imageName = str_replace([' ', '"'], ['-', ''], strtolower($name)) . ".png";
         $imagePath = "images/products/" . $imageName;
@@ -120,8 +117,9 @@ class ProductFactory extends Factory
             "description" => fake()->paragraph(3),
             "image" => $imagePath,
             "quantity" => fake()->numberBetween(0, 200),
-            "category_id" => Category::where('name', $categoryName)->first()->id,
-            "brand_id" => Brand::where('name', $brandName)->first()->id,
+            "category" => $category,
+            "brandname" => $brandName,
+            "type" => $type,
         ];
     }
 }

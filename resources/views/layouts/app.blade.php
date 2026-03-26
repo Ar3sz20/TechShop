@@ -34,14 +34,23 @@
                     <li class="active">
                         <a href="{{ route('products.index') }}">Összes termék</a>
                     </li>
-                    <li><a href="{{ route('products.index', ['category' => 'smartproduct']) }}"
-                            class="{{ request('category') == 'smartproduct' ? 'active' : '' }}">Okos eszközök
+                    <li><a href="{{ route('products.index', ['category' => 'Smartproduct']) }}"
+                            class="{{ request('category') == 'Smartproduct' ? 'active' : '' }}">Okos eszközök
                         </a></li>
-                    <li> <a href="{{ route('products.index', ['category' => 'household']) }}"
-                            class="{{ request('category') == 'household' ? 'active' : '' }}">Háztartás
+                    <li> <a href="{{ route('products.index', ['category' => 'Household']) }}"
+                            class="{{ request('category') == 'Household' ? 'active' : '' }}">Háztartás
                         </a></li>
-                    <li><a href="{{ route('products.index', ['category' => 'gaming']) }}"
-                            class="{{ request('category') == 'gaming' ? 'active' : '' }}">Gaming
+                    <li><a href="{{ route('products.index', ['category' => 'Gaming']) }}"
+                            class="{{ request('category') == 'Gaming' ? 'active' : '' }}">Gaming
+                        </a></li>
+                    <li><a href="{{ route('products.index', ['category' => 'Audio']) }}"
+                            class="{{ request('category') == 'Audio' ? 'active' : '' }}">Audió eszközök
+                        </a></li>
+                    <li><a href="{{ route('products.index', ['category' => 'Accesories']) }}"
+                            class="{{ request('category') == 'Accesories' ? 'active' : '' }}">Kiegészítők
+                        </a></li>
+                    <li><a href="{{ route('products.index', ['category' => 'Components']) }}"
+                            class="{{ request('category') == 'Components' ? 'active' : '' }}">Alkatrészek
                         </a></li>
                 </ul>
             </div>

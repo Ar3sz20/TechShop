@@ -18,8 +18,9 @@ return new class extends Migration
             $table->text("description");
             $table->string("image");
             $table->integer("quantity");
-            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('brand_id')->constrained()->cascadeOnDelete();
+            $table->string("category");
+            $table->string("brandname");
+            $table->string("type");
             $table->timestamps();
             $table->softDeletes();
         });

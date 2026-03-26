@@ -18,16 +18,8 @@ class Product extends Model
         'description',
         'image',
         'quantity',
-        'category_id',
-        'brand_id'
+        'category',
+        'brandname',
+        'type',
     ];
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    public function brand()
-    {
-        return $this->belongsTo(Brand::class);
-    }
 }

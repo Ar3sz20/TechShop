@@ -45,8 +45,8 @@
                                     </form>
                                 </div>
                             </td>
-                            <td data-label="Ár">{{ number_format($item['price'], 0, ",", " ") }} $</td>
-                            <td data-label="Összesen">{{ number_format($subtotal, 0, ",", " ") }} $</td>
+                            <td data-label="Ár">{{ number_format($item['price'], 2, ",") }} $</td>
+                            <td data-label="Összesen">{{ number_format($subtotal, 2, ",") }} $</td>
                             <td data-label="Művelet">
                                 <form action="{{ route('cart.remove', $id) }}" method="POST">
                                     @csrf
@@ -59,7 +59,7 @@
             </table>
 
             <div class="cart-summary">
-                <p>Összesen: <strong>{{ number_format($total, 0, ",", " ") }} $</strong></p>
+                <p>Összesen: <strong>{{ number_format($total, 2, ",") }} $</strong></p>
                 {{-- Csak bejelentkezett felhasználó rendelhet, vendég a bejelentkezés oldalra kerül --}}
                 @auth
                     <form action="{{ route('orders.store') }}" method="POST">
