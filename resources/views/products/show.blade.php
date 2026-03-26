@@ -11,7 +11,7 @@
         <div class="product-detail-card">
 
             <div class="product-image">
-                <img src="{{ $product->image ? asset('kepek/' . $product->image) : asset('kepek/placeholder.png') }}" alt="{{ $product->name ?? 'Termék' }}">
+                <img src="{{ $product->image ? asset($product->image) : asset('images/products/placeholder.png') }}" alt="{{ $product->name ?? 'Termék' }}">
             </div>
 
             <div class="product-info">

@@ -62,7 +62,7 @@
                 @foreach($products as $product)
                     <div class="product-card">
                         <div class="product-image">
-                            <img src="{{ $product->image ? asset('kepek/' . $product->image) : asset('kepek/placeholder.png') }}"
+                            <img src="{{ $product->image ? asset($product->image) : asset('images/products/placeholder.png') }}"
                                 alt="{{ $product->name }}">
                         </div>
 

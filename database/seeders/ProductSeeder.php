@@ -13,16 +13,6 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        Product::create([
-            "name" => "telefon 99",
-            "type" => "phone",
-            "price" => 59.99,
-            "category" => "smartproduct",
-            "description" => "ez egy jó teló",
-            "image" => "placeholde.png",
-            "quantity" => 150
-        ]);
-
-        Product::factory(10)->create();
+        Product::factory(120)->create();
     }
 }
