@@ -27,8 +27,7 @@
                         <tr>
                             <td data-label="Termék">
                                 <div class="cart-product-info">
-                                    <img src="{{ $item['image'] ? asset('kepek/' . $item['image']) : asset('kepek/placeholder.png') }}"
-                                        alt="{{ $item['name'] }}" class="cart-product-img">
+                                    <img src="{{ asset($item['image']) }}">
                                     <span>{{ $item['name'] }}</span>
                                 </div>
                             </td>
