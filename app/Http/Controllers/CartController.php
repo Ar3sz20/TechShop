@@ -32,7 +32,7 @@ class CartController extends Controller
         }
 
         //ha már van olyan terméka sessionben nővelje az mennyiségét ha nincs akkor adja hozzá
-        if (isset($cart[$id])) {
+        if (isset($cart[$id]) && $currentQty <= $product->quantity) {
             $cart[$id]["quantity"]++;
         } else {
             $cart[$id] = [
@@ -64,8 +64,11 @@ class CartController extends Controller
     // + gomb
     public function increase($id)
     {
+        $products = Product::find($id);
         $cart = session()->get('cart', []);
-        if (isset($cart[$id])) {
+
+        if (isset($cart[$id]) && $cart[$id]['quantity'] < $products->quantity)
+        {
             $cart[$id]['quantity']++;
             session()->put('cart', $cart);
         }
