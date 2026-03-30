@@ -1,14 +1,17 @@
 .footer {
     width: 100%;
     padding: 15px 50px;
-    background: linear-gradient(90deg, #2e2aff, #8a2be2);
+    background: linear-gradient(90deg, #f7bd8d,  #f0a364);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
     margin-top: auto;
+    transition: background 0.5s, color 0.5s;
 }
 
 .footer-content p {
     margin: 5px 0;
+    color: #fff;
+    transition: color 0.5s;
 }
 
 .footer-link {
@@ -19,4 +22,21 @@
 
 .footer-link:hover {
     color: #ffccff;
+}
+
+body.dark-mode .footer {
+    background: linear-gradient(90deg, #4a4a80, #8a2be2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode .footer-content p {
+    color: #e6e6e6;
+}
+
+body.dark-mode .footer-link {
+    color: #e6e6e6;
+}
+
+body.dark-mode .footer-link:hover {
+    color: #d1b3ff;
 }

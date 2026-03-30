@@ -6,6 +6,7 @@
     max-width: 1200px; 
     font-family: 'Inter', sans-serif;
     color: #1e293b;
+    transition: color 0.5s;
 }
 
 .profile {
@@ -15,6 +16,7 @@
     border-radius: 1rem;
     padding: 20px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    transition: background 0.5s, color 0.5s, box-shadow 0.3s;
 }
 
 .profile-header {
@@ -30,6 +32,7 @@
     object-fit: cover;
     border: 3px solid #fff;
     margin-right: 15px;
+    transition: border 0.3s;
 }
 
 .profile-text-container h1 {
@@ -41,6 +44,7 @@
     font-size: 14px;
     margin: 3px 0 0;
     color: #e0e6f5;
+    transition: color 0.5s;
 }
 
 .profile-menu {
@@ -82,6 +86,7 @@
     border-radius: 1rem;
     padding: 25px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    transition: background 0.5s, color 0.5s, box-shadow 0.3s;
 }
 
 .account-edit {
@@ -101,6 +106,7 @@
     font-size: 14px;
     margin-bottom: 5px;
     color: #64748b;
+    transition: color 0.5s;
 }
 
 .account-input-container input,
@@ -111,6 +117,7 @@
     font-size: 14px;
     transition: all 0.3s;
     color: #1e293b;
+    background-color: #fff;
 }
 
 .account-input-container input:focus,
@@ -147,6 +154,7 @@
     padding: 10px;
     text-align: left;
     font-size: 14px;
+    transition: background 0.5s, color 0.5s, border 0.5s;
 }
 
 .account-section table th {
@@ -168,7 +176,6 @@
     list-style-type: disc;
 }
 
-/* Értesítések checkbox */
 .profile-checkbox-label {
     display: flex;
     align-items: center;
@@ -177,6 +184,75 @@
     color: #1e293b;
     cursor: pointer;
     margin-top: 10px;
+    transition: color 0.5s;
+}
+
+body.dark-mode .profile {
+    background: rgba(30,30,50,0.95);
+    color: #e6e6e6;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+body.dark-mode .profile-text-container p {
+    color: #d1b3ff;
+}
+
+body.dark-mode .profile-menu-link,
+body.dark-mode .profile-menu form button {
+    background-color: rgba(50,50,80,0.9);
+    color: #f0f0f0;
+}
+
+body.dark-mode .profile-menu-link:hover,
+body.dark-mode .profile-menu form button:hover {
+    background-color: rgba(70,50,130,0.8);
+    box-shadow: 0 4px 12px rgba(138,43,226,0.5);
+}
+
+body.dark-mode .profile-menu-link.active {
+    background-color: #b983ff;
+    color: #1a1a1a;
+}
+
+body.dark-mode .account {
+    background-color: rgba(30,30,50,0.95);
+    color: #e6e6e6;
+    box-shadow: 0 6px 18px rgba(138,43,226,0.6);
+}
+
+body.dark-mode .account-input-container label {
+    color: #d1b3ff;
+}
+
+body.dark-mode .account-input-container input,
+body.dark-mode .account-input-container textarea {
+    background-color: rgba(50,50,80,0.9);
+    color: #f0f0f0;
+    border: 1px solid rgba(138,43,226,0.4);
+}
+
+body.dark-mode .account-input-container input:focus,
+body.dark-mode .account-input-container textarea:focus {
+    border-color: #b983ff;
+    box-shadow: 0 0 8px rgba(185,131,255,0.3);
+}
+
+body.dark-mode .account-btn-save {
+    background-color: #b983ff;
+    color: #1a1a1a;
+}
+
+body.dark-mode .account-btn-save:hover {
+    background-color: #9a33ff;
+}
+
+body.dark-mode .account-section table th {
+    background-color: rgba(50,50,80,0.9);
+    color: #f0f0f0;
+}
+
+body.dark-mode .account-section table tr:nth-child(even) {
+    background-color: rgba(30,30,50,0.85);
 }
 
 @media (max-width: 900px) {

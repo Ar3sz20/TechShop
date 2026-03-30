@@ -2,10 +2,11 @@
     max-width: 1000px;
     margin: 50px auto;
     padding: 30px 20px;
-    background: rgba(25,25,55,0.9);
+    background: rgba(245,245,245,0.95);
     border-radius: 20px;
-    box-shadow: 0 0 25px rgba(138,43,226,0.5);
-    color: #fff;
+    box-shadow: 0 0 25px rgba(138,43,226,0.3);
+    color: #1a1a1a;
+    transition: background 0.5s, color 0.5s, box-shadow 0.3s;
 }
 
 .cart-container h1{
@@ -20,23 +21,27 @@
     margin-bottom:30px;
     border-radius:12px;
     overflow:hidden;
-    background:rgba(25,25,55,0.8);
+    background: rgba(245,245,245,0.9);
+    transition: background 0.5s;
 }
 
 .cart-table thead th {
     padding:12px;
     text-align:left;
-    background:rgba(40,0,80,0.85);
+    background: #e0e6f5;
     border-bottom:2px solid #8a2be2;
+    color: #1a1a1a;
+    transition: background 0.5s, color 0.5s;
 }
 
 .cart-table tbody td {
     padding:12px;
-    border-bottom:1px solid rgba(255,255,255,0.1);
+    border-bottom:1px solid rgba(0,0,0,0.1);
+    transition: background 0.3s, color 0.3s;
 }
 
 .cart-table tbody tr:hover{
-    background:rgba(138,43,226,0.1);
+    background: rgba(138,43,226,0.05);
 }
 
 .cart-product-info{
@@ -102,10 +107,11 @@
     display:flex;
     justify-content:space-between;
     align-items:center;
-    background:rgba(25,25,55,0.9);
+    background: rgba(245,245,245,0.95);
     padding:20px;
     border-radius:12px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    transition: background 0.5s, color 0.5s, box-shadow 0.3s;
 }
 
 .cart-summary p{
@@ -124,6 +130,9 @@
     border-radius: 8px;
     border: none;
     outline: none;
+    background-color: #f0f0f0;
+    color: #1a1a1a;
+    transition: background 0.5s, color 0.5s;
 }
 
 .cart-summary button {
@@ -140,15 +149,75 @@
     background-color: #6a1bbf;
 }
 
-/* Üres kosár üzenet */
 .cart-empty {
     text-align: center;
     font-size: 1.2rem;
     margin-top: 20px;
 }
 
-@media (max-width: 768px){
+body.dark-mode .cart-container {
+    background: rgba(30,30,50,0.95);
+    color: #e6e6e6;
+    box-shadow: 0 0 25px rgba(138,43,226,0.7);
+}
 
+body.dark-mode .cart-table {
+    background: rgba(30,30,50,0.9);
+}
+
+body.dark-mode .cart-table thead th {
+    background: rgba(50,50,80,0.9);
+    color: #f0f0f0;
+    border-bottom:2px solid #b983ff;
+}
+
+body.dark-mode .cart-table tbody td {
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    color: #e6e6e6;
+}
+
+body.dark-mode .cart-table tbody tr:hover{
+    background: rgba(138,43,226,0.2);
+}
+
+body.dark-mode .qty-btn {
+    background-color: #b983ff;
+    color: #1a1a1a;
+}
+
+body.dark-mode .qty-btn:hover {
+    box-shadow: 0 5px 10px rgba(138,43,226,0.7);
+}
+
+body.dark-mode .remove-btn {
+    background-color: #ff5b5b;
+    color: #fff;
+}
+
+body.dark-mode .remove-btn:hover {
+    box-shadow: 0 5px 15px rgba(255,91,91,0.7);
+}
+
+body.dark-mode .cart-summary {
+    background: rgba(30,30,50,0.95);
+    box-shadow:0 10px 25px rgba(138,43,226,0.6);
+}
+
+body.dark-mode .cart-summary input {
+    background-color: rgba(50,50,80,0.9);
+    color: #f0f0f0;
+}
+
+body.dark-mode .cart-summary button {
+    background-color: #b983ff;
+    color: #1a1a1a;
+}
+
+body.dark-mode .cart-summary button:hover {
+    background-color: #9a33ff;
+}
+
+@media (max-width: 768px){
     .cart-container{
         padding:20px 10px;
         margin:20px 10px;
@@ -170,9 +239,14 @@
     .cart-table tr{
         display:block;
         margin-bottom:20px;
-        background:rgba(25,25,55,0.9);
+        background: rgba(245,245,245,0.95);
         border-radius:12px;
         padding:10px;
+        transition: background 0.5s;
+    }
+
+    body.dark-mode .cart-table tr{
+        background: rgba(30,30,50,0.95);
     }
 
     .cart-table tbody td{
@@ -181,11 +255,6 @@
         align-items:center;
         text-align:right;
         padding:10px;
-        border-bottom:1px solid rgba(255,255,255,0.1);
-    }
-
-    .cart-table tbody td:last-child{
-        border-bottom:none;
     }
 
     .cart-table tbody td::before{

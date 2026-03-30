@@ -25,6 +25,7 @@
             <div class="mobilscroll"></div>
         </div>
         <div class="nav-right">
+            <button id="theme-toggle">🌑</button>
             <div class="dropdown">
                 <div class="select">
                     <p>Termékek</p>
@@ -132,6 +133,7 @@
     {{-- Globális scriptek --}}
     <script src="{{ asset('js/navbardropdownmenu.js') }}"></script>
     <script src="{{ asset('js/newsletter.js') }}"></script>
+    <script src="{{ asset('js/darkmode.js') }}"></script>
     {{-- Oldal-specifikus scriptek --}}
     @stack('scripts')
 </body>

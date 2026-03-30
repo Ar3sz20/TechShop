@@ -1,4 +1,4 @@
-.navbar{
+.navbar {
     position: absolute;
     top: 20px;
     width: 75%;
@@ -6,35 +6,33 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(90deg, #2e2aff, #8a2be2);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(90deg, #f7bd8d, #f0a364);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     padding: 17px 20px;
     border-radius: 2rem;
     z-index: 1000;
+    transition: background 0.5s, box-shadow 0.5s;
 }
 
-.logo{
+.logo {
     font-size: 1.8rem;
     font-weight: 700;
     text-decoration: none;
-    color: #fff;
+    color: #fff; 
+    transition: color 0.5s;
 }
 
-.nav-left, .nav-right{
+.nav-left, .nav-right {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.nav-right a{
+.nav-right a {
     text-decoration: none;
     color: inherit;
     font-size: 1rem;
-}
-
-.nav-right a:hover{
-    transition: 0.2s;
-    font-size: 1.15rem;
+    transition: color 0.5s, font-size 0.2s;
 }
 
 .kereso {
@@ -43,51 +41,52 @@
     border: none;
     outline: none;
     width: 200px;
+    transition: background 0.5s, color 0.5s;
 }
 
-.dropdown{
+.dropdown {
     min-width: 7em;
     position: relative;
 }
-.dropdown *{
+.dropdown * {
     box-sizing: border-box;
 }
 
-.select{
+.select {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 1em;
     cursor: pointer;
-    transition: 0.3s;
+    padding: 5px 10px;
+    transition: background 0.3s, border 0.3s;
 }
 
-.select-clicked{
+.select:hover {
+    background: #e0d4c0; 
+}
+
+.select-clicked {
     border: 2px #26489a solid;
-    box-shadow: blue;
+    box-shadow: 0 0 10px rgba(138,43,226,0.5);
 }
 
-.select:hover{
-    background: #323741;
-}
-
-.nyilacska{
+.nyilacska {
     width: 0;
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 6px solid #fff;
-    transition: 0.3s;
+    transition: transform 0.3s, border-top-color 0.5s;
 }
-
-.nyilacska-rotate{
+.nyilacska-rotate {
     transform: rotate(180deg);
 }
 
-.menu{
+.menu {
     list-style: none;
     padding: 0.2em 0.5em;
-    background-color: blue;
+    background-color: #dfc015;
     border-radius: 0.5em;
     position: absolute;
     top: 3em;
@@ -96,30 +95,73 @@
     transform: translateX(-50%);
     opacity: 0;
     display: none;
-    transition: 0.2s;
+    transition: opacity 0.3s, background-color 0.5s;
     z-index: 1050;
 }
 
-.menu li{
+.menu li {
     padding: 0.7em 0.5em;
     margin: 0.3em 0;
     border-radius: 0.5em;
     cursor: pointer;
+    transition: background 0.3s, color 0.5s;
 }
 
-.menu li:hover{
-    background: #2a2d35;
+.menu li:hover {
+    background: #26489a;
+    color: #fff;
 }
 
-.active{
+.active {
     background: #23242a;
 }
 
-.menu-open{
+.menu-open {
     display: block;
     opacity: 1;
 }
 
+body.dark-mode .navbar {
+    background: linear-gradient(90deg, #302b63, #24243e);
+    box-shadow: 0 4px 10px rgba(138, 43, 226, 0.5);
+}
+
+body.dark-mode .logo {
+    color: #fff;
+}
+
+body.dark-mode .nav-right a {
+    color: #f0f0f0;
+}
+
+body.dark-mode .kereso {
+    background: rgba(50,50,80,0.9);
+    color: #f0f0f0;
+}
+
+body.dark-mode .select {
+    background: rgba(50,50,80,0.9);
+    color: #f0f0f0;
+}
+
+body.dark-mode .select:hover {
+    background: rgba(70,70,110,0.9);
+}
+
+body.dark-mode .nyilacska {
+    border-top-color: #f0f0f0;
+}
+
+body.dark-mode .menu {
+    background-color: rgba(30,30,50,0.95);
+}
+
+body.dark-mode .menu li:hover {
+    background: rgba(70,50,130,0.8);
+    color: #fff;
+}
+
+/* --- Mobil nézet --- */
 @media (max-width: 960px) {
     .navbar {
         flex-wrap: wrap;
