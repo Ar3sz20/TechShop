@@ -59,7 +59,7 @@
                     <button type="submit" class="loginbutton">Regisztráció</button>
                 </form>
 
-                <p>Van már fiókod? <a href="{{ route('loginshow') }}" id="showLogin">Bejelentkezés</a></p>
+                <p>Van már fiókod? <a href="{{ route('loginshow') }}" id="showLogin" class="login-option">Bejelentkezés</a></p>
             </div>
         </div>
     </div>

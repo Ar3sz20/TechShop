@@ -53,11 +53,15 @@ Route::post('newsletter', [NewsLetterController::class, 'store'])->name('newslet
 // Hitelesített útvonalak
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    
+
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::post('/order', [OrderController::class, 'store'])->name('orders.store');
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/notifications', [ProfileController::class, 'updateNewsletter'])->name('profile.updateNewsletter');
-});
+
+    //CRUD
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+    });

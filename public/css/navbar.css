@@ -14,6 +14,20 @@
     transition: background 0.5s, box-shadow 0.5s;
 }
 
+.nav-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 1em;
+    transition: background 0.3s, color 0.3s;
+}
+
+.nav-btn:hover {
+    background: #e0d4c0;
+}
 .logo {
     font-size: 1.8rem;
     font-weight: 700;
@@ -67,8 +81,8 @@
 }
 
 .select-clicked {
-    border: 2px #26489a solid;
-    box-shadow: 0 0 10px rgba(138,43,226,0.5);
+    border: 2px #9a7526 solid;
+    box-shadow: 0 0 10px rgba(248, 232, 9, 0.5);
 }
 
 .nyilacska {
@@ -108,12 +122,7 @@
 }
 
 .menu li:hover {
-    background: #26489a;
-    color: #fff;
-}
-
-.active {
-    background: #23242a;
+    background: #f2f83e;
 }
 
 .menu-open {
@@ -128,6 +137,9 @@ body.dark-mode .navbar {
 
 body.dark-mode .logo {
     color: #fff;
+}
+body.dark-mode .menu li:hover {
+    background: #26489a;
 }
 
 body.dark-mode .nav-right a {
@@ -150,6 +162,26 @@ body.dark-mode .select:hover {
 
 body.dark-mode .nyilacska {
     border-top-color: #f0f0f0;
+}
+
+body.dark-mode .select-clicked {
+    border: 2px #26489a solid;
+    box-shadow: 0 0 10px rgba(138,43,226,0.5);
+}
+
+body.dark-mode .nav-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 1em;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark-mode .nav-btn:hover {
+    background: #b386fb;
 }
 
 body.dark-mode .menu {

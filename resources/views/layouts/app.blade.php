@@ -25,7 +25,7 @@
             <div class="mobilscroll"></div>
         </div>
         <div class="nav-right">
-            <button id="theme-toggle">🌑</button>
+            <button id="theme-toggle" class="nav-btn">🌑</button>
             <div class="dropdown">
                 <div class="select">
                     <p>Termékek</p>
@@ -56,7 +56,7 @@
                 </ul>
             </div>
             @guest
-                <a href="{{ route('loginshow') }}">Bejelentkezés👤</a>
+                <a href="{{ route('loginshow') }}" class="nav-btn">Bejelentkezés👤</a>
             @endguest
 
             @auth

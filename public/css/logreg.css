@@ -5,7 +5,7 @@
     min-height: 100vh; 
     color: #1a1a1a;
     padding: 20px;
-    background: linear-gradient(180deg, #e0e6f5, #c0c8f0, #a0a8e0);
+    background: linear-gradient(180deg, #ffffff, #f0f8ff, #e6f7ff);
     transition: background 0.5s, color 0.5s;
 }
 
@@ -13,7 +13,7 @@
     background: rgba(245,245,245,0.9);
     padding: 50px 40px;
     border-radius: 20px;
-    box-shadow: 0 0 30px rgba(120, 0, 255, 0.3);
+    box-shadow: 0 0 30px rgba(255, 119, 0, 0.3);
     max-width: 400px;
     width: 90%;
     text-align: center;
@@ -23,7 +23,7 @@
 .log-container h2 {
     margin-bottom: 30px;
     font-size: 2rem;
-    text-shadow: 0 0 10px #8a2be2;
+    text-shadow: 0 0 10px rgb(248, 176, 42);
     color: #1a1a1a;
     transition: color 0.5s;
 }
@@ -44,7 +44,6 @@
     border-radius: 8px;
     border: none;
     outline: none;
-    background: rgba(0,0,0,0.05);
     color: #1a1a1a;
     font-size: 1rem;
     transition: background 0.5s, color 0.5s;
@@ -64,18 +63,18 @@
     top: -10px;
     left: 10px;
     font-size: 0.8rem;
-    color: #8a2be2;
-    background: rgba(245,245,245,0.9);
+    color: rgb(67, 75, 223);
+    background: rgba(245, 245, 245, 0.9);
     padding: 0 5px;
     border-radius: 5px;
 }
 
 .loginbutton {
     padding: 12px 25px;
-    background: linear-gradient(90deg, #6a5acd, #8a2be2);
+    background: linear-gradient(90deg, #65f9e3, #03ac6b);
     border-radius: 8px;
     text-decoration: none;
-    color: white;
+    color: black;
     font-weight: bold;
     border: none;
     font-size: 1rem;
@@ -83,7 +82,7 @@
 }
 
 .loginbutton:hover {
-    box-shadow: 0 0 25px rgba(140, 0, 255, 0.5);
+    box-shadow: 0 0 25px rgba(11, 101, 47, 0.973);
 }
 
 .forgot-container {
@@ -93,23 +92,28 @@
 .forgot-password {
     background: none;
     border: none;
-    color: #7b68ee;
+    color:  #03ac6b;
     font-size: 0.85rem;
     text-decoration: underline;
     transition: color 0.3s;
 }
 
 .forgot-password:hover {
-    color: #4b0082;
+    color:rgba(11, 101, 47, 0.973);
 }
-
+.login-option{
+    color:  #03ac6b;
+}
+.login-option:hover{
+    color:rgba(11, 101, 47, 0.973);
+}
 .register-option {
     margin-top: 20px;
     font-size: 0.9rem;
 }
 
 .register-option a {
-    color: #8a2be2;
+    color:  #03ac6b;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
@@ -149,6 +153,22 @@ body.dark-mode .auth-page {
 body.dark-mode .log-container {
     background: rgba(20, 20, 50, 0.8);
     box-shadow: 0 0 30px rgba(120, 0, 255, 0.6);
+}
+
+body.dark-mode .loginbutton{
+     background: linear-gradient(90deg, #6a5acd, #8a2be2);
+}
+
+body.dark-mode .loginbutton:hover{
+        box-shadow: 0 0 25px rgba(140, 0, 255, 0.5);
+}
+
+
+body.dark-mode .login-option{
+    color: #b983ff;
+}
+body.dark-mode .login-option:hover{ 
+    color: #7016e7;
 }
 
 body.dark-mode .log-container h2 {

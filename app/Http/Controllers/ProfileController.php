@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,11 @@ class ProfileController extends Controller
     // Profil oldal megjelenítése
     public function show()
     {
-        return view('profile', ['user' => auth()->user()]);
+        $user = auth()->user();
+
+        $products = Product::all();
+
+        return view('profile', compact('user', 'products'));
     }
 
     // Profil adatok mentése

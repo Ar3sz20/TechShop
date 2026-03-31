@@ -4,7 +4,7 @@
     padding: 30px 20px;
     background: rgba(245,245,245,0.95);
     border-radius: 20px;
-    box-shadow: 0 0 25px rgba(138,43,226,0.3);
+    box-shadow: 0 0 30px rgba(255, 119, 0, 0.3);
     color: #1a1a1a;
     transition: background 0.5s, color 0.5s, box-shadow 0.3s;
 }
