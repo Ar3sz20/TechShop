@@ -50,7 +50,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        //
     }
 
     /**
@@ -59,9 +59,15 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         // FIX: Használjuk a validated() metódust az all() helyett a biztonság érdekében
-        Product::create($request->validated());
-        
-        return redirect()->route('products.index')->with('success', 'Termék sikeresen hozzáadva!');
+        $data = $request->validate();
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('products', 'public');
+        }
+
+        Product::create($data);
+
+        return back();
     }
 
     /**

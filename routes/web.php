@@ -62,6 +62,5 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile/notifications', [ProfileController::class, 'updateNewsletter'])->name('profile.updateNewsletter');
 
     //CRUD
-    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::resource('products', ProductController::class)->except(['index', 'show']);
     });
