@@ -17,7 +17,7 @@ Route::get('/', function () {
         ->get();
 
     return view('welcome', compact('products'));
-});
+})->name('home');
 
 // Soft delete kezelés
 Route::get("/products/trashed", [ProductController::class, "showTrashed"])->name('products.trashed');
@@ -56,6 +56,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::post('/order', [OrderController::class, 'store'])->name('orders.store');
+
+    Route::get('/order/success', function () {
+        return view('orders.success');
+    })->name('order.success');
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');

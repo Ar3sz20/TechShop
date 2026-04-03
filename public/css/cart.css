@@ -29,7 +29,7 @@
     padding:12px;
     text-align:left;
     background: #e0e6f5;
-    border-bottom:2px solid #8a2be2;
+    border-bottom:2px solid #f9a321;
     color: #1a1a1a;
     transition: background 0.5s, color 0.5s;
 }
@@ -73,7 +73,7 @@
     padding: 6px 10px;
     border: none;
     border-radius: 6px;
-    background-color: #8a2be2;
+    background-color: #f0ae1e;
     color: #fff;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -139,7 +139,7 @@
     padding: 12px 20px;
     border: none;
     border-radius: 10px;
-    background-color: #8a2be2;
+    background: linear-gradient(90deg, #65f9e3, #03ac6b);
     color: white;
     cursor: pointer;
     transition: 0.3s;

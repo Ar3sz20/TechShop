@@ -10,7 +10,7 @@
 
 @section('content')
     @if(session('success'))
-        <div class="alert-success"
+        <div id="success-alert" class="alert-success"
             style="padding:10px; margin-bottom:15px; background-color:#d4edda; color:#155724; border-radius:5px;">
             {{ session('success') }}
         </div>
@@ -30,7 +30,11 @@
                 <button class="profile-menu-link active" data-section="account">Fiók</button>
                 <button class="profile-menu-link" data-section="orders">Előző rendelések</button>
                 <button class="profile-menu-link" data-section="notifications">Értesítések</button>
-                <button class="profile-menu-link" data-section="admin">Admin panel</button>
+                @auth
+                    @if(auth()->user()->role === 1)
+                        <button class="profile-menu-link" data-section="admin">Admin panel</button>
+                    @endif
+                @endauth
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="profile-menu-link">Kijelentkezés</button>

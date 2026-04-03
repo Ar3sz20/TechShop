@@ -1,36 +1,55 @@
 @extends('layouts.app')
 
+@push('styles')
+<style>
+    .success-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 70vh;
+        flex-direction: column;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        animation: fadeIn 0.5s ease;
+    }
+
+    .success-icon {
+        font-size: 4rem;
+        color: #28a745;
+        margin-bottom: 20px;
+        animation: pop 0.6s ease;
+    }
+
+    .success-message {
+        font-size: 1.5rem;
+        color: #155724;
+    }
+
+    @keyframes pop {
+        0% { transform: scale(0); }
+        60% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>
+@endpush
+
 @section('content')
-<div class="cart-container">
-    <h1>📦 Rendeléseim</h1>
-
-    @if(session('success'))
-        <div class="alert-success" style="padding:10px; margin-bottom:15px; background-color:#d4edda; color:#155724; border-radius:5px;">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if($orders->count() > 0)
-        <table class="cart-table">
-            <thead>
-                <tr>
-                    <th>Rendelés #</th>
-                    <th>Dátum</th>
-                    <th>Összeg</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($orders as $order)
-                    <tr>
-                        <td data-label="Rendelés #">{{ $order->id }}</td>
-                        <td data-label="Dátum">{{ $order->created_at->format('Y.m.d H:i') }}</td>
-                        <td data-label="Összeg">{{ number_format($order->total_price, 0, ",", " ") }} $</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @else
-        <p style="text-align:center; font-size:1.2rem; margin-top:20px;">Még nincs rendelésed!</p>
-    @endif
+<div class="success-page">
+    <div class="success-icon">✅</div>
+    <div class="success-message">
+        Sikeres rendelés!<br>
+        5 másodperc múlva visszairányítunk a főoldalra...
+    </div>
 </div>
+
+<script>
+    setTimeout(() => {
+        window.location.href = "{{ route('home') }}";
+    }, 5000);
+</script>
 @endsection
