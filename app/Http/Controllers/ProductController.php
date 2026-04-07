@@ -59,10 +59,13 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         // FIX: Használjuk a validated() metódust az all() helyett a biztonság érdekében
-        $data = $request->validate();
+        $data = $request->validated();
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('products', 'public');
+        }
+        else {
+            $data['image'] = "placeholder.png";
         }
 
         Product::create($data);

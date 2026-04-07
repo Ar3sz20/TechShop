@@ -18,6 +18,8 @@ Route::get('/', function () {
 
     return view('welcome', compact('products'));
 })->name('home');
+//CRUD
+Route::resource('products', ProductController::class)->except(['index', 'show']);
 
 // Soft delete kezelés
 Route::get("/products/trashed", [ProductController::class, "showTrashed"])->name('products.trashed');
@@ -65,6 +67,5 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/notifications', [ProfileController::class, 'updateNewsletter'])->name('profile.updateNewsletter');
 
-    //CRUD
-    Route::resource('products', ProductController::class)->except(['index', 'show']);
+
     });

@@ -185,7 +185,7 @@
                                     <td>{{ $product->quantity }}</td>
                                     <td>
                                         {{-- Törlés --}}
-                                        <form action="{{ route('products.trashed', $product->id) }}" method="POST"
+                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST"
                                             style="display:inline;">
                                             @csrf
                                             @method('DELETE')
