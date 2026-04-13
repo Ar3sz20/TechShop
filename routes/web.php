@@ -15,17 +15,9 @@ Route::get('/', function () {
         ->inRandomOrder()
         ->take(6)
         ->get();
-
     return view('welcome', compact('products'));
 })->name('home');
-//CRUD
-Route::resource('products', ProductController::class)->except(['index', 'show']);
 
-// Soft delete kezelés
-Route::get("/products/trashed", [ProductController::class, "showTrashed"])->name('products.trashed');
-
-// withTrashed() kell, mert a törölt terméket nem találná meg alapból
-Route::post("/products/{product}/restore", [ProductController::class, "restore"])->withTrashed()->name("products.restore");
 
 // Kosár műveletek
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
@@ -54,6 +46,16 @@ Route::post('newsletter', [NewsLetterController::class, 'store'])->name('newslet
 
 // Hitelesített útvonalak
 Route::middleware('auth')->group(function () {
+    //CRUD
+    Route::resource('products', ProductController::class)->except(['index', 'show']);
+
+    // Soft delete kezelés
+    Route::get("/products/trashed", [ProductController::class, "showTrashed"])->name('products.trashed');
+
+    // withTrashed() kell, mert a törölt terméket nem találná meg alapból
+    Route::post("/products/{product}/restore", [ProductController::class, "restore"])->withTrashed()->name("products.restore");
+
+    //Többi
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
@@ -68,4 +70,5 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile/notifications', [ProfileController::class, 'updateNewsletter'])->name('profile.updateNewsletter');
 
 
-    });
+    }
+);
