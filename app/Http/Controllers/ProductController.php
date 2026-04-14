@@ -25,7 +25,7 @@ class ProductController extends Controller
         if ($request->filled('type') && $request->filled('category')) {
 
             $validTypes = Product::where('category', $request->category)->pluck('type')->toArray();
-            
+
             if (in_array($request->type, $validTypes)) {
                 $query->where('type', $request->type);
             }
@@ -63,8 +63,7 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('products', 'public');
-        }
-        else {
+        } else {
             $data['image'] = "placeholder.png";
         }
 
@@ -88,7 +87,7 @@ class ProductController extends Controller
     {
         // Megjegyzés: Ha ugyanazt a nézetet használod create-hez és edit-hez, 
         // győződj meg róla, hogy a form kezeli a $product meglétét/hiányát.
-        return view("products.create", ["product" => $product]);
+        return view("products.edit", compact("product"));
     }
 
     /**
@@ -96,10 +95,18 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        // A validated() csak az ellenőrzött mezőket adja vissza
-        $product->update($request->validated());
-        
-        return redirect()->route("products.index")->with('success', 'Termék sikeresen frissítve!');
+        // A validated() csak az ellenőrzött mezőket adja vissza $data = $request->validated();
+        $data = $request->validated();
+
+        // Ha új kép van feltöltve
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('products', 'public');
+        }
+
+        $product->update($data);
+
+        return redirect()->route('products.index')
+            ->with('success', 'Termék frissítve!');
     }
 
     /**
@@ -128,7 +135,7 @@ class ProductController extends Controller
         // Mivel a route-nál használtad a ->withTrashed() kiegészítést, 
         // a Laravel automatikusan beinjektálja a törölt modellt is.
         $product->restore();
-        
+
         return redirect()->route("products.index")->with("success", "Termék sikeresen visszaállítva!");
     }
 }

@@ -3,10 +3,11 @@
     flex-wrap: wrap;
     gap: 30px;
     margin: 50px auto;
-    max-width: 1200px; 
+    max-width: 1200px;
     font-family: 'Inter', sans-serif;
     color: #1e293b;
     transition: color 0.5s;
+    align-items: flex-start;
 }
 
 .profile {
@@ -16,7 +17,7 @@
     border-radius: 1rem;
     padding: 20px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    transition: background 0.5s, color 0.5s, box-shadow 0.3s;
+    transition: all 0.5s;
 }
 
 .profile-header {
@@ -32,7 +33,6 @@
     object-fit: cover;
     border: 3px solid #fff;
     margin-right: 15px;
-    transition: border 0.3s;
 }
 
 .profile-text-container h1 {
@@ -44,7 +44,6 @@
     font-size: 14px;
     margin: 3px 0 0;
     color: #e0e6f5;
-    transition: color 0.5s;
 }
 
 .profile-menu {
@@ -72,6 +71,7 @@
 .profile-menu form button:hover {
     background-color: #fff;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
 }
 
 .profile-menu-link.active {
@@ -80,13 +80,18 @@
     font-weight: bold;
 }
 
+body.dark-mode .profile-menu-link.active {
+    background-color: rgba(83,109,254,0.3);
+    color: #fff;
+}
+
 .account {
     flex: 2 1 500px;
     background: #fff;
     border-radius: 1rem;
     padding: 25px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.05);
-    transition: background 0.5s, color 0.5s, box-shadow 0.3s;
+    transition: all 0.5s;
 }
 
 .account-edit {
@@ -106,28 +111,31 @@
     font-size: 14px;
     margin-bottom: 5px;
     color: #64748b;
-    transition: color 0.5s;
 }
 
 .account-input-container input,
-.account-input-container textarea {
+.account-input-container textarea,
+.account-input-container select {
     padding: 10px;
     border: 1px solid #cbd5e1;
     border-radius: 10px;
     font-size: 14px;
-    transition: all 0.3s;
     color: #1e293b;
     background-color: #fff;
+    transition: 0.3s;
 }
 
 .account-input-container input:focus,
-.account-input-container textarea:focus {
+.account-input-container textarea:focus,
+.account-input-container select:focus {
     outline: none;
     border-color: #536dfe;
     box-shadow: 0 0 8px rgba(83,109,254,0.3);
 }
 
+
 .account-btn-save {
+    margin-top: 15px;
     background-color: #536dfe;
     color: #fff;
     padding: 10px 25px;
@@ -142,6 +150,54 @@
     background-color: #4053e0;
 }
 
+.account-btn-edit {
+    background-color: #f59e0b;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.account-btn-edit:hover {
+    background-color: #d97706;
+}
+
+.account-btn-danger {
+    background: #ef4444;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+}
+
+.account-btn-danger:hover {
+    background: #dc2626;
+}
+
+
+.account-section {
+    display: none;
+    margin-bottom: 30px;
+}
+
+.account-section.active {
+    display: block;
+}
+
+.account-section h2,
+.account-section h3 {
+    margin-bottom: 15px;
+}
+
+
 .account-section table {
     width: 100%;
     border-collapse: collapse;
@@ -154,138 +210,206 @@
     padding: 10px;
     text-align: left;
     font-size: 14px;
-    transition: background 0.5s, color 0.5s, border 0.5s;
 }
 
-.account-section table th {
-    background-color: #f1f5f9;
-    color: #1e293b;
-    font-weight: 600;
+
+.account-section table tbody tr:nth-child(even) {
+    background: #eef2ff;
+}
+.account-action {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
 }
 
-.account-section table tr:nth-child(even) {
-    background-color: #f9fafb;
+.account-action a,
+.account-action button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
 }
 
-.account-section table td ul {
-    padding-left: 20px;
+.account-action form {
+    margin: 0;
+    display: inline-flex;
+}
+
+.account-action button {
     margin: 0;
 }
 
-.account-section table td ul li {
-    list-style-type: disc;
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
-.profile-checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    color: #1e293b;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: color 0.5s;
+.admin-table th,
+.admin-table td {
+    border: 1px solid #cbd5e1;
+    padding: 10px;
+    text-align: left;
 }
+
+.admin-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.admin-header {
+    background: linear-gradient(135deg, #536dfe, #7c4dff);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.admin-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
+}
+
 
 #admin {
-    background-color: #f3f4f6;
-    padding: 25px;
-    border-radius: 1rem;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    margin-top: 30px;
+    width: 100%;
+    overflow-x: auto;
 }
 
-#admin .account-input-container {
-    margin-bottom: 20px;
-}
-
-#admin .account-edit {
-    gap: 30px;
-}
-
-body.dark-mode #admin {
-    background-color: rgba(50,50,80,0.9);
-    box-shadow: 0 6px 18px rgba(138,43,226,0.5);
+body.dark-mode {
+    background: #0f172a;
+    color: #e5e7eb;
 }
 
 body.dark-mode .profile {
     background: rgba(30,30,50,0.95);
-    color: #e6e6e6;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+    color: #e5e7eb;
 }
 
 body.dark-mode .profile-text-container p {
-    color: #d1b3ff;
+    color: #cbd5e1;
 }
 
 body.dark-mode .profile-menu-link,
 body.dark-mode .profile-menu form button {
-    background-color: rgba(50,50,80,0.9);
-    color: #f0f0f0;
+    background: rgba(50,50,80,0.9);
+    color: #e5e7eb;
 }
 
 body.dark-mode .profile-menu-link:hover,
 body.dark-mode .profile-menu form button:hover {
-    background-color: rgba(70,50,130,0.8);
-    box-shadow: 0 4px 12px rgba(138,43,226,0.5);
-}
-
-body.dark-mode .profile-menu-link.active {
-    background-color: #b983ff;
-    color: #1a1a1a;
+    background: rgba(83,109,254,0.25);
 }
 
 body.dark-mode .account {
-    background-color: rgba(30,30,50,0.95);
-    color: #e6e6e6;
-    box-shadow: 0 6px 18px rgba(138,43,226,0.6);
+    background: rgba(30,30,50,0.95);
+    color: #e5e7eb;
 }
 
 body.dark-mode .account-input-container label {
-    color: #d1b3ff;
+    color: #cbd5e1;
 }
 
 body.dark-mode .account-input-container input,
-body.dark-mode .account-input-container textarea {
-    background-color: rgba(50,50,80,0.9);
-    color: #f0f0f0;
+body.dark-mode .account-input-container textarea,
+body.dark-mode .account-input-container select {
+    background: rgba(50,50,80,0.9);
+    color: #f1f5f9;
     border: 1px solid rgba(138,43,226,0.4);
 }
 
 body.dark-mode .account-input-container input:focus,
-body.dark-mode .account-input-container textarea:focus {
-    border-color: #b983ff;
-    box-shadow: 0 0 8px rgba(185,131,255,0.3);
+body.dark-mode .account-input-container textarea:focus,
+body.dark-mode .account-input-container select:focus {
+    box-shadow: 0 0 10px rgba(83,109,254,0.4);
 }
 
-body.dark-mode .account-btn-save {
-    background-color: #b983ff;
-    color: #1a1a1a;
+body.dark-mode .account-section table tbody tr:nth-child(even) {
+    background: rgba(83, 109, 254, 0.12);
 }
 
-body.dark-mode .account-btn-save:hover {
-    background-color: #9a33ff;
+.account-section table tbody tr:hover {
+    background: rgba(83,109,254,0.15);
 }
 
-body.dark-mode .account-section table th {
-    background-color: rgba(50,50,80,0.9);
-    color: #f0f0f0;
+body.dark-mode .admin-card {
+    background: rgba(30,30,50,0.95);
+    color: #e5e7eb;
 }
 
-body.dark-mode .account-section table tr:nth-child(even) {
-    background-color: rgba(30,30,50,0.85);
+body.dark-mode .admin-table th {
+    background: rgba(50,50,80,0.9);
+    color: #e5e7eb;
+}
+
+body.dark-mode .admin-table td {
+    border-color: rgba(148,163,184,0.3);
 }
 
 @media (max-width: 900px) {
     .profile-container {
         flex-direction: column;
     }
-    .account, .profile {
+
+    .account,
+    .profile {
         width: 100%;
     }
-    .account-section table th, 
+
+    .account-section table th,
     .account-section table td {
         font-size: 12px;
         padding: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-table thead {
+        display: none;
+    }
+
+    .admin-table,
+    .admin-table tbody,
+    .admin-table tr,
+    .admin-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .admin-table tr {
+        margin-bottom: 15px;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    body.dark-mode .admin-table tr {
+        background: rgba(30,30,50,0.95);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .admin-table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        border: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    .admin-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #64748b;
+    }
+
+    .account-action {
+        justify-content: flex-end;
     }
 }

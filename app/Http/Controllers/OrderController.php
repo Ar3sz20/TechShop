@@ -24,7 +24,11 @@ class OrderController extends Controller
         }
 
         $request->validate([
-            'address' => 'required|string|max:255',
+            'postal_code' => 'required|string',
+            'city' => 'required|string',
+            'street' => 'required|string',
+            'house_number' => 'required|string',
+            'floor' => 'nullable|string',
         ]);
 
         $total = 0;
@@ -38,10 +42,18 @@ class OrderController extends Controller
             $total += $item['price'] * $item['quantity'];
         }
 
+        $address = implode(';', [
+            $request->postal_code,
+            $request->city,
+            $request->street,
+            $request->house_number,
+            $request->floor ?? ''
+        ]);
+
         Order::create([
             'user_id' => Auth::id(),
             'total_price' => $total,
-            'address' => $request->address,
+            'address' => $address,
             'items' => json_encode($cart)
         ]);
 
