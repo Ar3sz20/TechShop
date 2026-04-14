@@ -27,7 +27,7 @@
                         <tr>
                             <td data-label="Termék">
                                 <div class="cart-product-info">
-                                    <img src="{{ asset($item['image']) }}">
+                                    <img class="cart-product-img" src="{{ asset($item['image']) }}">
                                     <span>{{ $item['name'] }}</span>
                                 </div>
                             </td>
@@ -61,12 +61,9 @@
                 <p>Összesen: <strong>{{ number_format($total, 2, ",") }} $</strong></p>
                 {{-- Csak bejelentkezett felhasználó rendelhet, vendég a bejelentkezés oldalra kerül --}}
                 @auth
-                    <form action="{{ route('orders.store') }}" method="POST">
-                        @csrf
-                        <label for="address">Szállítási cím:</label>
-                        <input type="text" name="address" id="address" value="{{ old('address', auth()->user()->address ?? '') }}" required>
-                        <button type="submit">Rendelés leadása</button>
-                    </form>
+                    <button type="button" class="checkout-open-btn" id="openCheckout">
+                        Rendelés leadása 🚀
+                    </button>
                 @endauth
                 @guest
                     <a href="{{ route('loginshow') }}" class="btn-login-to-cart">
@@ -79,4 +76,87 @@
             <p class="cart-empty">A kosarad üres!</p>
         @endif
     </div>
+<div class="checkout-overlay" id="checkoutModal">
+
+    <div class="checkout-shell">
+
+        <div class="checkout-left">
+
+            <h2 class="checkout-title">🧾 Rendelés véglegesítése</h2>
+            <p class="checkout-subtitle">Ellenőrizd az adataid és fejezd be a rendelést</p>
+
+            <form action="{{ route('orders.store') }}" method="POST" class="checkout-form">
+                @csrf
+
+                <div class="checkout-section">
+                    <h3>🚚 Szállítás</h3>
+
+                    <label>Cím</label>
+                    <input type="text" name="address"
+                           value="{{ auth()->user()->address ?? '' }}"
+                           placeholder="Utca, házszám, város"
+                           required>
+
+                    <label>Telefon</label>
+                    <input type="text" name="phone" placeholder="+36..." required>
+                </div>
+
+                <div class="checkout-section">
+                    <h3>💳 Fizetés</h3>
+
+                    <label class="payment-card">
+                        <input type="radio" name="payment_method" value="cod" checked>
+                        <span>💵 Utánvét</span>
+                    </label>
+
+                    <label class="payment-card">
+                        <input type="radio" name="payment_method" value="card">
+                        <span>💳 Utalás</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="checkout-pay-btn">
+                    Rendelés leadása 🚀
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="checkout-right">
+
+            <h3>🛒 Kosár összesítő</h3>
+
+            <div class="checkout-items">
+                @php $total = 0; @endphp
+
+                @foreach($cart as $item)
+                    @php $subtotal = $item['price'] * $item['quantity']; $total += $subtotal; @endphp
+
+                    <div class="checkout-item">
+                        <img src="{{ asset($item['image']) }}">
+                        <div>
+                            <p>{{ $item['name'] }}</p>
+                            <small>{{ $item['quantity'] }}x</small>
+                        </div>
+                        <span>{{ number_format($subtotal, 2, ",") }} $</span>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="checkout-total">
+                <span>Összesen:</span>
+                <strong>{{ number_format($total, 2, ",") }} $</strong>
+            </div>
+
+        </div>
+
+        <button id="closeCheckout" class="checkout-close">✖</button>
+
+    </div>
+</div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/cart.js') }}"></script>
+@endpush

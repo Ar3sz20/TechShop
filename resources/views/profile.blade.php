@@ -43,7 +43,7 @@
         </div>
 
         <div class="account">
-            <div id="account" class="account-section">
+            <div id="account" class="account-section active">
                 <h2>Fiók beállítások</h2>
                 <form action="{{ route('profile.update') }}" method="POST">
                     @csrf
@@ -117,96 +117,129 @@
             {{-- Admin panel csak adminoknak --}}
             @if(auth()->user()->role === 1)
 
-                <div id="admin" class="account-section" style="display:none;">
-                    <h2>Admin panel - Termékek kezelése</h2>
+                <div id="admin" class="account-section admin-panel" style="display:none;">
 
-                    {{-- Új termék hozzáadása --}}
-                    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="account-edit">
-                            <div class="account-input-container">
-                                <label>Termék neve:</label>
-                                <input type="text" name="name" required>
-                            </div>
-                            <div class="account-input-container">
-                                <label>Ár:</label>
-                                <input type="number" name="price" step="0.01" required>
-                            </div>
-                        </div>
-                        <div class="account-edit">
-                            <div class="account-input-container">
-                                <label>Kép:</label>
-                                <input type="file" name="image">
-                            </div>
-                            <div class="account-input-container">
-                                <label>Darabszám:</label>
-                                <input type="number" name="quantity" required min="0">
-                            </div>
-                        </div>
-                        <div class="account-edit">
-                            <select name="category_id" required>
-                                <option value="">-- Válassz kategóriát --</option>
-                                @foreach($products as $product)
-                                    <option value="{{ $product->category }}">
-                                        {{ $product->category }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <div class="account-input-container">
-                                <label>Márka:</label>
-                                <input type="text" name="brandname">
-                            </div>
-                            <div class="account-input-container">
-                                <label>Típus:</label>
-                                <select name="type_id" required>
-                                    <option value="">-- Válassz típust --</option>
-                                    @foreach($products as $product)
-                                    <option value="{{ $product->type }}">
-                                        {{ $product->type }}
-                                    </option>
-                                @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="account-input-container">
-                            <label>Leírás:</label>
-                            <textarea name="description"></textarea>
-                        </div>
-                        <button type="submit" class="account-btn-save">Hozzáadás</button>
-                    </form>
+                    <div class="admin-header">
+                        <h2>🛠 Admin panel</h2>
+                        <p>Termékek kezelése és adminisztráció</p>
+                    </div>
 
-                    {{-- Termékek lista --}}
-                    <h3>Összes termék</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Név</th>
-                                <th>Ár</th>
-                                <th>Mennyiség</th>
-                                <th>Műveletek</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($products as $product)
+                    <!-- ÚJ TERMÉK -->
+                    <div class="admin-card">
+                        <h3>➕ Új termék hozzáadása</h3>
+
+                        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+
+                            <div class="account-edit">
+                                <div class="account-input-container">
+                                    <label>Termék neve</label>
+                                    <input type="text" name="name" required>
+                                </div>
+
+                                <div class="account-input-container">
+                                    <label>Ár</label>
+                                    <input type="number" name="price" step="0.01" required>
+                                </div>
+                            </div>
+
+                            <div class="account-edit">
+                                <div class="account-input-container">
+                                    <label>Kép</label>
+                                    <input type="file" name="image">
+                                </div>
+
+                                <div class="account-input-container">
+                                    <label>Darabszám</label>
+                                    <input type="number" name="quantity" min="0" required>
+                                </div>
+                            </div>
+
+                            <div class="account-edit">
+                                <div class="account-input-container">
+                                    <label>Kategória</label>
+                                    <select name="category_id" required>
+                                        <option value="">-- Válassz --</option>
+                                        @foreach($products as $product)
+                                            <option value="{{ $product->category }}">
+                                                {{ $product->category }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="account-input-container">
+                                    <label>Márka</label>
+                                    <input type="text" name="brandname">
+                                </div>
+
+                                <div class="account-input-container">
+                                    <label>Típus</label>
+                                    <select name="type_id" required>
+                                        <option value="">-- Válassz --</option>
+                                        @foreach($products as $product)
+                                            <option value="{{ $product->type }}">
+                                                {{ $product->type }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="account-input-container">
+                                <label>Leírás</label>
+                                <textarea name="description"></textarea>
+                            </div>
+
+                            <button type="submit" class="account-btn-save">Hozzáadás</button>
+                        </form>
+                    </div>
+
+                    <!-- TERMÉKEK LISTÁJA -->
+                    <div class="admin-card">
+                        <h3>📦 Termékek</h3>
+
+                        <table class="admin-table">
+                            <thead>
                                 <tr>
-                                    <td>{{ $product->id }}</td>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{{ number_format($product->price, 2, ",") }} $</td>
-                                    <td>{{ $product->quantity }}</td>
-                                    <td>
-                                        {{-- Törlés --}}
-                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST"
-                                            style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="account-btn-save" style="background:red;">Törlés</button>
-                                        </form>
-                                    </td>
+                                    <th>ID</th>
+                                    <th>Név</th>
+                                    <th>Ár</th>
+                                    <th>Mennyiség</th>
+                                    <th>Műveletek</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+
+                            <tbody>
+                                @foreach($products as $product)
+                                    <tr>
+                                        <td data-label="ID">{{ $product->id }}</td>
+                                        <td data-label="Név">{{ $product->name }}</td>
+                                        <td data-label="Ár">{{ number_format($product->price, 2, ",") }} $</td>
+                                        <td data-label="Mennyiség">{{ $product->quantity }}</td>
+
+                                        <td data-label="Műveletek">
+                                            <div class="account-action">
+                                                <a href="{{ route('products.edit', $product->id) }}" class="account-btn-edit">
+                                                    Módosítás
+                                                </a>
+
+                                                <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <button type="submit" class="account-btn-save" style="background:red;">
+                                                        Törlés
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             @endif
 
