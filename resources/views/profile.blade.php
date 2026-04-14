@@ -45,33 +45,73 @@
         <div class="account">
             <div id="account" class="account-section active">
                 <h2>Fiók beállítások</h2>
+
+                @php
+                    $address = explode(';', $user->address ?? '');
+                @endphp
+
                 <form action="{{ route('profile.update') }}" method="POST">
                     @csrf
                     @method('PUT')
+
                     <div class="account-edit">
                         <div class="account-input-container">
                             <label>Profil név:</label>
                             <input type="text" name="name" value="{{ $user->name }}">
                         </div>
+
                         <div class="account-input-container">
                             <label>Email cím:</label>
                             <input type="email" name="email" value="{{ $user->email }}">
                         </div>
                     </div>
+
                     <div class="account-edit">
                         <div class="account-input-container">
                             <label>Telefonszám:</label>
                             <input type="text" name="phone" value="{{ $user->phone ?? '' }}">
                         </div>
+                    </div>
+
+                    <h3 style="margin-top:20px;">🚚 Szállítási cím</h3>
+
+                    <div class="account-edit">
                         <div class="account-input-container">
-                            <label>Cím:</label>
-                            <input type="text" name="address" value="{{ $user->address ?? '' }}">
+                            <label>Irányítószám:</label>
+                            <input type="text" name="postal_code" value="{{ $address[0] ?? '' }}">
+                        </div>
+
+                        <div class="account-input-container">
+                            <label>Város:</label>
+                            <input type="text" name="city" value="{{ $address[1] ?? '' }}">
                         </div>
                     </div>
-                    <button type="submit" class="account-btn-save">Mentés</button>
+
+                    <div class="account-edit">
+                        <div class="account-input-container">
+                            <label>Utca:</label>
+                            <input type="text" name="street" value="{{ $address[2] ?? '' }}">
+                        </div>
+
+                        <div class="account-input-container">
+                            <label>Házszám:</label>
+                            <input type="text" name="house_number" value="{{ $address[3] ?? '' }}">
+                        </div>
+                    </div>
+
+                    <div class="account-edit">
+                        <div class="account-input-container">
+                            <label>Emelet / ajtó:</label>
+                            <input type="text" name="floor" value="{{ $address[4] ?? '' }}">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="account-btn-save">
+                        Mentés
+                    </button>
                 </form>
             </div>
-
+            
             <div id="orders" class="account-section" style="display:none;">
                 <h2>Előző rendelések</h2>
                 @if($user->orders->count() > 0)

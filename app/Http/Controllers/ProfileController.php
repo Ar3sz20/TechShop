@@ -25,13 +25,32 @@ class ProfileController extends Controller
             'name' => 'required|string|max:50',
             'email' => 'required|email',
             'phone' => 'nullable|string|max:20',
-            'address' => 'nullable|string|max:255',
+            'postal_code' => 'required|string|max:10',
+            'city' => 'required|string|max:100',
+            'street' => 'required|string|max:100',
+            'house_number' => 'required|string|max:20',
+            'floor' => 'nullable|string|max:20',
         ]);
 
         $user = $request->user();
-        $user->update($request->only('name', 'email', 'phone', 'address'));
+
+        $address = implode(';', [
+            $request->postal_code,
+            $request->city,
+            $request->street,
+            $request->house_number,
+            $request->floor ?? ''
+        ]);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $address,
+        ]);
 
         return redirect()->back()->with('success', 'Profil frissítve.');
+
     }
 
     public function updateNewsletter(Request $request)
