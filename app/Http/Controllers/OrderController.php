@@ -29,6 +29,7 @@ class OrderController extends Controller
             'street' => 'required|string',
             'house_number' => 'required|string',
             'floor' => 'nullable|string',
+            'payment_method' => 'required|string'
         ]);
 
         $total = 0;
@@ -54,7 +55,9 @@ class OrderController extends Controller
             'user_id' => Auth::id(),
             'total_price' => $total,
             'address' => $address,
-            'items' => json_encode($cart)
+            'items' => json_encode($cart),
+                'payment_method' => $request->payment_method
+
         ]);
 
         // Raktárkészlet csökkentése a megrendelt mennyiséggel
