@@ -8,6 +8,7 @@
     <script src="{{ asset('js/profile.js') }}"></script>
 @endpush
 
+
 @section('content')
     @if(session('success'))
         <div id="success-alert" class="alert-success"
@@ -144,30 +145,24 @@
                             </div>
                         </div>
                         <div class="account-edit">
-                            <select name="category_id" required>
-                                <option value="">-- Válassz kategóriát --</option>
-                                @foreach($products as $product)
-                                    <option value="{{ $product->category }}">
-                                        {{ $product->category }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <div class="account-input-container">
-                                <label>Márka:</label>
-                                <input type="text" name="brandname">
-                            </div>
-                            <div class="account-input-container">
-                                <label>Típus:</label>
-                                <select name="type_id" required>
-                                    <option value="">-- Válassz típust --</option>
-                                    @foreach($products as $product)
-                                    <option value="{{ $product->type }}">
-                                        {{ $product->type }}
-                                    </option>
-                                @endforeach
-                                </select>
-                            </div>
+                        <select name="category" id="category">
+                            <option value="">Összes kategória</option>
+                            <option value="Smartproduct">Okos eszközök</option>
+                            <option value="Household">Háztartási</option>
+                            <option value="Gaming">Gaming</option>
+                            <option value="Audio">Audió eszközök</option>
+                            <option value="Accessories">Kiegészítők</option>
+                            <option value="Components">Alkatrészek</option>
+                        </select>
+
+                        <select name="type" id="type">
+                            <option value="">-- Válassz típust --</option>
+                        </select>
+                        <div class="account-input-container">
+                            <label>Márka:</label>
+                            <input type="text" name="brandname">
                         </div>
+
                         <div class="account-input-container">
                             <label>Leírás:</label>
                             <textarea name="description"></textarea>
