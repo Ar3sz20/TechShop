@@ -1,6 +1,6 @@
 # Elektronikai Webshop (TechShop)
 
-Laravel alapú, magyar nyelvű webáruház prototípus elektronikai termékekhez.
+Laravel alapú, magyar nyelvű webáruház elektronikai termékekhez.
 
 ## Készítők
 
@@ -10,69 +10,98 @@ Laravel alapú, magyar nyelvű webáruház prototípus elektronikai termékekhez
 
 ## Rövid projektleírás
 
-A projekt célja egy modern, áttekinthető webshop felépítése, ahol a felhasználók termékeket böngészhetnek, regisztrálhatnak/bejelentkezhetnek, és szűrhetik a termékkínálatot. Az alkalmazás jelenleg MVP/prototípus állapotban van: az alap felhasználói és terméklista funkciók működnek, több haladó modul (pl. teljes kosár- és rendeléskezelés) még fejlesztés alatt áll.
+A projekt célja egy modern, áttekinthető webshop felépítése, ahol a felhasználók termékeket böngészhetnek, kosárba tehetik őket, rendelést adhatnak le, és kezelhetik profiljukat. Admin jogosultsággal termékek hozzáadhatók, szerkeszthetők és törölhetők.
 
-## Fő funkciók (jelenlegi állapot)
+## Fő funkciók
 
-### Működő funkciók
-
-- Nyitóoldal hero + ajánlat jellegű blokkokkal
-- Terméklista oldal
-- Termékszűrés:
-    - kategória alapján (`category`)
-    - minimum ár (`min_price`)
-    - maximum ár (`max_price`)
-- Regisztráció és bejelentkezés (Laravel Auth alapokkal)
-- Kijelentkezés
-- Auth middleware-rel védett kosár útvonal (`/cart`)
-- Seedelt termékadatok adatbázisba
-
-### Fejlesztés alatt / részben kész
-
-- Kosár logika (`CartController` metódusok még üresek)
-- Termék CRUD admin oldali kezelése (resource metódusok még üresek)
-- Rendeléskezelés (orders/order_items) még nincs implementálva migrációval sem
+- **Nyitóoldal** – hero szekció, véletlenszerű ajánlott termékek (raktáron lévő)
+- **Terméklista** – szűrés kategória, típus, min/max ár alapján
+- **Termék részletek** – egyedi termékoldal leírással, árral, készletállapottal
+- **Kosár** – session-alapú kosárkezelés (hozzáadás, eltávolítás, mennyiség növelése/csökkentése, készletellenőrzés)
+- **Rendelés** – cím megadásával rendelés leadása, készlet automatikus csökkentése
+- **Rendelési előzmények** – korábbi rendelések listázása
+- **Regisztráció és bejelentkezés** – jelszóérvényesítéssel (min. 8 karakter, betűk, számok, szimbólumok)
+- **Felhasználói profil** – név, email, telefon, cím szerkesztése, hírlevél preferencia
+- **Hírlevél** – email feliratkozás (AJAX), felhasználói profilban ki/bekapcsolható
+- **Termék CRUD (admin)** – létrehozás, szerkesztés, soft delete, visszaállítás (role=1 jogosultság)
+- **Sötét mód** – kliens oldali dark mode váltás
 
 ## Technológiai háttér
 
-- **Backend:** PHP 8.2, Laravel 12
+- **Backend:** PHP 8.2+, Laravel 12
 - **Frontend:** Blade, HTML, CSS, JavaScript
-- **Build:** Vite
-- **Adatbázis:** Laravel kompatibilis relációs DB (tipikusan MySQL vagy SQLite)
-- **Tesztelés:** PHPUnit (alap Laravel tesztstruktúra)
+- **Build:** Vite, TailwindCSS
+- **Adatbázis:** Laravel kompatibilis relációs DB (MySQL vagy SQLite)
+- **Tesztelés:** PHPUnit
 
 ## Projektstruktúra (röviden)
 
-- `app/Http/Controllers` – vezérlők (`AuthController`, `ProductController`, `CartController`)
-- `app/Models` – modellek (`User`, `Product`, `Cart`)
-- `database/migrations` – sémák (`users`, `products`, `carts`, stb.)
-- `database/seeders` – demo adatok (`ProductSeeder`)
-- `resources/views` – Blade nézetek (layout, auth, products, welcome)
+- `app/Http/Controllers` – vezérlők (`AuthController`, `ProductController`, `CartController`, `OrderController`, `ProfileController`, `NewsLetterController`)
+- `app/Models` – modellek (`User`, `Product`, `Order`, `NewsLetter`)
+- `app/Policies` – jogosultságkezelés (`ProductPolicy` – admin role alapján)
+- `database/migrations` – sémák (`users`, `products`, `orders`, `newsletters`, `sessions`, `cache`)
+- `database/seeders` – demo adatok (`ProductSeeder` – 70 egyedi termék)
+- `resources/views` – Blade nézetek (layout, auth, products, cart, orders, profile)
 - `routes/web.php` – webes útvonalak
-- `public/css`, `public/js` – statikus stílusok és kliens oldali script
+- `public/css`, `public/js` – statikus stílusok és kliens oldali scriptek
+- `public/images/products` – termékképek (70 db)
 
-## Adatbázis (jelenlegi séma)
+## Adatbázis séma
 
 ### `users`
 
-- `id`, `name`, `email`, `password`, időbélyegek
+- `id`, `name`, `email` (unique), `password`, `role` (nullable int, 0=vásárló, 1=admin), `phone` (nullable), `address` (nullable), `newsletter` (boolean, default false), időbélyegek
 
 ### `products`
 
-- `id`, `name`, `type`, `price`, `category`, `description`, `image`, `quantity`, időbélyegek, `deleted_at` (soft delete)
+- `id`, `name`, `price` (decimal 10,2), `description` (text), `image` (default: placeholder.png), `quantity` (int), `category`, `brandname`, `type`, időbélyegek, `deleted_at` (soft delete)
 
-### `carts`
+### `orders`
 
-- jelenleg minimális tábla (`id`, időbélyegek), üzleti mezők még tervezettek
+- `id`, `user_id` (FK → users, cascade), `total_price` (decimal 10,2), `address`, `items` (JSON), időbélyegek
+
+### `newsletters`
+
+- `id`, `email` (unique), időbélyegek
 
 ## Fontos útvonalak
 
+### Publikus
+
 - `GET /` – kezdőlap
 - `GET /products` – terméklista + szűrés
-- `GET /login`, `POST /login`
-- `GET /register`, `POST /register`
-- `POST /logout`
-- `GET /cart` – csak bejelentkezett felhasználónak
+- `GET /products/{product}` – termék részletek
+- `GET /cart` – kosár megtekintése
+- `POST /cart/add/{product}` – termék kosárba helyezése
+- `POST /cart/increase/{id}` – mennyiség növelése
+- `POST /cart/decrease/{id}` – mennyiség csökkentése
+- `POST /cart/remove/{id}` – termék eltávolítása a kosárból
+- `POST /newsletter` – hírlevél feliratkozás
+
+### Vendég (guest)
+
+- `GET /login`, `POST /login` – bejelentkezés
+- `GET /register`, `POST /register` – regisztráció
+
+### Bejelentkezett felhasználó (auth)
+
+- `POST /logout` – kijelentkezés
+- `GET /orders` – rendelési előzmények
+- `POST /order` – rendelés leadása
+- `GET /order/success` – sikeres rendelés oldal
+- `GET /profile` – profil megtekintése
+- `PUT /profile` – profil szerkesztése
+- `PUT /profile/notifications` – hírlevél preferencia módosítása
+
+### Admin (auth + role=1)
+
+- `GET /products/create` – termék létrehozása
+- `POST /products` – termék mentése
+- `GET /products/{product}` – termék szerkesztése
+- `PUT /products/{product}` – termék frissítése
+- `DELETE /products/{product}` – termék soft delete
+- `GET /products/trashed` – törölt termékek listája
+- `POST /products/{product}/restore` – termék visszaállítása
 
 ## Telepítés és futtatás
 
@@ -127,14 +156,4 @@ vagy Composer scriptből:
 ```bash
 composer run dev
 ```
-
-## Fejlesztői megjegyzések
-
-- A README a jelenlegi implementációt tükrözi, nem egy teljes kész webshopot.
-- A dokumentált, de még nem kész funkciókat külön jelölve hagytuk.
-- Javasolt következő lépések:
-    1.  `carts` tábla bővítése (user/product kapcsolat, mennyiség)
-    2.  Kosár metódusok implementálása (`index/store/update/destroy`)
-    3.  Rendelési modul (`orders`, `order_items`) bevezetése
-    4.  Jogosultsági szintek (user/admin) explicit mezővel és policy/middleware finomítással
 

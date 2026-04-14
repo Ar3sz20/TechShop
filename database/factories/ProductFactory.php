@@ -104,7 +104,7 @@ class ProductFactory extends Factory
         $product = $this->faker->randomElement($products);
         [$name, $brandName, $category, $type, $price] = $product;
         
-        $imageName = str_replace([' ', '"'], ['-', ''], strtolower($name)) . ".png";
+        $imageName = \Illuminate\Support\Str::slug($name, '_') . ".png";
         $imagePath = "images/products/" . $imageName;
 
         if (!file_exists(public_path($imagePath))) {
