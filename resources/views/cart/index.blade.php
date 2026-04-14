@@ -69,7 +69,7 @@
                     </form>
                 @endauth
                 @guest
-                    <a href="{{ route('loginshow') }}" style="text-decoration:none; padding:12px 20px; background:#8a2be2; color:#fff; border-radius:10px; display:inline-block;">
+                    <a href="{{ route('loginshow') }}" class="btn-login-to-cart">
                         Jelentkezz be a rendeléshez
                     </a>
                 @endguest

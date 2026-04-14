@@ -8,14 +8,6 @@
     transition: background 0.5s, color 0.5s;
 }
 
-.products-grid {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    transition: background 0.5s;
-}
-
 .product-detail-card {
     display: flex;
     flex-direction: column;
@@ -110,7 +102,7 @@
 .products-page-wrapper {
     display: flex;
     gap: 30px;
-    padding: 20px;
+    padding: 50px 20px;
     max-width: 1400px;
     margin: auto;
     transition: background 0.5s;
@@ -175,6 +167,7 @@
 
 .products-section {
     flex: 1;
+    padding: 0;
 }
 
 body.dark-mode .product-detail-card {

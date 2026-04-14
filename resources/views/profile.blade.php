@@ -144,17 +144,28 @@
                             </div>
                         </div>
                         <div class="account-edit">
-                            <div class="account-input-container">
-                                <label>Kategória:</label>
-                                <input type="text" name="category">
-                            </div>
+                            <select name="category_id" required>
+                                <option value="">-- Válassz kategóriát --</option>
+                                @foreach($products as $product)
+                                    <option value="{{ $product->category }}">
+                                        {{ $product->category }}
+                                    </option>
+                                @endforeach
+                            </select>
                             <div class="account-input-container">
                                 <label>Márka:</label>
                                 <input type="text" name="brandname">
                             </div>
                             <div class="account-input-container">
                                 <label>Típus:</label>
-                                <input type="text" name="type">
+                                <select name="type_id" required>
+                                    <option value="">-- Válassz típust --</option>
+                                    @foreach($products as $product)
+                                    <option value="{{ $product->type }}">
+                                        {{ $product->type }}
+                                    </option>
+                                @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="account-input-container">
