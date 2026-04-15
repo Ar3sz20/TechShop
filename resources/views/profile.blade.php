@@ -198,7 +198,7 @@
                         </div>
                         <div class="account-edit">
                         <select name="category" id="category">
-                            <option value="">Összes kategória</option>
+                            <option value="">Válasz kategóriát</option>
                             <option value="Smartproduct">Okos eszközök</option>
                             <option value="Household">Háztartási</option>
                             <option value="Gaming">Gaming</option>
@@ -208,7 +208,7 @@
                         </select>
 
                         <select name="type" id="type">
-                            <option value="">-- Válassz típust --</option>
+                            <option value="">Válassz típust</option>
                         </select>
                         <div class="account-input-container">
                             <label>Márka:</label>
