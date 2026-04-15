@@ -161,13 +161,13 @@
                     <h3>💳 Fizetés</h3>
 
                     <label class="payment-card">
-                        <input type="radio" name="payment_method" value="cod" checked>
+                        <input type="radio" name="payment_method" value="utanvet" checked>
                         <span>💵 Utánvét</span>
                     </label>
 
                     <label class="payment-card">
-                        <input type="radio" name="payment_method" value="card">
-                        <span>💳 Bankkártya</span>
+                        <input type="radio" name="payment_method" value="utalas">
+                        <span>💳 Utalás</span>
                     </label>
                 </div>
 
