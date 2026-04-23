@@ -74,7 +74,7 @@
                                 <a href="{{ route('products.show', $product->id) }}" class="view-btn">Megnézem</a>
                                 <form action="{{ route('cart.add', $product->id) }}" method="POST" style="display:inline;">
                                     @csrf
-                                    <button type="submit" class="cart-btn">Kosárba 🛒</button>
+                                    <button type="submit" class="cart-btn">Kosárba <span class="material-icons">add_shopping_cart</span></button>
                                 </form>
                             </div>
                         </div>

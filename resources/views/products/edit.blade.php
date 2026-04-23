@@ -8,10 +8,10 @@
 
 <div class="product-edit-wrapper">
 
-    <h2 class="product-edit-title">✏️ Termék szerkesztése</h2>
+    <h2 class="product-edit-title"><span class="material-icons">edit</span> Termék szerkesztése</h2>
 
     <a href="{{ route('products.index') }}" class="product-edit-back">
-        ← Vissza
+        <span class="material-icons">arrow_back</span> Vissza
     </a>
 
     <form action="{{ route('products.update', $product->id) }}"
@@ -79,7 +79,7 @@
         </div>
 
         <button class="product-edit-btn" type="submit">
-            💾 Mentés
+            <span class="material-icons">save</span> Mentés
         </button>
 
     </form>

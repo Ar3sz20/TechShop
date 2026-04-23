@@ -1,8 +1,8 @@
 .footer {
     width: 100%;
     padding: 15px 50px;
-    background: linear-gradient(90deg, #f7bd8d,  #f0a364);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    background: var(--gradient-brand);
+    box-shadow: var(--shadow-md);
     text-align: center;
     margin-top: auto;
     transition: background 0.5s, color 0.5s;
@@ -21,7 +21,7 @@
 }
 
 .footer-link:hover {
-    color: #ffccff;
+    color: var(--color-surface-muted);
 }
 
 body.dark-mode .footer {

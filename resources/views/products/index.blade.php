@@ -101,7 +101,7 @@
                             @auth
                                 @if(auth()->user()->role === 1)
                                     <a href="{{ route('products.edit', $product->id) }}" class="admin-edit-btn">
-                                        ✏️
+                                        <span class="material-icons">edit</span>
                                     </a>
                                 @endif
                             @endauth
@@ -118,7 +118,7 @@
                                     <a href="{{ route('products.show', $product->id) }}" class="view-btn">Megnézem</a>
                                     <form action="{{ route('cart.add', $product->id) }}" method="POST" style="display:inline;">
                                         @csrf
-                                        <button type="submit" class="cart-btn">Kosárba 🛒</button>
+                                        <button type="submit" class="cart-btn">Kosárba <span class="material-icons">add_shopping_cart</span></button>
                                     </form>
                                 </div>
                             </div>

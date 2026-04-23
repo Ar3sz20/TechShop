@@ -20,6 +20,10 @@
         animation: pop 0.6s ease;
     }
 
+    .success-icon .material-icons {
+        font-size: inherit;
+    }
+
     .success-message {
         font-size: 1.5rem;
         color: #155724;
@@ -40,7 +44,7 @@
 
 @section('content')
 <div class="success-page">
-    <div class="success-icon">✅</div>
+    <div class="success-icon"><span class="material-icons">check_circle</span></div>
     <div class="success-message">
         Sikeres rendelés!<br>
         5 másodperc múlva visszairányítunk a főoldalra...

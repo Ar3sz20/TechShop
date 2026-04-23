@@ -17,7 +17,7 @@
 
                 @if ($errors->has('login'))
                     <div class="error-box">
-                        ❌ {{ $errors->first('login') }}
+                        <span class="material-icons">error</span> {{ $errors->first('login') }}
                     </div>
                 @endif
 
