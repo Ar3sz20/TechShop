@@ -19,7 +19,7 @@
                     <div class="error-box">
                         <ul>
                             @foreach ($errors->all() as $error)
-                                <li>❌ {{ $error }}</li>
+                                <li><span class="material-icons">error</span> {{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>

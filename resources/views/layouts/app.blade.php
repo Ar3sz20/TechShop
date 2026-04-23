@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webshop</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- Material Icons (Google) --}}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     {{-- Globális stílusok (minden oldalon kellenek) --}}
     <link rel="stylesheet" href="{{asset('css/apps.css')}}">
     <link rel="stylesheet" href="{{asset('css/navbar.css')}}">
@@ -25,7 +27,7 @@
             <div class="mobilscroll"></div>
         </div>
         <div class="nav-right">
-            <button id="theme-toggle" class="nav-btn">🌑</button>
+            <button id="theme-toggle" class="nav-btn"><span class="material-icons">dark_mode</span></button>
             <div class="dropdown">
                 <div class="select">
                     <p>Termékek</p>
@@ -56,7 +58,7 @@
                 </ul>
             </div>
             @guest
-                <a href="{{ route('loginshow') }}" class="nav-btn">Bejelentkezés👤</a>
+                <a href="{{ route('loginshow') }}" class="nav-btn">Bejelentkezés <span class="material-icons">person</span></a>
             @endguest
 
             @auth
@@ -77,7 +79,7 @@
                 </div>
             @endauth
 
-            <a href="{{route('cart')}}" class="nav-btn">Kosár🛒</a>
+            <a href="{{route('cart')}}" class="nav-btn">Kosár <span class="material-icons">shopping_cart</span></a>
         </div>
     </nav>
     {{--Navbar End--}}
@@ -107,7 +109,7 @@
         <div class="model-close-overlay"></div>
         <div class="model-content">
             <button class="model-close-btn">
-                ❌
+                <span class="material-icons">close</span>
             </button>
             <div class="newsletter-img">
                 <img src="{{ asset('images/newsletter.png') }}" alt="subscribe newsletter" width="400" height="400">

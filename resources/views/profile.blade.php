@@ -74,7 +74,7 @@
                         </div>
                     </div>
 
-                    <h3 style="margin-top:20px;">🚚 Szállítási cím</h3>
+                    <h3 style="margin-top:20px;"><span class="material-icons">local_shipping</span> Szállítási cím</h3>
 
                     <div class="account-edit">
                         <div class="account-input-container">
@@ -161,13 +161,13 @@
                 <div id="admin" class="account-section admin-panel" style="display:none;">
 
                     <div class="admin-header">
-                        <h2>🛠 Admin panel</h2>
+                        <h2><span class="material-icons">admin_panel_settings</span> Admin panel</h2>
                         <p>Termékek kezelése és adminisztráció</p>
                     </div>
 
                     <!-- ÚJ TERMÉK -->
                     <div class="admin-card">
-                        <h3>➕ Új termék hozzáadása</h3>
+                        <h3><span class="material-icons">add_circle</span> Új termék hozzáadása</h3>
 
                         <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf

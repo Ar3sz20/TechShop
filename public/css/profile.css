@@ -5,18 +5,18 @@
     margin: 50px auto;
     max-width: 1200px;
     font-family: 'Inter', sans-serif;
-    color: #1e293b;
+    color: var(--color-text);
     transition: color 0.5s;
     align-items: flex-start;
 }
 
 .profile {
     flex: 1 1 300px;
-    background: #536dfe;
+    background: var(--color-primary);
     color: #fff;
     border-radius: 1rem;
     padding: 20px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-sm);
     transition: all 0.5s;
 }
 
@@ -43,7 +43,7 @@
 .profile-text-container p {
     font-size: 14px;
     margin: 3px 0 0;
-    color: #e0e6f5;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .profile-menu {
@@ -58,8 +58,8 @@
     padding: 12px 15px;
     border-radius: 10px;
     text-decoration: none;
-    color: #1e293b;
-    background-color: #e0e6f5;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.15);
     font-weight: 500;
     transition: all 0.3s;
     text-align: left;
@@ -69,14 +69,14 @@
 
 .profile-menu-link:hover,
 .profile-menu form button:hover {
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background-color: rgba(255, 255, 255, 0.28);
+    box-shadow: var(--shadow-sm);
     transform: translateY(-2px);
 }
 
 .profile-menu-link.active {
     background-color: #fff;
-    color: #536dfe;
+    color: var(--color-primary);
     font-weight: bold;
 }
 
@@ -87,10 +87,10 @@ body.dark-mode .profile-menu-link.active {
 
 .account {
     flex: 2 1 500px;
-    background: #fff;
+    background: var(--color-surface);
     border-radius: 1rem;
     padding: 25px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    box-shadow: var(--shadow-sm);
     transition: all 0.5s;
 }
 
@@ -110,18 +110,18 @@ body.dark-mode .profile-menu-link.active {
 .account-input-container label {
     font-size: 14px;
     margin-bottom: 5px;
-    color: #64748b;
+    color: var(--color-text-muted);
 }
 
 .account-input-container input,
 .account-input-container textarea,
 .account-input-container select {
     padding: 10px;
-    border: 1px solid #cbd5e1;
+    border: 1px solid var(--color-border);
     border-radius: 10px;
     font-size: 14px;
-    color: #1e293b;
-    background-color: #fff;
+    color: var(--color-text);
+    background-color: var(--color-surface);
     transition: 0.3s;
 }
 
@@ -129,14 +129,14 @@ body.dark-mode .profile-menu-link.active {
 .account-input-container textarea:focus,
 .account-input-container select:focus {
     outline: none;
-    border-color: #536dfe;
-    box-shadow: 0 0 8px rgba(83,109,254,0.3);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-soft);
 }
 
 
 .account-btn-save {
     margin-top: 15px;
-    background-color: #536dfe;
+    background-color: var(--color-primary);
     color: #fff;
     padding: 10px 25px;
     border-radius: 25px;
@@ -147,11 +147,11 @@ body.dark-mode .profile-menu-link.active {
 }
 
 .account-btn-save:hover {
-    background-color: #4053e0;
+    background-color: var(--color-primary-hover);
 }
 
 .account-btn-edit {
-    background-color: #f59e0b;
+    background-color: var(--color-accent);
     color: #fff;
     padding: 10px 25px;
     border-radius: 25px;
@@ -164,11 +164,11 @@ body.dark-mode .profile-menu-link.active {
 }
 
 .account-btn-edit:hover {
-    background-color: #d97706;
+    background-color: var(--color-accent-hover);
 }
 
 .account-btn-danger {
-    background: #ef4444;
+    background: var(--color-danger);
     color: #fff;
     padding: 10px 25px;
     border-radius: 25px;
@@ -179,7 +179,7 @@ body.dark-mode .profile-menu-link.active {
 }
 
 .account-btn-danger:hover {
-    background: #dc2626;
+    background: var(--color-danger-hover);
 }
 
 
@@ -206,7 +206,7 @@ body.dark-mode .profile-menu-link.active {
 
 .account-section table th,
 .account-section table td {
-    border: 1px solid #cbd5e1;
+    border: 1px solid var(--color-border);
     padding: 10px;
     text-align: left;
     font-size: 14px;
@@ -214,7 +214,7 @@ body.dark-mode .profile-menu-link.active {
 
 
 .account-section table tbody tr:nth-child(even) {
-    background: #eef2ff;
+    background: var(--color-surface-alt);
 }
 .account-action {
     display: flex;
@@ -251,7 +251,7 @@ body.dark-mode .profile-menu-link.active {
 
 .admin-table th,
 .admin-table td {
-    border: 1px solid #cbd5e1;
+    border: 1px solid var(--color-border);
     padding: 10px;
     text-align: left;
 }
@@ -263,17 +263,17 @@ body.dark-mode .profile-menu-link.active {
 }
 
 .admin-header {
-    background: linear-gradient(135deg, #536dfe, #7c4dff);
+    background: var(--gradient-brand);
     color: white;
     padding: 20px;
     border-radius: 15px;
 }
 
 .admin-card {
-    background: #fff;
+    background: var(--color-surface);
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: var(--shadow-sm);
     margin-bottom: 15px;
 }
 
@@ -336,7 +336,7 @@ body.dark-mode .account-section table tbody tr:nth-child(even) {
 }
 
 .account-section table tbody tr:hover {
-    background: rgba(83,109,254,0.15);
+    background: var(--color-primary-soft);
 }
 
 body.dark-mode .admin-card {

@@ -1,10 +1,13 @@
 const toggleBtn = document.getElementById("theme-toggle");
 
+const sunIcon = '<span class="material-icons">light_mode</span>';
+const moonIcon = '<span class="material-icons">dark_mode</span>';
+
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
-    toggleBtn.textContent = "☀️";
+    toggleBtn.innerHTML = sunIcon;
 } else {
-    toggleBtn.textContent = "🌑";
+    toggleBtn.innerHTML = moonIcon;
 }
 
 toggleBtn.addEventListener("click", () => {
@@ -12,9 +15,9 @@ toggleBtn.addEventListener("click", () => {
 
     if (document.body.classList.contains("dark-mode")) {
         localStorage.setItem("theme", "dark");
-        toggleBtn.textContent = "☀️";
+        toggleBtn.innerHTML = sunIcon;
     } else {
         localStorage.setItem("theme", "light");
-        toggleBtn.textContent = "🌑";
+        toggleBtn.innerHTML = moonIcon;
     }
 });

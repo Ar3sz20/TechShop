@@ -12,7 +12,7 @@
 @endphp
 
 <div class="cart-container">
-    <h1>🛒 Kosár</h1>
+    <h1><span class="material-icons">shopping_cart</span> Kosár</h1>
 
     @if(count($cart) > 0)
 
@@ -85,7 +85,7 @@
 
             @auth
                 <button type="button" class="checkout-open-btn" id="openCheckout">
-                    Rendelés leadása 🚀
+                    Rendelés leadása <span class="material-icons">shopping_cart_checkout</span>
                 </button>
             @endauth
 
@@ -107,14 +107,14 @@
 
         <div class="checkout-left">
 
-            <h2 class="checkout-title">🧾 Rendelés véglegesítése</h2>
+            <h2 class="checkout-title"><span class="material-icons">receipt_long</span> Rendelés véglegesítése</h2>
             <p class="checkout-subtitle">Ellenőrizd az adataid és fejezd be a rendelést</p>
 
             <form action="{{ route('orders.store') }}" method="POST" class="checkout-form">
                 @csrf
 
                 <div class="checkout-section">
-                    <h3>🧍 Személyes adatok</h3>
+                    <h3><span class="material-icons">person</span> Személyes adatok</h3>
 
                     <label>Név</label>
                     <input type="text"
@@ -130,7 +130,7 @@
                 </div>
 
                 <div class="checkout-section">
-                    <h3>🚚 Szállítási cím</h3>
+                    <h3><span class="material-icons">local_shipping</span> Szállítási cím</h3>
 
                     <div class="checkout-grid">
 
@@ -158,21 +158,21 @@
                 </div>
 
                 <div class="checkout-section">
-                    <h3>💳 Fizetés</h3>
+                    <h3><span class="material-icons">payments</span> Fizetés</h3>
 
                     <label class="payment-card">
                         <input type="radio" name="payment_method" value="utanvet" checked>
-                        <span>💵 Utánvét</span>
+                        <span><span class="material-icons">payments</span> Utánvét</span>
                     </label>
 
                     <label class="payment-card">
                         <input type="radio" name="payment_method" value="utalas">
-                        <span>💳 Utalás</span>
+                        <span><span class="material-icons">credit_card</span> Utalás</span>
                     </label>
                 </div>
 
                 <button type="submit" class="checkout-pay-btn">
-                    Rendelés leadása 🚀
+                    Rendelés leadása <span class="material-icons">shopping_cart_checkout</span>
                 </button>
 
             </form>
@@ -181,7 +181,7 @@
 
         <div class="checkout-right">
 
-            <h3>🛒 Kosár összesítő</h3>
+            <h3><span class="material-icons">shopping_cart</span> Kosár összesítő</h3>
 
             <div class="checkout-items">
 
@@ -212,7 +212,7 @@
 
         </div>
 
-        <button id="closeCheckout" class="checkout-close">✖</button>
+        <button id="closeCheckout" class="checkout-close"><span class="material-icons">close</span></button>
 
     </div>
 </div>

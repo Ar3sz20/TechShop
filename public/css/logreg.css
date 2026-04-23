@@ -3,17 +3,17 @@
     justify-content: center; 
     align-items: center;
     min-height: 100vh; 
-    color: #1a1a1a;
+    color: var(--color-text);
     padding: 20px;
-    background: linear-gradient(180deg, #ffffff, #f0f8ff, #e6f7ff);
+    background: linear-gradient(180deg, var(--color-bg-start), var(--color-bg-mid), var(--color-bg-end));
     transition: background 0.5s, color 0.5s;
 }
 
 .log-container {
-    background: rgba(245,245,245,0.9);
+    background: var(--color-surface);
     padding: 50px 40px;
     border-radius: 20px;
-    box-shadow: 0 0 30px rgba(255, 119, 0, 0.3);
+    box-shadow: var(--shadow-md);
     max-width: 400px;
     width: 90%;
     text-align: center;
@@ -23,8 +23,7 @@
 .log-container h2 {
     margin-bottom: 30px;
     font-size: 2rem;
-    text-shadow: 0 0 10px rgb(248, 176, 42);
-    color: #1a1a1a;
+    color: var(--color-text);
     transition: color 0.5s;
 }
 
@@ -42,18 +41,24 @@
     width: 100%;
     padding: 12px 10px;
     border-radius: 8px;
-    border: none;
+    border: 1px solid var(--color-border);
     outline: none;
-    color: #1a1a1a;
+    background: var(--color-surface);
+    color: var(--color-text);
     font-size: 1rem;
-    transition: background 0.5s, color 0.5s;
+    transition: background 0.5s, color 0.5s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-group input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-soft);
 }
 
 .input-group label {
     position: absolute;
     left: 12px;
     top: 12px;
-    color: #64748b;
+    color: var(--color-text-muted);
     pointer-events: none;
     transition: all 0.3s;
 }
@@ -63,18 +68,18 @@
     top: -10px;
     left: 10px;
     font-size: 0.8rem;
-    color: rgb(67, 75, 223);
-    background: rgba(245, 245, 245, 0.9);
+    color: var(--color-primary);
+    background: var(--color-surface);
     padding: 0 5px;
     border-radius: 5px;
 }
 
 .loginbutton {
     padding: 12px 25px;
-    background: linear-gradient(90deg, #65f9e3, #03ac6b);
+    background: var(--color-primary);
     border-radius: 8px;
     text-decoration: none;
-    color: black;
+    color: white;
     font-weight: bold;
     border: none;
     font-size: 1rem;
@@ -82,7 +87,8 @@
 }
 
 .loginbutton:hover {
-    box-shadow: 0 0 25px rgba(11, 101, 47, 0.973);
+    background: var(--color-primary-hover);
+    box-shadow: var(--shadow-md);
 }
 
 .forgot-container {
@@ -92,20 +98,20 @@
 .forgot-password {
     background: none;
     border: none;
-    color:  #03ac6b;
+    color: var(--color-primary);
     font-size: 0.85rem;
     text-decoration: underline;
     transition: color 0.3s;
 }
 
 .forgot-password:hover {
-    color:rgba(11, 101, 47, 0.973);
+    color: var(--color-primary-hover);
 }
 .login-option{
-    color:  #03ac6b;
+    color: var(--color-primary);
 }
 .login-option:hover{
-    color:rgba(11, 101, 47, 0.973);
+    color: var(--color-primary-hover);
 }
 .register-option {
     margin-top: 20px;
@@ -113,7 +119,7 @@
 }
 
 .register-option a {
-    color:  #03ac6b;
+    color: var(--color-primary);
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
@@ -124,13 +130,13 @@
 }
 
 .error-box {
-    background: rgba(255,0,0,0.15);
-    border-left: 4px solid #ff3b3b;
+    background: rgba(220, 38, 38, 0.10);
+    border-left: 4px solid var(--color-danger);
     padding: 10px 15px;
     margin-bottom: 15px;
     border-radius: 8px;
     text-align: left;
-    color: #b71c1c;
+    color: var(--color-danger-hover);
 }
 
 .error-box ul {
