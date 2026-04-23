@@ -55,9 +55,9 @@ class OrderController extends Controller
             'user_id' => Auth::id(),
             'total_price' => $total,
             'address' => $address,
-            'items' => json_encode($cart),
-                'payment_method' => $request->payment_method
-
+            'items' => json_encode(array_keys($cart)),
+            'payment_method' => $request->payment_method,
+            'status' => 'in progress'
         ]);
 
         // Raktárkészlet csökkentése a megrendelt mennyiséggel
