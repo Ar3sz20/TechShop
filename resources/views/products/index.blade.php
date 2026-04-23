@@ -112,7 +112,7 @@
 
                             <div class="product-info">
                                 <h3>{{ $product->name }}</h3>
-                                <span class="price">{{ number_format($product->price, 2, ",") }} $</span>
+                                <span class="price">${{ number_format($product->price, 2, ",") }}</span>
 
                                 <div class="product-actions">
                                     <a href="{{ route('products.show', $product->id) }}" class="view-btn">Megnézem</a>

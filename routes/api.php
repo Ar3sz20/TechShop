@@ -11,12 +11,10 @@ Route::get('/user', function (Request $request) {
 
 
 Route::get('/products', [ProductController::class, 'index']);
-Route::post('/products', [ProductController::class, 'store']);
+Route::post('/products/store', [ProductController::class, 'store']);
+Route::post('/products/bulk', [ProductController::class, 'bulkStore']);
 Route::put('/products/{product}', [ProductController::class, 'update']);
 Route::delete('/products/{product}', [ProductController::class, 'destroy']);
+Route::delete('/products/{product}/force', [ProductController::class, 'forceDelete'])->withTrashed();
 Route::get('/products/trashed', [ProductController::class, 'showTrashed']);
 Route::post('/products/{product}/restore', [ProductController::class, 'restore'])->withTrashed();
-
-Route::post('register', [UserController::class, 'register']);
-Route::post('login', [UserController::class, 'login']);
-Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');

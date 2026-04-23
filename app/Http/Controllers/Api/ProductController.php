@@ -24,13 +24,24 @@ class ProductController extends Controller
             $data['image'] = $request->file('image')->store('products', 'public');
         }
         else {
-            $data['image'] = "placeholder.png";
+            $data['image'] = "image/products/placeholder.png";
         }
 
         Product::create($data);
 
         $products = Product::all();
         return response()->json(["message" => "Termék sikeresen létrehozva!", "products" => $products]);
+    }
+
+    public function bulkStore(Request $request)
+    {
+        $products = $request->all();
+
+        foreach ($products as $data) {
+            Product::create($data);
+        }
+
+        return response()->json(['message' => 'Bulk upload ok']);
     }
 
     public function show(Product $product)
@@ -53,6 +64,12 @@ class ProductController extends Controller
     {
         $product->delete();
         return response()->json(["message" => "Termék sikeresen törölve!"]);
+    }
+
+    public function forceDelete(Product $product)
+    {
+        $product->forceDelete();
+        return response()->json(["message" => "Termék véglegesen törölve!"]);
     }
 
     public function showTrashed()

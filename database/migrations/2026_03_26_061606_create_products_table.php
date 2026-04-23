@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("name");
             $table->decimal("price",10,2);
             $table->text("description");
-            $table->string("image")->default('placeholder.png');
+            $table->string("image")->default('images/products/placeholder.png');
             $table->integer("quantity")->default(0);
             $table->string("category");
             $table->string("brandname");
