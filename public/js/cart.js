@@ -17,3 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+
+const companyToggle = document.getElementById("isCompany");
+const companyFields = document.getElementById("companyFields");
+
+companyToggle.addEventListener("change", () => {
+    companyFields.style.display =
+        companyToggle.checked ? "block" : "none";
+});

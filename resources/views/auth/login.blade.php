@@ -46,4 +46,25 @@
             </div>
         </div>
     </div>
+
+    <div id="forgotModal" class="forgot-modal">
+    <div class="forgot-box">
+
+        <button class="forgot-close" id="closeForgot">
+            <span class="material-icons">close</span>
+        </button>
+
+        <h3>Jelszó visszaállítás</h3>
+        <p>Add meg az e-mail címed, küldünk egy linket.</p>
+
+        <input type="email" id="forgotEmail" placeholder="E-mail cím">
+
+        <button id="sendForgot" class="forgot-send-btn">
+            Küldés
+        </button>
+
+        <p id="forgotMsg" class="forgot-msg"></p>
+
+    </div>
+</div>
 @endsection
