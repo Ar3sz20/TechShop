@@ -29,13 +29,16 @@ class OrderController extends Controller
             'street' => 'required|string',
             'house_number' => 'required|string',
             'floor' => 'nullable|string',
-            'payment_method' => 'required|string'
+            'payment_method' => 'required|string',
+            'is_company' => 'nullable',
+            'company_name' => 'nullable|string',
+            'tax_number' => 'nullable|string',
         ]);
 
         $total = 0;
 
         // Ellenőrizzük, hogy minden termékből van-e elég raktáron
-        foreach($cart as $id => $item){
+        foreach ($cart as $id => $item) {
             $product = Product::find($id);
             if (!$product || $product->quantity < $item['quantity']) {
                 return redirect()->back()->with('error', 'A(z) "' . $item['name'] . '" termékből nincs elég raktáron!');
@@ -51,11 +54,21 @@ class OrderController extends Controller
             $request->floor ?? ''
         ]);
 
-        
+                
+        $companyData = null;
+
+        if ($request->boolean('is_company')) {
+            $companyData = implode(';', [
+                $request->company_name,
+                $request->tax_number,
+            ]);
+        }
+
         Order::create([
             'user_id' => Auth::id(),
             'total_price' => $total,
             'address' => $address,
+            'company_data' => $companyData,
             'item_id' => implode(',', array_keys($cart)),
             'item_quantity' => implode(',', array_column($cart, 'quantity')),
             'payment_method' => $request->payment_method,
@@ -63,7 +76,7 @@ class OrderController extends Controller
         ]);
 
         // Raktárkészlet csökkentése a megrendelt mennyiséggel
-        foreach($cart as $id => $item){
+        foreach ($cart as $id => $item) {
             $product = Product::find($id);
             $product->decrement('quantity', $item['quantity']);
         }
