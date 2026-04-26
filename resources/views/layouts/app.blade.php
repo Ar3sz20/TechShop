@@ -23,7 +23,7 @@
     <nav class="navbar">
         <div class="nav-left">
             <a href="/" class="logo">Techshop</a>
-            <input type="text" class="kereso" placeholder="Kereső...">
+            <form action="{{ route('products.index') }}" method="GET"><input type="text" name="name" class="kereso" placeholder="Kereső..." value="{{ request('name') }}"></form>
             <div class="mobilscroll"></div>
         </div>
         <div class="nav-right">

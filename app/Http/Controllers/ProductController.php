@@ -16,6 +16,10 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
+        if ($request->filled('name')) {
+        $query->where('name', 'like', '%' . $request->name . '%');
+    }
+
         // Kategória
         if ($request->filled('category')) {
             $query->where('category', $request->category);
