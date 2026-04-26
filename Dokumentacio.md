@@ -1,6 +1,6 @@
 # TechShop – Műszaki Dokumentáció
 
-> Verzió: 1.1 · Dátum: 2026.04.24. · Nyelv: magyar
+> Verzió: 1.2 · Dátum: 2026.04.26. · Nyelv: magyar
 >
 > Készítők: **Harkó Dávid**, **Zakar Levente Gusztáv**, **Iancu-Tóth Daniel**
 >
@@ -208,17 +208,21 @@ tests/
 
 #### Order – [app/Models/Order.php](app/Models/Order.php)
 
+> **⚠️ Schéma-változás (v1.2):** A v4 vFINISHED build során az `orders.items` JSON oszlop **megszűnt**, helyette `item_id` + `item_quantity` (bár mindkettő `string` típusú) került bevezetésre. Továbbá új `company_data` (text) mező a céges számlázási adatokhoz.
+
 | Mező | Típus | Megjegyzés |
 |---|---|---|
 | id | bigint PK | – |
 | user_id | FK users.id | `cascade` törlés |
 | address | string | szállítási cím |
 | total_price | decimal(10,2) | – |
-| items | json | a vásárolt termékek tömbje |
+| item_id | string | termék azonosító(k) (jelenleg szövegként tárolva) |
+| item_quantity | string | termék mennyiség(ek) (jelenleg szövegként tárolva) |
+| status | string | rendelés állapot, alapértelmezett `pending` |
 | payment_method | string NULL | pl. cash, card |
-| status | string NULL | rendelés állapot (pl. `pending`, `processing`, `completed`, `cancelled`) – API-ról állítható |
+| company_data | text NULL | céges számlázási adatok |
 
-- Cast: `items: array`
+- Cast: `items: array` *(megj.: legacy cast a modellben, a megfelelő oszlop már nem létezik → [karbantartási pont](#9-karbantartás-és-bővítés))*
 - Kapcsolat: `user()` → `belongsTo(User::class)`
 
 #### NewsLetter – [app/Models/NewsLetter.php](app/Models/NewsLetter.php)
@@ -234,14 +238,13 @@ tests/
 | Vezérlő | Felelősség | Fájl |
 |---|---|---|
 | `AuthController` | Bejelentkezés, regisztráció, kijelentkezés | [AuthController.php](app/Http/Controllers/AuthController.php) |
-| `ProductController` | Termék lista, szűrés, részletek, admin CRUD, soft delete + restore | [ProductController.php](app/Http/Controllers/ProductController.php) |
+| `ProductController` | Termék lista, szűrés (kategória/típus/ár/**név keresés**), részletek, admin CRUD, soft delete + restore | [ProductController.php](app/Http/Controllers/ProductController.php) |
 | `CartController` | Session-alapú kosár (add, increase, decrease, remove) | [CartController.php](app/Http/Controllers/CartController.php) |
 | `OrderController` | Rendelés leadása, rendelési előzmények | [OrderController.php](app/Http/Controllers/OrderController.php) |
 | `ProfileController` | Profil megjelenítés és módosítás, hírlevél kapcsoló | [ProfileController.php](app/Http/Controllers/ProfileController.php) |
 | `NewsLetterController` | Email feliratkozás (AJAX-szerű JSON válasz) | [NewsLetterController.php](app/Http/Controllers/NewsLetterController.php) |
 | `Api\ProductController` | JSON CRUD termékekre, bulk upload, soft/force delete, restore | [Api/ProductController.php](app/Http/Controllers/Api/ProductController.php) |
 | `Api\OrderController` | JSON CRUD rendelésekre (admin) | [Api/OrderController.php](app/Http/Controllers/Api/OrderController.php) |
-| `Api\UserController` | API regisztráció / login / logout, token kibocsátás | [Api/UserController.php](app/Http/Controllers/Api/UserController.php) |
 
 ### 3.5. Form Request validációk
 
@@ -424,7 +427,7 @@ A fejlesztés során néhány műszaki döntés eltért a kezdeti adatbázis-ter
 
 ### 3.10. Asztali admin kliens (`APIWinform`)
 
-A kisérleti, különálló **C# / .NET 10 Windows Forms** alkalmazás a TechShop backend REST API-ján keresztül nyújt admin felületet. Forrás: a csapat külső repositóriájában található `APIWinform/` mappa.
+A különálló **C# / .NET 10 Windows Forms** alkalmazás a TechShop backend REST API-ján keresztül nyújt admin felületet. Forrás: a `vFINISHED` build óta a [APIWinform/](APIWinform/) mappa **a fő repositórium része** (korábban külön került verziózásra).
 
 #### 3.10.1. Projekt-struktúra
 
@@ -566,7 +569,7 @@ php artisan tinker
 ### 5.4. Tipikus vásárlói munkafolyamat
 
 1. **Regisztráció** – `/register` (név, email, min. 8 karakteres, betűt-számot-szimbólumot tartalmazó jelszó).
-2. **Böngészés** – `/products`, szűrés `category`, `type`, `min_price`, `max_price` query paraméterekkel.
+2. **Böngészés** – `/products`, szűrés `category`, `type`, `min_price`, `max_price` query paraméterekkel, illetve **név szerinti keresés** a `name` query paraméterrel (a navbarba integrált kereső mezőből, `LIKE %name%`).
 3. **Termék részletek** – `/products/{id}`.
 4. **Kosár** – `Kosárba` gomb → `/cart` oldalon mennyiség-állítás.
 5. **Rendelés** – cím + fizetési mód → `POST /order`.
@@ -650,45 +653,11 @@ Accept: application/json
 Content-Type: application/json
 ```
 
-#### 6.2.1. Hitelesítés – [`Api\UserController`](app/Http/Controllers/Api/UserController.php)
+#### 6.2.1. Hitelesítés
 
-**POST `/api/register`**
+> **⚠️ Változás (v1.2):** Az `Api\UserController` a `vFINISHED` build során eltávolításra került; az **`/api/register`, `/api/login`, `/api/logout` végpontok jelenleg nem aktivak** a `routes/api.php` fájlban. A Sanctum infrastruktúra (`personal_access_tokens` tábla, `auth:sanctum` middleware) továbbra is él, így az asztali admin kliens (lsd. 3.10) jelenleg **nem auth-olt** közvetlen HTTP hívásokkal kommunikál a backenddel. A token-alapú hitelesítés visszaállítása karbantartási pont (lsd. 9. pont).
 
-Request:
-```json
-{
-  "name": "Teszt Elek",
-  "email": "teszt@example.com",
-  "password": "Erő$Jelszó1"
-}
-```
-
-Response 200:
-```json
-{
-  "user":  { "id": 1, "name": "Teszt Elek", "email": "teszt@example.com", "role": 0 },
-  "token": "1|XXXXXXXXXXXXXXXXXXXXXXXX"
-}
-```
-
-Hibák: `422` validációs hiba (Laravel default formátum).
-
-**POST `/api/login`**
-
-Request:
-```json
-{ "email": "teszt@example.com", "password": "Erő$Jelszó1" }
-```
-
-Response 200: ugyanaz, mint regisztrációnál (user + token, a token neve a `User-Agent`).
-
-Hiba: `418 I'm a teapot` – hibás credentials esetén.
-
-**POST `/api/logout`** – `auth:sanctum`
-
-Eltávolítja az aktuális access tokent. Response 200 üres / sikerüzenettel.
-
-**GET `/api/user`** – `auth:sanctum` – visszaadja a tokenhez tartozó usert.
+**GET `/api/user`** – `auth:sanctum` – visszaadja a tokenhez tartozó usert (ha már van kibocsájtott token).
 
 #### 6.2.2. Termékek – [`Api\ProductController`](app/Http/Controllers/Api/ProductController.php)
 
@@ -721,9 +690,11 @@ Létrehozási kérés példa:
   "user_id": 1,
   "address": "1111 Budapest, Teszt utca 1.",
   "total_price": 2999.99,
-  "items": [{"id": 7, "name": "iPhone 15 Pro", "quantity": 2, "price": 1499.99}],
+  "item_id": "7,12",
+  "item_quantity": "2,1",
   "payment_method": "card",
-  "status": "pending"
+  "status": "pending",
+  "company_data": null
 }
 ```
 
@@ -768,7 +739,7 @@ Termék objektum sémája (válasz):
 
 - **AJAX hírlevél**: `POST /newsletter` JSON-ban → `{ "success": true }`. Lásd [public/js/newsletter.js](public/js/newsletter.js).
 - **Sötét mód**: kliensoldali, localStorage alapú toggle. Lásd [public/js/darkmode.js](public/js/darkmode.js).
-- **Mobil kliens** Sanctum tokennel: `POST /api/login` → token tárolása biztonságos tárolóban → `Authorization: Bearer ...` minden további híváshoz.
+- **Mobil/asztali kliens** Sanctum tokennel: token kibocsájtása Tinkerből (`User::find(1)->createToken('admin')->plainTextToken`) vagy ideiglenes seeder segítségével → token tárolása biztonságos tárolóban → `Authorization: Bearer ...` minden további híváshoz. (Az `/api/login` végpont jelenleg nem aktív – lsd. 6.2.1.)
 
 ---
 
@@ -900,7 +871,7 @@ A `php artisan test` parancs kimenete (futtatás dátuma: **2026-04-23**, körny
   Duration: 0.67s
 ```
 
-**Összesítés**: **24/24 teszt sikeres**, 33 assertion, futási idő 0,67 s.
+**Összesítés**: A v1.1 doc készítésekor (2026-04-23) **24/24 teszt sikeres**, 33 assertion, 0,67 s. A v1.2 build (`vFINISHED`, 2026-04-26) sémamódosításai miatt **jelenleg 20 teszt sikeres és 4 fail** az `OrderTest` osztályban (`item_id` NOT NULL constraint) – részletek a [9.5. Ismert technikai adósságok](#95-ismert-technikai-adósságok-v12) pontban.
 
 ---
 
@@ -953,6 +924,17 @@ vendor/bin/pint           # automatikus formázás
 vendor/bin/pint --test    # csak ellenőrzés
 ```
 
+### 9.5. Ismert technikai adósságok (v1.2)
+
+A `vFINISHED` build óta az alábbi pontokon a kód és a tesztek divergálnak — ezek karbantartási feladatok:
+
+1. **`Order::items` cast vs. tényleges séma** – a `Order` modellben szerepel `protected $casts = ['items' => 'array']`, viszont az `orders` tábla `items` JSON oszlopa megszűnt és helyette `item_id` + `item_quantity` (string) van. A cast inert, és a `tests/Feature/Models/OrderTest.php::test_order_items_are_cast_to_array` jelenleg **fail** (`NOT NULL constraint failed: orders.item_id`). Megoldási lehetőségek:
+   - vagy visszahozni az `items` JSON oszlopot (és a cast funkcióját), vagy
+   - migrálni az `item_id` / `item_quantity` mezőket egy normalizált `order_items` táblába és frissíteni a teszteket.
+2. **API auth (`/api/login`, `/api/register`, `/api/logout`)** – az `Api\UserController` törölve, a végpontok nincsenek route-olva. Ha az asztali admin klienst (`APIWinform`) Sanctum-token alapra akarjuk visszaállítani, az auth controllert vissza kell állítani vagy újraírni.
+3. **Form Request névelírás** – `app/Http/Requests/Api/Request/StoreProudctRequest.php` és `UpdateProudctRequest.php` (helyesen `Product` lenne). Új API funkciónál érdemes átnevezni.
+4. **`OrderTest::test_order_can_be_created`** és kapcsolódó tesztek `items` paramétert adnak át a `Order::create`-nek – frissítendők az új `item_id` / `item_quantity` sémához (lásd 1. pont).
+
 ---
 
 ## 10. Hibaelhárítás
@@ -979,11 +961,13 @@ vendor/bin/pint --test    # csak ellenőrzés
 - [ProfileController.php](app/Http/Controllers/ProfileController.php)
 - [NewsLetterController.php](app/Http/Controllers/NewsLetterController.php)
 - [Api/ProductController.php](app/Http/Controllers/Api/ProductController.php)
-- [Api/UserController.php](app/Http/Controllers/Api/UserController.php)
+- [Api/OrderController.php](app/Http/Controllers/Api/OrderController.php)
 
 ### Form Requests
 - [StoreProductRequest.php](app/Http/Requests/StoreProductRequest.php)
 - [UpdateProductRequest.php](app/Http/Requests/UpdateProductRequest.php)
+- [Api/Request/StoreProudctRequest.php](app/Http/Requests/Api/Request/StoreProudctRequest.php)
+- [Api/Request/UpdateProudctRequest.php](app/Http/Requests/Api/Request/UpdateProudctRequest.php)
 
 ### Modellek és Policy
 - [Product.php](app/Models/Product.php)
