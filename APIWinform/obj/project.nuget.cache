@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "mQfWBVrn+lg=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Asus\\Documents\\Dualis\\C#\\APIWinform\\APIWinform.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Asus\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}

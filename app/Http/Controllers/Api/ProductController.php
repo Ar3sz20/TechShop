@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Request\StoreProudctRequest;
+use App\Http\Requests\Api\Request\UpdateProudctRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -16,7 +16,7 @@ class ProductController extends Controller
         return response()->json(["products" => $products]);
     }
 
-    public function store(StoreProductRequest $request)
+    public function store(StoreProudctRequest $request)
     {
         $data = $request->validated();
 
@@ -54,7 +54,7 @@ class ProductController extends Controller
         return response()->json(["product" => $product]);
     }
 
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProudctRequest $request, Product $product)
     {
         $product->update($request->validated());
         return response()->json(["message" => "Termék sikeresen frissítve!", "product" => $product]);

@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->string('address')->after('user_id');
-            $table->json('items')->after('total_price');
         });
     }
 
@@ -24,7 +23,6 @@ return new class extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->dropColumn('address');
-            $table->dropColumn('items');
         });
     }
 };

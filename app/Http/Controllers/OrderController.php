@@ -51,13 +51,15 @@ class OrderController extends Controller
             $request->floor ?? ''
         ]);
 
+        
         Order::create([
             'user_id' => Auth::id(),
             'total_price' => $total,
             'address' => $address,
-            'items' => json_encode(array_keys($cart)),
+            'item_id' => implode(',', array_keys($cart)),
+            'item_quantity' => implode(',', array_column($cart, 'quantity')),
             'payment_method' => $request->payment_method,
-            'status' => 'in progress'
+            'status' => 'pending'
         ]);
 
         // Raktárkészlet csökkentése a megrendelt mennyiséggel
