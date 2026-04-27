@@ -114,7 +114,7 @@ flowchart LR
   Order -- items JSON --> Product
 ```
 
-> **Multi-platform megjegyzés (KKK 8.4.2):** A vásárlói kliens egységesen reszponzív web-frontend (Blade + Tailwind 4), amely asztali böngészőkben és mobil eszközön is natív-szerű felhasználói élményt nyújt. Az **adminisztrációs felület** pedig egy külön **natív asztali alkalmazás** (`APIWinform`, C# / .NET 10 Windows Forms), amely a REST API-n keresztül kommunikál a backenddel. Ez pontosan megfelel a KKK példának: *„A felhasználóknak szánt interfész webes megjelenítést használ, míg az adminisztrációs felület natív asztali alkalmazásként készül el"*. Részleteket lásd a [3.10. Asztali admin kliens](#310-asztali-admin-kliens-apiwinform) fejezetben.
+> **Multi-platform megjegyzés (KKK 8.4.2):** A vásárlói kliens egységesen reszponzív web-frontend (Blade + CSS), amely asztali böngészőkben és mobil eszközön is natív-szerű felhasználói élményt nyújt. Az **adminisztrációs felület** pedig egy külön **natív asztali alkalmazás** (`APIWinform`, C# / .NET 10 Windows Forms), amely a REST API-n keresztül kommunikál a backenddel. Ez pontosan megfelel a KKK példának: *„A felhasználóknak szánt interfész webes megjelenítést használ, míg az adminisztrációs felület natív asztali alkalmazásként készül el"*. Részleteket lásd a [3.10. Asztali admin kliens](#310-asztali-admin-kliens-apiwinform) fejezetben.
 
 ### 2.2. Adatfolyam példa: vásárlás
 
@@ -134,7 +134,7 @@ flowchart LR
 | Keretrendszer | Laravel | ^12.0 |
 | API auth | Laravel Sanctum | ^4.0 |
 | Frontend build | Vite | ^7.3 |
-| CSS | Tailwind CSS | ^4.0 |
+| CSS | CSS | – |
 | Adatbázis (prod) | MySQL | 8.x (vagy SQLite) |
 | Adatbázis (test) | SQLite (in-memory) | – |
 | Tesztelés | PHPUnit | ^11.5 |
@@ -423,7 +423,7 @@ A fejlesztés során néhány műszaki döntés eltért a kezdeti adatbázis-ter
 
 #### Vite build pipeline
 
-- [vite.config.js](vite.config.js) – Tailwind 4 + Laravel plugin, belépési pontok: `resources/css/app.css`, `resources/js/app.js`. Hot reload, kivéve `storage/framework/views/`.
+- [vite.config.js](vite.config.js) – CSS + Laravel plugin, belépési pontok: `resources/css/app.css`, `resources/js/app.js`. Hot reload, kivéve `storage/framework/views/`.
 
 ### 3.10. Asztali admin kliens (`APIWinform`)
 
@@ -1024,7 +1024,7 @@ A KKK 8.4.2 elvárja a fejlesztési csapatban betöltött szerepek bemutatását
 
 ## 13. English abstract
 
-**TechShop** is a Hungarian-language e-commerce web application built on **Laravel 12 / PHP 8.2**, **Tailwind CSS 4** with **Vite** for asset bundling, and **MySQL** (or SQLite for tests) as the database backend. It implements a full electronics-store workflow: product browsing with category/type/price filters, session-based shopping cart, authenticated checkout with shipping address and payment method, order history, and a newsletter subscription. Administrators (`role = 1`) can perform full CRUD on products including image upload and soft-delete with restore, all enforced through `ProductPolicy` and dedicated `Form Request` validation. A **REST API** under `/api/*` secured with **Laravel Sanctum** bearer tokens exposes the same product and user operations to potential native mobile or third-party clients. The codebase follows clean-code principles, is formatted with Laravel Pint, and is covered by **24 PHPUnit tests** (Feature + Unit, in-memory SQLite via `RefreshDatabase`) — all passing in 0.67 s. The single responsive Blade-based frontend serves both desktop and mobile browsers, satisfying the multi-platform client requirement of the KKK exam specification.
+**TechShop** is a Hungarian-language e-commerce web application built on **Laravel 12 / PHP 8.2**, **CSS** with **Vite** for asset bundling, and **MySQL** (or SQLite for tests) as the database backend. It implements a full electronics-store workflow: product browsing with category/type/price filters, session-based shopping cart, authenticated checkout with shipping address and payment method, order history, and a newsletter subscription. Administrators (`role = 1`) can perform full CRUD on products including image upload and soft-delete with restore, all enforced through `ProductPolicy` and dedicated `Form Request` validation. A **REST API** under `/api/*` secured with **Laravel Sanctum** bearer tokens exposes the same product and user operations to potential native mobile or third-party clients. The codebase follows clean-code principles, is formatted with Laravel Pint, and is covered by **24 PHPUnit tests** (Feature + Unit, in-memory SQLite via `RefreshDatabase`) — all passing in 0.67 s. The single responsive Blade-based frontend serves both desktop and mobile browsers, satisfying the multi-platform client requirement of the KKK exam specification.
 
 ---
 
