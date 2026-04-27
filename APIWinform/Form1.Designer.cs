@@ -61,6 +61,9 @@
             OrderChangeSave = new Button();
             OrdersStatus = new ComboBox();
             EDITMODEBTN = new Button();
+            label8 = new Label();
+            label9 = new Label();
+            label10 = new Label();
             ((System.ComponentModel.ISupportInitialize)Response).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PriceNud).BeginInit();
             ((System.ComponentModel.ISupportInitialize)QuantityNud).BeginInit();
@@ -321,7 +324,7 @@
             // OrdersItems
             // 
             OrdersItems.FormattingEnabled = true;
-            OrdersItems.Location = new Point(12, 385);
+            OrdersItems.Location = new Point(12, 401);
             OrdersItems.Name = "OrdersItems";
             OrdersItems.Size = new Size(121, 23);
             OrdersItems.TabIndex = 28;
@@ -329,14 +332,14 @@
             // 
             // ItemsQuantity
             // 
-            ItemsQuantity.Location = new Point(151, 384);
+            ItemsQuantity.Location = new Point(148, 401);
             ItemsQuantity.Name = "ItemsQuantity";
             ItemsQuantity.Size = new Size(120, 23);
             ItemsQuantity.TabIndex = 29;
             // 
             // OrderChangeSave
             // 
-            OrderChangeSave.Location = new Point(12, 448);
+            OrderChangeSave.Location = new Point(12, 474);
             OrderChangeSave.Name = "OrderChangeSave";
             OrderChangeSave.Size = new Size(121, 23);
             OrderChangeSave.TabIndex = 30;
@@ -348,7 +351,7 @@
             // 
             OrdersStatus.FormattingEnabled = true;
             OrdersStatus.Items.AddRange(new object[] { "pending", "shipping", "done" });
-            OrdersStatus.Location = new Point(12, 419);
+            OrdersStatus.Location = new Point(12, 445);
             OrdersStatus.Name = "OrdersStatus";
             OrdersStatus.Size = new Size(121, 23);
             OrdersStatus.TabIndex = 31;
@@ -359,15 +362,45 @@
             EDITMODEBTN.Name = "EDITMODEBTN";
             EDITMODEBTN.Size = new Size(99, 26);
             EDITMODEBTN.TabIndex = 32;
-            EDITMODEBTN.Text = "Szerkeztő Mód";
+            EDITMODEBTN.Text = "Szerkeztő mód";
             EDITMODEBTN.UseVisualStyleBackColor = true;
             EDITMODEBTN.Click += EDITMODEBTN_Click;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(12, 383);
+            label8.Name = "label8";
+            label8.Size = new Size(61, 15);
+            label8.TabIndex = 33;
+            label8.Text = "Termék id:";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(148, 384);
+            label9.Name = "label9";
+            label9.Size = new Size(109, 15);
+            label9.TabIndex = 34;
+            label9.Text = "Termék mennyiség:";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(12, 427);
+            label10.Name = "label10";
+            label10.Size = new Size(99, 15);
+            label10.TabIndex = 35;
+            label10.Text = "Rendelés állapota";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1281, 675);
+            Controls.Add(label10);
+            Controls.Add(label9);
+            Controls.Add(label8);
             Controls.Add(EDITMODEBTN);
             Controls.Add(OrdersStatus);
             Controls.Add(OrderChangeSave);
@@ -445,5 +478,8 @@
         private Button OrderChangeSave;
         private ComboBox OrdersStatus;
         private Button EDITMODEBTN;
+        private Label label8;
+        private Label label9;
+        private Label label10;
     }
 }

@@ -591,6 +591,14 @@ namespace APIWinform
         private void EDITMODEBTN_Click(object sender, EventArgs e)
         {
             isEditMode = !isEditMode;
+            if(!isEditMode)
+            {
+                EDITMODEBTN.Text = "Szerkesztő mód";
+            }
+            else
+            {
+                EDITMODEBTN.Text = "Hozzáadó mód";
+            }
             EDITMODE();
         }
     }
