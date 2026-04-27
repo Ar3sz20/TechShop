@@ -30,19 +30,21 @@ A projekt célja egy modern, áttekinthető webshop felépítése, ahol a felhas
 
 - **Backend:** PHP 8.2+, Laravel 12
 - **Frontend:** Blade, HTML, CSS, JavaScript
-- **Build:** Vite, TailwindCSS
-- **Adatbázis:** Laravel kompatibilis relációs DB (MySQL vagy SQLite)
+- **Build:** Vite
+- **Adatbázis:** Laravel kompatibilis relációs DB (MySQL)
 - **Tesztelés:** PHPUnit
 
 ## Projektstruktúra (röviden)
 
 - `app/Http/Controllers` – vezérlők (`AuthController`, `ProductController`, `CartController`, `OrderController`, `ProfileController`, `NewsLetterController`)
+- `app/Http/Controllers/Api` – Api vezérlők (`ProductController`, `OrderController`)
 - `app/Models` – modellek (`User`, `Product`, `Order`, `NewsLetter`)
 - `app/Policies` – jogosultságkezelés (`ProductPolicy` – admin role alapján)
 - `database/migrations` – sémák (`users`, `products`, `orders`, `newsletters`, `sessions`, `cache`)
 - `database/seeders` – demo adatok (`ProductSeeder` – 70 egyedi termék)
 - `resources/views` – Blade nézetek (layout, auth, products, cart, orders, profile)
 - `routes/web.php` – webes útvonalak
+- `routes/api.php` – api útvonalak
 - `public/css`, `public/js` – statikus stílusok és kliens oldali scriptek
 - `public/images/products` – termékképek (70 db)
 
@@ -50,58 +52,19 @@ A projekt célja egy modern, áttekinthető webshop felépítése, ahol a felhas
 
 ### `users`
 
-- `id`, `name`, `email` (unique), `password`, `role` (nullable int, 0=vásárló, 1=admin), `phone` (nullable), `address` (nullable), `newsletter` (boolean, default false), időbélyegek
+- `id`, `name`, `email` (unique), `password`, `role` (nullable int, 0=vásárló, 1=admin), `phone` (nullable), `address` (nullable), `newsletter` (boolean, default false), (időbélyegek)
 
 ### `products`
 
-- `id`, `name`, `price` (decimal 10,2), `description` (text), `image` (default: placeholder.png), `quantity` (int), `category`, `brandname`, `type`, időbélyegek, `deleted_at` (soft delete)
+- `id`, `name`, `price` (decimal 10,2), `description` (text), `image` (default: placeholder.png), `quantity` (int), `category`, `brandname`, `type`, (időbélyegek), `deleted_at` (soft delete)
 
 ### `orders`
 
-- `id`, `user_id` (FK → users, cascade), `total_price` (decimal 10,2), `address`, `items` (JSON), időbélyegek
+- `id`, `user_id` (FK → users, cascade), `total_price` (decimal 10,2), `address`, `item_id`, `item_quantity`, `status`, (időbélyegek), `payment_method`, `company_data`
 
 ### `newsletters`
 
-- `id`, `email` (unique), időbélyegek
-
-## Fontos útvonalak
-
-### Publikus
-
-- `GET /` – kezdőlap
-- `GET /products` – terméklista + szűrés
-- `GET /products/{product}` – termék részletek
-- `GET /cart` – kosár megtekintése
-- `POST /cart/add/{product}` – termék kosárba helyezése
-- `POST /cart/increase/{id}` – mennyiség növelése
-- `POST /cart/decrease/{id}` – mennyiség csökkentése
-- `POST /cart/remove/{id}` – termék eltávolítása a kosárból
-- `POST /newsletter` – hírlevél feliratkozás
-
-### Vendég (guest)
-
-- `GET /login`, `POST /login` – bejelentkezés
-- `GET /register`, `POST /register` – regisztráció
-
-### Bejelentkezett felhasználó (auth)
-
-- `POST /logout` – kijelentkezés
-- `GET /orders` – rendelési előzmények
-- `POST /order` – rendelés leadása
-- `GET /order/success` – sikeres rendelés oldal
-- `GET /profile` – profil megtekintése
-- `PUT /profile` – profil szerkesztése
-- `PUT /profile/notifications` – hírlevél preferencia módosítása
-
-### Admin (auth + role=1)
-
-- `GET /products/create` – termék létrehozása
-- `POST /products` – termék mentése
-- `GET /products/{product}` – termék szerkesztése
-- `PUT /products/{product}` – termék frissítése
-- `DELETE /products/{product}` – termék soft delete
-- `GET /products/trashed` – törölt termékek listája
-- `POST /products/{product}/restore` – termék visszaállítása
+- `id`, `email` (unique), (időbélyegek)
 
 ## Telepítés és futtatás
 
