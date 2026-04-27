@@ -6,7 +6,6 @@ let current = 0;
 let nextBtn = document.querySelector('.slider-btn.next');
 let prevBtn = document.querySelector('.slider-btn.prev');
 
-// Csak akkor fut, ha az oldal tartalmaz slidert (nem minden oldalon van)
 if (track && nextBtn && prevBtn && slides.length > 0) {
     function showSlide() {
         track.style.transform = 'translateX(-' + (current * 100) + '%)';

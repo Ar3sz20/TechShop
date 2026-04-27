@@ -25,10 +25,10 @@ class ProfileController extends Controller
             'name' => 'required|string|max:50',
             'email' => 'required|email',
             'phone' => 'nullable|string|max:20',
-            'postal_code' => 'required|string|max:10',
-            'city' => 'required|string|max:100',
-            'street' => 'required|string|max:100',
-            'house_number' => 'required|string|max:20',
+            'postal_code' => 'nullable|string|max:10',
+            'city' => 'nullable|string|max:100',
+            'street' => 'nullable|string|max:100',
+            'house_number' => 'nullable|string|max:20',
             'floor' => 'nullable|string|max:20',
         ]);
 

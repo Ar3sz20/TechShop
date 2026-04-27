@@ -204,7 +204,6 @@ body.dark-mode .menu li:hover {
     color: #fff;
 }
 
-/* --- Mobil nézet --- */
 @media (max-width: 960px) {
     .navbar {
         flex-wrap: wrap;

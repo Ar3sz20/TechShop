@@ -49,8 +49,8 @@
                     <li><a href="{{ route('products.index', ['category' => 'Audio']) }}"
                             class="{{ request('category') == 'Audio' ? 'active' : '' }}">Audió eszközök
                         </a></li>
-                    <li><a href="{{ route('products.index', ['category' => 'Accesories']) }}"
-                            class="{{ request('category') == 'Accesories' ? 'active' : '' }}">Kiegészítők
+                    <li><a href="{{ route('products.index', ['category' => 'Accessories']) }}"
+                            class="{{ request('category') == 'Accessories' ? 'active' : '' }}">Kiegészítők
                         </a></li>
                     <li><a href="{{ route('products.index', ['category' => 'Components']) }}"
                             class="{{ request('category') == 'Components' ? 'active' : '' }}">Alkatrészek
@@ -96,7 +96,12 @@
             <p>
                 <a href="#" class="footer-link">Impresszum</a>
                 <a href="#" class="footer-link">Adatvédelem</a>
-                <a href="#" class="footer-link">Kapcsolat</a>
+                <p>
+                    <u>Kapcsolat:</u> <br>
+                    Tel: +36 1 111 1111 <br>
+                    Cím: Budapest, Lövőház u. 2-6, 1024 <br>
+                    Email: info@techshop.hu <br>
+                </p>
             </p>
         </div>
     </footer>
