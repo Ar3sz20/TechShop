@@ -1,0 +1,11 @@
+name;price;description;quantity;category;brandname;type
+Laptop Dell XPS 13;399999.99;Prémium ultrabook 13 colos kijelzővel;10;Laptop;Dell;Elektronika
+iPhone 14;499999.00;Apple okostelefon A15 chippel;15;Mobil;Apple;Elektronika
+Samsung Galaxy S23;429999.50;Csúcskategóriás Android telefon;20;Mobil;Samsung;Elektronika
+Logitech MX Master 3;34999.99;Professzionális vezeték nélküli egér;30;Kiegészítő;Logitech;Periféria
+Asus ROG Strix G15;599999.00;Gaming laptop erős GPU-val;5;Laptop;Asus;Elektronika
+HP LaserJet Pro;89999.90;Lézernyomtató irodai használatra;8;Nyomtató;HP;Iroda
+Sony WH-1000XM5;129999.00;Zajszűrős fejhallgató;12;Audio;Sony;Elektronika
+Kingston 16GB DDR4 RAM;15999.99;Memória modul PC-hez;25;Alkatrész;Kingston;Hardver
+Sandisk 1TB SSD;45999.00;Gyors SSD adattárolásra;18;Alkatrész;Sandisk;Hardver
+Canon EOS 250D;219999.00;Belépő szintű DSLR fényképezőgép;7;Kamera;Canon;Elektronika
