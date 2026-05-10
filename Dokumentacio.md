@@ -222,7 +222,7 @@ tests/
 | payment_method | string NULL | pl. cash, card |
 | company_data | text NULL | céges számlázási adatok |
 
-- Cast: `items: array` *(megj.: legacy cast a modellben, a megfelelő oszlop már nem létezik → [karbantartási pont](#9-karbantartás-és-bővítés))*
+- Cast: `items: array` *(megj.: legacy cast a modellben, a megfelelő oszlop már nem létezik)*
 - Kapcsolat: `user()` → `belongsTo(User::class)`
 
 #### NewsLetter – [app/Models/NewsLetter.php](app/Models/NewsLetter.php)
@@ -655,7 +655,7 @@ Content-Type: application/json
 
 #### 6.2.1. Hitelesítés
 
-> **⚠️ Változás (v1.2):** Az `Api\UserController` a `vFINISHED` build során eltávolításra került; az **`/api/register`, `/api/login`, `/api/logout` végpontok jelenleg nem aktivak** a `routes/api.php` fájlban. A Sanctum infrastruktúra (`personal_access_tokens` tábla, `auth:sanctum` middleware) továbbra is él, így az asztali admin kliens (lsd. 3.10) jelenleg **nem auth-olt** közvetlen HTTP hívásokkal kommunikál a backenddel. A token-alapú hitelesítés visszaállítása karbantartási pont (lsd. 9. pont).
+> **⚠️ Változás (v1.2):** Az `Api\UserController` a `vFINISHED` build során eltávolításra került; az **`/api/register`, `/api/login`, `/api/logout` végpontok jelenleg nem aktivak** a `routes/api.php` fájlban. A Sanctum infrastruktúra (`personal_access_tokens` tábla, `auth:sanctum` middleware) továbbra is él, így az asztali admin kliens (lsd. 3.10) jelenleg **nem auth-olt** közvetlen HTTP hívásokkal kommunikál a backenddel.
 
 **GET `/api/user`** – `auth:sanctum` – visszaadja a tokenhez tartozó usert (ha már van kibocsájtott token).
 
@@ -775,7 +775,7 @@ Termék objektum sémája (válasz):
 | | `test_product_can_be_soft_deleted` | `delete()` után `deleted_at` ki van töltve, rekord soft-törölt |
 | [tests/Feature/Models/OrderTest.php](tests/Feature/Models/OrderTest.php) | `test_order_can_be_created` | Order rekord helyesen jön létre user-rel |
 | | `test_order_belongs_to_user` | `$order->user` visszaadja a tulajdonost |
-| | `test_order_items_are_cast_to_array` | `items` mező array-ként deszerializálódik |
+| | `test_order_stores_item_id_and_quantity` | `item_id` és `item_quantity` mezők pontosan eltárolódnak és visszaolvashatók |
 | [tests/Feature/Models/UserTest.php](tests/Feature/Models/UserTest.php) | `test_user_can_be_created` | User létrejön a megadott `role`-lal |
 | | `test_user_has_many_orders` | `$user->orders` kapcsolat működik |
 | [tests/Feature/Policies/ProductPolicyTest.php](tests/Feature/Policies/ProductPolicyTest.php) | `test_anyone_can_view_any_products` | `viewAny` mindenkinek `true` |
@@ -801,20 +801,23 @@ public function test_admin_can_create_products(): void
 }
 ```
 
-**OrderTest – items tömbként deszerializálódik** ([forrás](tests/Feature/Models/OrderTest.php)):
+**OrderTest – item_id és item_quantity eltárolása** ([forrás](tests/Feature/Models/OrderTest.php)):
 
 ```php
-public function test_order_items_are_cast_to_array(): void
+public function test_order_stores_item_id_and_quantity(): void
 {
     $user  = User::factory()->create();
     $order = Order::create([
-        'user_id'     => $user->id,
-        'address'     => 'Teszt utca 1.',
-        'total_price' => 1234.56,
-        'items'       => [['id' => 1, 'name' => 'Termék', 'quantity' => 2]],
+        'user_id'       => $user->id,
+        'address'       => 'Teszt utca 1.',
+        'total_price'   => 1234.56,
+        'item_id'       => '7,12',
+        'item_quantity' => '3,1',
     ]);
 
-    $this->assertIsArray($order->fresh()->items);
+    $fresh = $order->fresh();
+    $this->assertSame('7,12', $fresh->item_id);
+    $this->assertSame('3,1', $fresh->item_quantity);
 }
 ```
 
@@ -842,7 +845,7 @@ A `php artisan test` parancs kimenete (futtatás dátuma: **2026-04-23**, körny
    PASS  Tests\Feature\Models\OrderTest
   ✓ order can be created                                                 0.01s
   ✓ order belongs to user                                                0.01s
-  ✓ order items are cast to array                                        0.01s
+  ✓ order stores item id and quantity                                    0.01s
 
    PASS  Tests\Feature\Models\ProductTest
   ✓ product can be created                                               0.01s
@@ -871,7 +874,7 @@ A `php artisan test` parancs kimenete (futtatás dátuma: **2026-04-23**, körny
   Duration: 0.67s
 ```
 
-**Összesítés**: A v1.1 doc készítésekor (2026-04-23) **24/24 teszt sikeres**, 33 assertion, 0,67 s. A v1.2 build (`vFINISHED`, 2026-04-26) sémamódosításai miatt **jelenleg 20 teszt sikeres és 4 fail** az `OrderTest` osztályban (`item_id` NOT NULL constraint) – részletek a [9.5. Ismert technikai adósságok](#95-ismert-technikai-adósságok-v12) pontban.
+**Összesítés**: A v1.1 doc készítésekor (2026-04-23) **24/24 teszt sikeres**, 33 assertion, 0,67 s. A v1.2 build (`vFINISHED`, 2026-04-26) sémamódosításai után az `OrderTest`/`UserTest` osztályok a tesztek frissítésével (`item_id` + `item_quantity` séma) ismét **mind sikeresek**.
 
 ---
 
@@ -923,17 +926,6 @@ A Feature-tesztekben használj `RefreshDatabase` traitet, modell létrehozáshoz
 vendor/bin/pint           # automatikus formázás
 vendor/bin/pint --test    # csak ellenőrzés
 ```
-
-### 9.5. Ismert technikai adósságok (v1.2)
-
-A `vFINISHED` build óta az alábbi pontokon a kód és a tesztek divergálnak — ezek karbantartási feladatok:
-
-1. **`Order::items` cast vs. tényleges séma** – a `Order` modellben szerepel `protected $casts = ['items' => 'array']`, viszont az `orders` tábla `items` JSON oszlopa megszűnt és helyette `item_id` + `item_quantity` (string) van. A cast inert, és a `tests/Feature/Models/OrderTest.php::test_order_items_are_cast_to_array` jelenleg **fail** (`NOT NULL constraint failed: orders.item_id`). Megoldási lehetőségek:
-   - vagy visszahozni az `items` JSON oszlopot (és a cast funkcióját), vagy
-   - migrálni az `item_id` / `item_quantity` mezőket egy normalizált `order_items` táblába és frissíteni a teszteket.
-2. **API auth (`/api/login`, `/api/register`, `/api/logout`)** – az `Api\UserController` törölve, a végpontok nincsenek route-olva. Ha az asztali admin klienst (`APIWinform`) Sanctum-token alapra akarjuk visszaállítani, az auth controllert vissza kell állítani vagy újraírni.
-3. **Form Request névelírás** – `app/Http/Requests/Api/Request/StoreProudctRequest.php` és `UpdateProudctRequest.php` (helyesen `Product` lenne). Új API funkciónál érdemes átnevezni.
-4. **`OrderTest::test_order_can_be_created`** és kapcsolódó tesztek `items` paramétert adnak át a `Order::create`-nek – frissítendők az új `item_id` / `item_quantity` sémához (lásd 1. pont).
 
 ---
 

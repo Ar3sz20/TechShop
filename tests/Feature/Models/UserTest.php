@@ -35,7 +35,8 @@ class UserTest extends TestCase
             'user_id' => $user->id,
             'address' => '123 Fake Street',
             'total_price' => 199.99,
-            'items' => [['product_id' => 1, 'quantity' => 1]],
+            'item_id' => '1',
+            'item_quantity' => '1',
         ]);
 
         $this->assertTrue($user->orders->contains($order));

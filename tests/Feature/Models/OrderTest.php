@@ -19,16 +19,16 @@ class OrderTest extends TestCase
             'user_id' => $user->id,
             'address' => '456 Test Ave',
             'total_price' => 250.00,
-            'items' => [
-                ['product_id' => 1, 'quantity' => 2],
-                ['product_id' => 2, 'quantity' => 1],
-            ],
+            'item_id' => '1,2',
+            'item_quantity' => '2,1',
         ]);
 
         $this->assertDatabaseHas('orders', [
             'user_id' => $user->id,
             'address' => '456 Test Ave',
             'total_price' => 250.00,
+            'item_id' => '1,2',
+            'item_quantity' => '2,1',
         ]);
     }
 
@@ -40,28 +40,29 @@ class OrderTest extends TestCase
             'user_id' => $user->id,
             'address' => '789 User Blvd',
             'total_price' => 50.00,
-            'items' => [],
+            'item_id' => '1',
+            'item_quantity' => '1',
         ]);
 
         $this->assertInstanceOf(User::class, $order->user);
         $this->assertEquals($user->id, $order->user->id);
     }
 
-    public function test_order_items_are_cast_to_array()
+    public function test_order_stores_item_id_and_quantity()
     {
         $user = User::factory()->create();
-        $itemsArray = [['product_id' => 1, 'quantity' => 2]];
 
         $order = Order::create([
             'user_id' => $user->id,
             'address' => '123 Array St',
             'total_price' => 99.99,
-            'items' => $itemsArray,
+            'item_id' => '7,12',
+            'item_quantity' => '3,1',
         ]);
 
         $freshOrder = Order::find($order->id);
 
-        $this->assertIsArray($freshOrder->items);
-        $this->assertEquals($itemsArray, $freshOrder->items);
+        $this->assertSame('7,12', $freshOrder->item_id);
+        $this->assertSame('3,1', $freshOrder->item_quantity);
     }
 }
